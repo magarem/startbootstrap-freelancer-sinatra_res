@@ -37,8 +37,18 @@ pages:
     body: Web Developer - Web master
   about:
     label: About
-    body1: MAguete é um cara 1000!!!
-    body2: Tudo bem ok?
+    body1: >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+      Praesent aliquam purus in tristique cursus. 
+      Etiam at magna enim. Fusce auctor nec lectus non porta. 
+      Nam quis pharetra purus, sit amet imperdiet sapien. 
+      Aliquam a mollis neque. Donec velit dolor
+    
+    body2: >
+      Aliquam ut nisi nec, eleifend consequat ipsum. 
+      Cras feugiat vulputate metus, ut consequat elit porttitor non.
+      Aliquam ut nisi nec, eleifend consequat ipsum. 
+      Cras feugiat vulputate metus, ut consequat elit porttitor non.  
   portfolio:
     label: Portfólio
     items:

@@ -1,0 +1,86 @@
+---
+head:
+  title: Portfolio geral
+  description: Site pra garela
+  author: Maguete
+moldura:
+  label: Portfolio
+  logo:
+    label: Maguete Ninja
+    link: index.ttt
+  menu:
+  - label: Portfolio
+    link: 
+  - label: About
+    link: 
+  - label: Contact
+    link: 
+  footer:
+    endereco: Rio de Janeiro - RJ - Brasil
+    social:
+    - label: facebook
+      link: marcelo.a.magalhaes
+    - label: google-plus
+      link: Maguete
+    - label: twitter
+      link: magalhaes
+    - label: linkedin
+      link: mmm
+    - label: dribbble
+      link: ddrrible
+    about_resumo: jaksfh sdkjhs djkash djkasdh
+    creditos: Copyright © magaweb 2016
+pages:
+  home:
+    label: Start Bootstrap
+    img: img/profile.png
+    body: Web Developer - Web master
+  about:
+    label: About
+    body1: MAguete é um cara 1000!!!
+    body2: Tudo bem ok?
+  portfolio:
+    label: Portfólio
+    items:
+    - titulo: Projeto 122
+      img: img/portfolio/cabin.png
+      txt: Este é um teste muito legal
+      cliente: Fidelito
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+    - titulo: Site teste
+      img: img/portfolio/cake.png
+      txt: Este é um teste muito legal
+      nome: Fidelito
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+    - titulo: Site teste
+      img: img/portfolio/circus.png
+      txt: Este é um teste muito legal
+      nome: Fidelito
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+    - titulo: Site teste
+      img: img/portfolio/game.png
+      txt: Este é um teste muito legal
+      nome: Fidelito
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+    - titulo: Site teste
+      img: img/portfolio/safe.png
+      txt: Este é um teste muito legal
+      nome: Fidelito
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+    - titulo: Site teste
+      img: img/portfolio/submarine.png
+      txt: Este é um teste muito legal
+      nome: Fidelito
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação

@@ -3,11 +3,40 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <img class="img-responsive" src="{{ site.pages.home.img }}" alt="">
+             <style>
+               .cropcircle{
+                      width: 250px;
+                      height: 250px;
+                      border-radius: 100%;
+                      background: #eee no-repeat center;
+                      background-size: cover;
+
+                      box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+                      -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+                      -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+
+                      margin: 0 auto;
+                  }
+
+                  #image1{
+                      background-image: url({{ site.pages.home.img }});
+                  }
+                </style>
+              
+                <div id="image1" class="cropcircle img-responsive" data-toggle="modal" data-target="#myModal"></div>
+
+                
                 <div class="intro-text">
-                    <span class="name">{{ site.pages.home.label }}</span>
+                    <span class="name">
+                      <div class="editable">
+                       {{ site.pages.home.label }}
+                      </div>
+                    </span>
                     <hr class="star-light">
-                    <span class="skills">{{ site.pages.home.body }}</span>
+                    <span class="skills">
+                     <div class="editable">
+                      {{ site.pages.home.body }}</span>
+                     </div>
                 </div>
             </div>
         </div>

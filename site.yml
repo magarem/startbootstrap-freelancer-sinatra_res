@@ -32,23 +32,20 @@ moldura:
     creditos: Copyright © magaweb 2016
 pages:
   home:
-    label: Start Bootstrap
-    img: img/profile.png
+    label: 22 Bem 22<br>
+    img: img/22185_10206768931482492_8018920670780716769_n.jpg
     body: Web Developer - Web master
   about:
     label: About
-    body1: >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-      Praesent aliquam purus in tristique cursus. 
-      Etiam at magna enim. Fusce auctor nec lectus non porta. 
-      Nam quis pharetra purus, sit amet imperdiet sapien. 
-      Aliquam a mollis neque. Donec velit dolor
-    
-    body2: >
-      Aliquam ut nisi nec, eleifend consequat ipsum. 
-      Cras feugiat vulputate metus, ut consequat elit porttitor non.
-      Aliquam ut nisi nec, eleifend consequat ipsum. 
-      Cras feugiat vulputate metus, ut consequat elit porttitor non.  
+    body1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Praesent aliquam
+      purus in tristique cursus.  Etiam at magna enim. Fusce auctor nec lectus non
+      porta.  Nam quis pharetra purus, sit amet imperdiet sapien.  Aliquam a mollis
+      neque. Donec velit dolor
+
+'
+    body2: "Aliquam ut nisi nec, eleifend consequat ipsum.  Cras feugiat vulputate
+      metus, ut consequat elit porttitor non. Aliquam ut nisi nec, eleifend consequat
+      ipsum.  Cras feugiat vulputate metus, ut consequat elit porttitor non.  \n"
   portfolio:
     label: Portfólio
     items:

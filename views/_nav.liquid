@@ -9,18 +9,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <!--a class="navbar-brand" href="{{ data.logo.link}}"-->
                      
                      <a id=logo class="navbar-brand" href="{{ data.logo.link}}">
                         {{ site.moldura.logo.label }}
                      </a>
-                     
-                <!--/a-->
+                     {% if logado  %}<button type="button" class="btn btn-primary btn-sm" id=save>Save</button>
+                     <button type="button" class="btn btn-primary btn-sm" onclick="location.href='/{{data}}/logout'">Logout</button>
+                     {% endif  %}
+
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
                 <ul class="nav navbar-nav navbar-right">
+
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>

@@ -23,7 +23,14 @@
                   }
                 </style>
               
-                <div id="image1" class="cropcircle img-responsive" data-toggle="modal" data-target="#myModal"></div>
+                <div id="image1" 
+                     class="cropcircle img-responsive" 
+                    {% if logado  %}
+                     data-toggle="modal" 
+                     data-target="#myModal"
+                    {% endif %}
+                     >
+                </div>
 
                 
                 <div class="intro-text">

@@ -1,5 +1,6 @@
 ---
-name: site
+name: maga
+senha: 1222
 head:
   title: Portfolio geral
   description: Site pra garela
@@ -7,7 +8,7 @@ head:
 moldura:
   label: Portfolio
   logo:
-    label: Maguete Ninja
+    label: Maguete II
     link: index.ttt
   menu:
   - label: Portfolio
@@ -33,8 +34,8 @@ moldura:
     creditos: Copyright © magaweb 2016
 pages:
   home:
-    label: 22 Bem 22<br>
-    img: img/site.jpg
+    label: indio<br>
+    img: img/maga.jpeg
     body: Web Developer - Web master
   about:
     label: About

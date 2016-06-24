@@ -5,6 +5,10 @@ require 'liquid'
 require 'pony'
 require 'json'
 require 'mini_magick'
+require 'fileutils'
+
+enable :sessions
+
 
 configure do
   # App Paths
@@ -18,9 +22,33 @@ end
 #set :public_folder, File.dirname(__FILE__) + '/public'
 
 
-get '/' do
-   site = YAML.load_file('site.yml')
-   liquid :index, :locals => { :site => site }
+get '/:site_nome/logout' do
+
+    session[:logado] = false
+
+    redirect '/'+params[:site_nome]
+end
+
+post '/:site_nome/login_do' do
+
+    @form_senha = params["senha"]
+    @site_nome = params[:site_nome]
+    @data = YAML.load_file(@site_nome+'.yml')
+
+    #Compara a senha digitada no formulário de login com a senha do fonte
+    if @form_senha.to_s == @data["senha"].to_s then 
+      session[:logado] = true       
+    else 
+      session[:logado] = false
+    end
+
+    redirect '/'+params[:site_nome]
+end
+
+
+get '/:site_nome' do
+   site_yaml = YAML.load_file(params[:site_nome]+'.yml')
+   liquid :index, :locals => { :data => params[:site_nome], :logado => session[:logado],  :site => site_yaml }
 end
 
 get '/create' do
@@ -30,26 +58,19 @@ get '/create' do
     erb :create
 end
 
-post '/s' , :provides => :json do
-
-  # I'd use a 201 as the status if actually creating something,
-  # 200 while testing.
-  # I'd send the JSON back as a confirmation too, hence the
-  # :provides => :json
-  #@data = JSON.parse params
-  data = YAML.load_file "site.yml"
-  data["pages"]["home"]["label"] = params["element-0"]["value"]
-  #data["pages"]["home"]["label"] = params["element-0"]["value"]
-  File.open("site.yml", 'w') { |f| YAML.dump(data, f) }
-    
-  
-  #pry
-  # do something with the data, then…
-  #halt 200, data.to_json
-  # halt because there's no need to render anything
-  # and it's convenient for setting the status too
-  #render body: "raw"
-  
+post '/:site_nome/page_save' , :provides => :json do
+  if session[:logado] then
+      # I'd use a 201 as the status if actually creating something,
+      # 200 while testing.
+      # I'd send the JSON back as a confirmation too, hence the
+      # :provides => :json
+      #@data = JSON.parse params
+      site_fonte = params[:site_nome]+".yml"
+      data = YAML.load_file site_fonte
+      data["pages"]["home"]["label"] = params["element-0"]["value"]
+      #data["pages"]["home"]["label"] = params["element-0"]["value"]
+      File.open(site_fonte, 'w') { |f| YAML.dump(data, f) }
+  end       
 end
 
 
@@ -82,26 +103,44 @@ post '/edit_about_save' do
     redirect '/'
 end
 
-# Handle POST-request (Receive and save the uploaded file)
-post "/upload" do 
-  #@name = params[:name]
-  #pry
-  @filename = params[:file][:filename]
-  file = params[:file][:tempfile]
-
-  File.open("./public/img/#{@filename}", 'wb') do |f|
-    f.write(file.read)
-  end
-  
-  image = MiniMagick::Image.open("./public/img/#{@filename}")
-  image.resize "600x600" 
-  image.write "./public/img/#{@filename}"
-  # return "The file was successfully uploaded!"
-
-
-  data = YAML.load_file "site.yml"
-  data["pages"]["home"]["img"] = "img/#{@filename}"
-  File.open("site.yml", 'w') { |f| YAML.dump(data, f) }
-
-  redirect '/'
+get "/site_new/:site_nome" do 
+    FileUtils.cp("site.yml",params[:site_nome]+".yml")
 end
+
+# Handle POST-request (Receive and save the uploaded file)
+post "/:site_nome/upload" do 
+  if session[:logado] then
+      @filename = params[:file][:filename].downcase
+      file = params[:file][:tempfile]
+      imagem_tipo = params[:file][:type]
+      
+      #pry
+      #@filename = Time.now.to_i.to_s+"."+params["file"][:filename].split(".").last
+      
+      # Testa para ver se é uma imagem que está sendo enviada
+      if (imagem_tipo == 'image/png'  || 
+          imagem_tipo == 'image/jpeg' || 
+          imagem_tipo == 'image/gif') && 
+         file.size < 300000
+
+            @filename = params[:site_nome]+"."+params["file"][:filename].split(".").last.downcase
+            File.open("./public/img/#{@filename}", 'wb') do |f|
+              f.write(file.read)
+            end
+            
+            image = MiniMagick::Image.open("./public/img/#{@filename}")
+            image.resize "600x600"   
+            #image.write "./public/img/#{@filename}"
+            image.write "./public/img/#{@filename}"
+            # return "The file was successfully uploaded!"
+
+
+            data = YAML.load_file params[:site_nome]+".yml"
+            data["pages"]["home"]["img"] = "img/#{@filename}"
+            File.open(params[:site_nome]+".yml", 'w') { |f| YAML.dump(data, f) }
+
+      end          
+      redirect '/'+params[:site_nome]
+  end
+end
+

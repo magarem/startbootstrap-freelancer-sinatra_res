@@ -10,13 +10,14 @@
         <div class="row">
           {% for item in site.pages.portfolio.items %}
             <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal{{ forloop.index }}" class="portfolio-link" data-toggle="modal">
+                <a href="#portfolioModal{{item.id}}" class="portfolio-link" data-toggle="modal"
+                onclick = "$('#img_port_item_id').val({{ forloop.index }});">
                     <div class="caption">
                         <div class="caption-content">
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="{{item.img}}" class="img-responsive" alt="">
+                    <img id=port_img_mini_{{item.id}} src="{{item.img}}" class="img-responsive" alt="">
                 </a>
                 
             </div>

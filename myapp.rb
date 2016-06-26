@@ -67,12 +67,41 @@ post '/:site_nome/page_save' , :provides => :json do
       #@data = JSON.parse params
       site_fonte = params[:site_nome]+".yml"
       data = YAML.load_file site_fonte
-      data["pages"]["home"]["label"] = params["element-0"]["value"]
+      
+      data["moldura"]["logo"]["label"] = params["element-0"]["value"]
+      data["pages"]["home"]["label"] = params["element-1"]["value"]
+      
+
       #data["pages"]["home"]["label"] = params["element-0"]["value"]
       File.open(site_fonte, 'w') { |f| YAML.dump(data, f) }
+
+      redirect '/'+params[:site_nome]
   end       
 end
 
+post '/:site_nome/menu/save' do
+  if session[:logado] then
+
+      site_fonte = params[:site_nome]+".yml"
+      data = YAML.load_file site_fonte
+      
+      
+        data["moldura"]["menu"][0]["label"] = params[:site_moldura_menu_0_label]
+        data["moldura"]["menu"][0]["link"] = params[:site_moldura_menu_0_link]
+      
+        data["moldura"]["menu"][1]["label"] = params[:site_moldura_menu_1_label]
+        data["moldura"]["menu"][1]["link"] = params[:site_moldura_menu_1_link]
+      
+        data["moldura"]["menu"][2]["label"] = params[:site_moldura_menu_2_label]
+        data["moldura"]["menu"][2]["link"] = params[:site_moldura_menu_2_link]
+      
+
+      #data["pages"]["home"]["label"] = params["element-0"]["value"]
+      File.open(site_fonte, 'w') { |f| YAML.dump(data, f) }
+
+      redirect '/'+params[:site_nome]
+  end       
+end
 
 post '/create' do
     @logfile = File.open("site.yml","w")
@@ -109,6 +138,7 @@ end
 
 # Handle POST-request (Receive and save the uploaded file)
 post "/:site_nome/upload" do 
+
   if session[:logado] then
       @filename = params[:file][:filename].downcase
       file = params[:file][:tempfile]
@@ -142,5 +172,45 @@ post "/:site_nome/upload" do
       end          
       redirect '/'+params[:site_nome]
   end
+end
+
+post "/:site_nome/portfolio/img/upload" do 
+  @site_nome = params[:site_nome]
+  id = params[:item_id]
+  #pry
+
+  #if session[:logado] then
+      @filename = params[("file_"+id).to_sym][:filename].downcase
+
+      file = params[("file_"+id).to_sym][:tempfile]
+      imagem_tipo = params[("file_"+id).to_sym][:type]
+      
+      #pry
+      #@filename = Time.now.to_i.to_s+"."+params["file"][:filename].split(".").last
+      
+      # Testa para ver se é uma imagem que está sendo enviada
+      if (imagem_tipo == 'image/png'  || 
+          imagem_tipo == 'image/jpeg' || 
+          imagem_tipo == 'image/gif') && 
+         file.size < 300000
+
+            File.open("./public/img/portfolio/#{@filename}", 'wb') do |f|
+              f.write(file.read)
+            end
+            
+            image = MiniMagick::Image.open("./public/img/portfolio/#{@filename}")
+            image.resize "600x600"   
+            #image.write "./public/img/#{@filename}"
+            image.write "./public/img/portfolio/#{@filename}"
+            # return "The file was successfully uploaded!"
+
+
+            data = YAML.load_file params[:site_nome]+".yml"
+            data["pages"]["portfolio"]["items"][id.to_i]["img"] = "img/portfolio/#{@filename}"
+            File.open(params[:site_nome]+".yml", 'w') { |f| YAML.dump(data, f) }
+
+      end           
+      redirect '/'+params[:site_nome]
+  #end
 end
 

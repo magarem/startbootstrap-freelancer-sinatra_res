@@ -1,6 +1,5 @@
 ---
-name: maga
-senha: 1222
+name: site
 head:
   title: Portfolio geral
   description: Site pra garela
@@ -8,7 +7,7 @@ head:
 moldura:
   label: Portfolio
   logo:
-    label: Maguete II
+    label: Maguete Ninja
     link: index.ttt
   menu:
   - label: Portfolio
@@ -34,8 +33,8 @@ moldura:
     creditos: Copyright © magaweb 2016
 pages:
   home:
-    label: indio<br>
-    img: img/maga.jpeg
+    label: 22 Bem 22<br>
+    img: img/maga.jpg
     body: Web Developer - Web master
   about:
     label: About
@@ -51,43 +50,49 @@ pages:
   portfolio:
     label: Portfólio
     items:
-    - titulo: Projeto 122
-      img: img/portfolio/cabin.png
+    - id: 0
+      titulo: Projeto 122
+      img: img/portfolio/22185_10206768931482492_8018920670780716769_n.jpg
       txt: Este é um teste muito legal
       cliente: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-    - titulo: Site teste
-      img: img/portfolio/cake.png
+    - id: 1
+      titulo: Site teste
+      img: img/portfolio/1926801_358908134247907_476196602_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-    - titulo: Site teste
-      img: img/portfolio/circus.png
+    - id: 2
+      titulo: Site teste
+      img: img/portfolio/10433098_753781931309861_6823199289509207437_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-    - titulo: Site teste
-      img: img/portfolio/game.png
+    - id: 3
+      titulo: Site teste
+      img: img/portfolio/12804681_10208785054604310_3739912535591575185_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-    - titulo: Site teste
-      img: img/portfolio/safe.png
+    - id: 4
+      titulo: Site teste
+      img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-    - titulo: Site teste
-      img: img/portfolio/submarine.png
+    - id: 5
+      titulo: Site teste
+      img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com

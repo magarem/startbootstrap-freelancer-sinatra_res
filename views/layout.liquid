@@ -17,6 +17,8 @@
     <!-- Custom CSS -->
     <link href="css/freelancer.css" rel="stylesheet">
 
+    <link href="css/img_upload.css" rel="stylesheet">
+
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -34,7 +36,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
+    <script src="js/jquery.js"></script>
 
 </head>
 
@@ -87,7 +89,7 @@
         </div>
     </footer>
      <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
@@ -104,10 +106,12 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/freelancer.js"></script>
     <!-- Trigger the modal with a button -->
-    <script src="medium-editor/dist/js/medium-editor.js"></script>
+    <script src="js/img_upload_ajax.js"></script>
+    
     
     
     {% if logado  %}
+    <script src="medium-editor/dist/js/medium-editor.js"></script>
         <script>
             var editor = new MediumEditor('.editable', {
                 buttonLabels: 'fontawesome'
@@ -118,48 +122,29 @@
 
     <script>
     $( "#save" ).click(function(event) {
+
+                //Envia as imagens
+        $("#uploadimage").submit()
+        $("#image_port_form_0").submit()
+        $("#image_port_form_1").submit()
+        $("#image_port_form_2").submit()
+        $("#image_port_form_3").submit()
+        $("#image_port_form_4").submit()
+        $("#image_port_form_5").submit() 
         
         $.post("/{{data}}/page_save", 
 
             editor.serialize()
 
             );
+
+       
+        
         alert ("Página salva com sucesso!");
     })
     </script>
-     <script src="image_upload/src/bootstrap.fd.js"></script>
-        <script type="text/javascript">
-        $("#open_btn").click(function() {
-            $.FileDialog({multiple: true}).on('files.bs.filedialog', function(ev) {
-                var files = ev.files;
-                var text = "";
-
-                files.forEach(function(f) {
-                    text += f.name + ",";
-                    //alert(text);
-                });
-                $.ajax({
-                url: "/upload?name="+text,
-                success: function( data ) {
-                    if(data == "retn value") { //return value of the php function
-    //                  alert("");
-
-                    } else {
-
-                    }
-                }
-            });
-                $("#output").html(text);
-            }).on('cancel.bs.filedialog', function(ev) {
-                $("#output").html("Cancelled!");
-            });
-        });
-
-   
-
-
-
-        </script>
+     
+    
 
 
 </div>
@@ -167,56 +152,6 @@
 <!-- Button trigger modal -->
 
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Eviar imagem</h4>
-      </div>
-      <div class="modal-body">
-        <form id=image_form action="{{data}}/upload" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="site" value="{{site.name}}">
-            <input type="hidden" name="MAX_FILE_SIZE" value="10" />
-            <input type="file" name="file" class="btn btn-info">
-            
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button onclick='$("#image_form").submit();' type="button" class="btn btn-primary">Enviar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Login para {{site.name}}</h4>
-      </div>
-      <div class="modal-body">
-        <form id=login_form action="{{data}}/login_do" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="site" value="{{site.name}}">
-            <input type="password" name="senha" value="" class="form-control" id="exampleInputEmail1" placeholder="Entre com a senha">
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button onclick='$("#login_form").submit();' type="button" class="btn btn-primary">Ok</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 </body>

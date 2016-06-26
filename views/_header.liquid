@@ -26,13 +26,19 @@
                 <div id="image1" 
                      class="cropcircle img-responsive" 
                     {% if logado  %}
-                     data-toggle="modal" 
-                     data-target="#myModal"
+                     onclick="$('#file').click();"
                     {% endif %}
                      >
                 </div>
 
-                
+                <form id=uploadimage action="/{{site.name}}/upload" method="POST" enctype="multipart/form-data">
+           
+                    <input type="hidden" name="site" value="{{site.name}}">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10" />
+                    <input class="btn btn-info" type="file" name="file" id="file" required style="visibility:hidden">
+                   
+                </form>
+
                 <div class="intro-text">
                     <span class="name">
                       <div class="editable">
@@ -42,8 +48,8 @@
                     <hr class="star-light">
                     <span class="skills">
                      <div class="editable">
-                      {{ site.pages.home.body }}</span>
-                     </div>
+                      {{ site.pages.home.body }}
+                     </div></span>
                 </div>
             </div>
         </div>

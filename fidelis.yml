@@ -50,45 +50,56 @@ pages:
   portfolio:
     label: Portfólio
     items:
-    - titulo: Projeto 122
-      img: img/portfolio/cabin.png
-      txt: Este é um teste muito legal
-      cliente: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-    - titulo: Site teste
-      img: img/portfolio/cake.png
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-    - titulo: Site teste
-      img: img/portfolio/circus.png
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-    - titulo: Site teste
-      img: img/portfolio/game.png
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-    - titulo: Site teste
-      img: img/portfolio/safe.png
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-    - titulo: Site teste
-      img: img/portfolio/submarine.png
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
+      - id: 0
+        titulo: Projeto 122
+        img: img/portfolio/cabin.png
+        txt: Este é um teste muito legal
+        cliente: Fidelito
+        site: fidelis.com
+        data: 10/10/12
+        servico: Programação
+      
+      - id: 1 
+        titulo: Site teste
+        img: img/portfolio/cake.png
+        txt: Este é um teste muito legal
+        nome: Fidelito
+        site: fidelis.com
+        data: 10/10/12
+        servico: Programação
+      
+      - id: 2
+        titulo: Site teste
+        img: img/portfolio/circus.png
+        txt: Este é um teste muito legal
+        nome: Fidelito
+        site: fidelis.com
+        data: 10/10/12
+        servico: Programação
+      
+      - id: 3
+        titulo: Site teste
+        img: img/portfolio/game.png
+        txt: Este é um teste muito legal
+        nome: Fidelito
+        site: fidelis.com
+        data: 10/10/12
+        servico: Programação
+      
+      - id: 4
+        titulo: Site teste
+        img: img/portfolio/safe.png
+        txt: Este é um teste muito legal
+        nome: Fidelito
+        site: fidelis.com
+        data: 10/10/12
+        servico: Programação
+      
+      - id: 5
+        titulo: Site teste
+        img: img/portfolio/submarine.png
+        txt: Este é um teste muito legal
+        nome: Fidelito
+        site: fidelis.com
+        data: 10/10/12
+        servico: Programação

@@ -9,16 +9,32 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                     
-                     <a id=logo class="navbar-brand" href="{{ data.logo.link}}">
-                        {{ site.moldura.logo.label }}
-                     </a>
-                     {% if logado  %}<button type="button" class="btn btn-primary btn-sm" id=save>Save</button>
-                     <button type="button" class="btn btn-primary btn-sm" onclick="location.href='/{{data}}/logout'">Logout</button>
-                     {% endif  %}
+                 
+                    <a class="navbar-brand" 
+                       href="#page-top"> <div class="editable">
+                       {{ site.moldura.logo.label }}</div>
+                    </a>
+                  
+            </div>
+            <style>
+                .nav_center
+                {
+                    position: absolute;
+                    width: 100%;
+                    left: 0;
+                    text-align: center;
+                    margin:0 auto;
+                }
+            </style>
+            <div class="nav_center" style="padding-top: 10px;">
+                {% if logado  %}
+                   <a href=#  id=save>Save</a>&nbsp;&nbsp; 
+                   <a href=#  onclick="location.href='/{{data}}/logout'">Logout</a>
+                   <a href=#  onclick="$('#image_port_form_0').submit()">s2</a>
+                   
+                {% endif  %}
 
             </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
@@ -26,10 +42,14 @@
 
                     <li class="hidden">
                         <a href="#page-top"></a>
-                    </li>
+                    </li>                    
                     {% for item in site.moldura.menu %}
                         <li class="page-scroll">
-                            <a href="{{item.link}}">{{item.label}}</a>
+                            <a 
+                            href="{{item.link}}"
+                            data-toggle="modal" 
+                            data-target="#adm_menu"
+                            >{{item.label}}</a>
                         </li>
                     {% endfor %}
                 </ul>

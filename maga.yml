@@ -176,7 +176,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat: bagaço
     - id: 14
       titulo: Site teste1
       img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
@@ -185,7 +185,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: legal,fidel
+      cat: legal, fidel, bagaço
     - id: 15
       titulo: Site teste2
       img: img/portfolio/12804681_10208785054604310_3739912535591575185_n.jpg
@@ -194,7 +194,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: super
+      cat: super,ninja, teste
     - id: 16
       titulo: Site teste
       img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg

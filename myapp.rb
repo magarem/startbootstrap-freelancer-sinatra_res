@@ -56,42 +56,26 @@ get '/:site_nome' do
   data = YAML.load_file(params[:site_nome]+'.yml')
    
   module IndiceArray
-
+            
+       @@items = YAML.load_file('maga.yml')["pages"]["portfolio"]["items"]
      
        def indice(input="")
-
-            data = YAML.load_file('maga.yml')
-            items = data["pages"]["portfolio"]["items"]
-           
-            @cat = Array.new
-           
-           for t in items
+           input = input.to_s.gsub(", ", ",")
+           @cat, @n, @i = [], [], []
+           @@items.each do |item| 
+              item_cat = item["cat"].to_s.gsub(", ", ",")
               
-              a = t["cat"]
-              if a.to_s.include? "," then
-                 @cat +=  a.split(",")
-                 
+              if item_cat.to_s.include? "," then
+                 @cat +=  item_cat.split(",")
               else
-                 @cat << a
+                 @cat << item_cat
               end
-            end
-          
-           @n = Array.new
-           @cat.uniq.each_with_index do |item, i|
-          
-              @n << item
-           
-           end 
-           
-           @i = Array.new
-           if input.to_s.include? "," then
-              b = input.split(",")
-              for c in b
-                    @i << (@n.index(c)+1)
-              end
-              return @i.join(", ")
+           end
+           if input.include? "," then
+              input.split(",").each {|c| @i << (@cat.uniq.index(c)+1)}
+              @i.join(", ")
            else  
-             return @n.index(input)+1  
+              @cat.uniq.index(input)+1  
            end
            #pry
         end
@@ -99,23 +83,20 @@ get '/:site_nome' do
 
   Liquid::Template.register_filter(IndiceArray)
 
-  data = YAML.load_file('maga.yml')
-  items = data["pages"]["portfolio"]["items"]
- 
+  items = YAML.load_file('maga.yml')["pages"]["portfolio"]["items"]
   @cat = Array.new
+   
+   items.each do |item| 
+
+        item_cat = item["cat"].to_s.gsub(", ", ",")        
+        
+        if item_cat.include? "," then
+           @cat +=  item_cat.split(",")
+        else
+           @cat << item_cat
+        end
+   end
  
-  for t in items
-      a = t["cat"]
-      if a.to_s.include? "," then
-          @cat += a.split(",")
-         # for c in b
-         #    @cat << c
-         # end
-      else
-         @cat << a
-      end
-  end
-          
 
   #data = IndiceArray.load(params[:site_nome])
   liquid :index, :locals => {:port_cats => @cat.uniq, :data => params[:site_nome], :logado => session[:logado],  :site => data }

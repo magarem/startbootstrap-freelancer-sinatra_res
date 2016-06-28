@@ -22,6 +22,9 @@ end
 #set :public_folder, File.dirname(__FILE__) + '/public'
 
 
+
+
+
 get '/:site_nome/logout' do
 
     session[:logado] = false
@@ -47,9 +50,81 @@ end
 
 
 get '/:site_nome' do
-   site_yaml = YAML.load_file(params[:site_nome]+'.yml')
-   liquid :index, :locals => { :data => params[:site_nome], :logado => session[:logado],  :site => site_yaml }
+   
+  # Definindo as categorias de portfolio
+  
+  data = YAML.load_file(params[:site_nome]+'.yml')
+   
+  module IndiceArray
+
+     
+       def indice(input="")
+
+            data = YAML.load_file('maga.yml')
+            items = data["pages"]["portfolio"]["items"]
+           
+            @cat = Array.new
+           
+           for t in items
+              
+              a = t["cat"]
+              if a.to_s.include? "," then
+                 b = a.split(",")
+                 for c in b
+                    @cat << c.strip!
+                 end
+              else
+                 @cat << a
+              end
+            end
+          
+           @n = Array.new
+           @cat.uniq.each_with_index do |item, i|
+          
+              @n << item
+           
+           end 
+           
+           @i = Array.new
+           if input.to_s.include? "," then
+              b = input.split(",")
+              for c in b
+                    @i << (@n.index(c)+1)
+              end
+              return @i.join(", ")
+           else  
+             return @n.index(input)+1  
+           end
+           #pry
+        end
+  end
+
+  Liquid::Template.register_filter(IndiceArray)
+
+   data = YAML.load_file('maga.yml')
+            items = data["pages"]["portfolio"]["items"]
+           
+            @cat = Array.new
+           
+           for t in items
+              
+              a = t["cat"]
+              if a.to_s.include? "," then
+                 b = a.split(",")
+                 for c in b
+                    @cat << c.strip!
+                 end
+              else
+                 @cat << a
+              end
+            end
+          
+
+  #data = IndiceArray.load(params[:site_nome])
+  liquid :index, :locals => {:port_cats => @cat.uniq, :data => params[:site_nome], :logado => session[:logado],  :site => data }
+
 end
+
 
 get '/create' do
     @logfile = File.open("site.yml","r")
@@ -212,5 +287,32 @@ post "/:site_nome/portfolio/img/upload" do
       end           
       redirect '/'+params[:site_nome]
   #end
+end
+
+get "/:site_nome/portfolio/add" do 
+  
+  @site_nome = params[:site_nome]
+  
+  data = YAML.load_file params[:site_nome]+".yml"
+  
+  for t in data["pages"]["portfolio"]["items"]
+     id_last = t["id"]
+  end
+
+  d = { "id" => id_last+1,
+        "titulo" => "Novo",
+        "img" => "img/noimage.png",
+        "txt" => "Txt novo",
+        "nome" => "Fidelito",
+        "site" => "fidelis.com",
+        "data" => "10/10/12",
+        "servico" => "Programação"
+      }
+  
+  data["pages"]["portfolio"]["items"][(id_last.to_i)+1] = d
+  
+  File.open(params[:site_nome]+".yml", 'w') { |f| YAML.dump(data, f) }
+
+  redirect '/'+params[:site_nome]
 end
 

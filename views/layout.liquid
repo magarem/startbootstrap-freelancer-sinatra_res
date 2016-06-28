@@ -13,11 +13,12 @@
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+<!-- <link rel="stylesheet" href="css/index.css"> -->
     <!-- Custom CSS -->
     <link href="css/freelancer.css" rel="stylesheet">
 
-    <link href="css/img_upload.css" rel="stylesheet">
+    <!-- <link href="css/img_upload.css" rel="stylesheet"> -->
+
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -29,14 +30,23 @@
     <link rel="stylesheet" href="medium-editor/dist/css/medium-editor.css">
     <link rel="stylesheet" href="medium-editor/dist/css/themes/default.css" id="medium-editor-theme">
 
-    <link rel="stylesheet" href="image_upload/dist/bootstrap.fd.css">
+    <!-- <link rel="stylesheet" href="image_upload/dist/bootstrap.fd.css"> -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
+    
+    <link rel="stylesheet" href="css/portfolio_filtro.css">
+
+<!-- <script src="//code.jquery.com/jquery-1.11.2.min.js"></script> -->
+
+
+<!-- jQuery -->
     <script src="js/jquery.js"></script>
+
 
 </head>
 
@@ -106,8 +116,7 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/freelancer.js"></script>
     <!-- Trigger the modal with a button -->
-    <script src="js/img_upload_ajax.js"></script>
-    
+    <!-- <script src="js/img_upload_ajax.js"></script> -->
     
     
     {% if logado  %}
@@ -125,12 +134,12 @@
 
                 //Envia as imagens
         $("#uploadimage").submit()
-        $("#image_port_form_0").submit()
-        $("#image_port_form_1").submit()
-        $("#image_port_form_2").submit()
-        $("#image_port_form_3").submit()
-        $("#image_port_form_4").submit()
-        $("#image_port_form_5").submit() 
+
+        {% for item in site.pages.portfolio.items %}
+
+           $("#image_port_form_{{item.id}}").submit()
+
+        {% endfor %}
         
         $.post("/{{data}}/page_save", 
 
@@ -138,15 +147,28 @@
 
             );
 
-       
+
         
         alert ("Página salva com sucesso!");
     })
+
+
+
     </script>
-     
-    
 
+<!-- <script src="js/bootstrap-portfilter.min.js"></script> -->
+ <!-- Include jQuery & Filterizr -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
+    <script src="filterizr/jquery.filterizr.js"></script>
+    <script src="js/controls.js"></script>
 
+    <!-- Kick off Filterizr -->
+    <script type="text/javascript">
+        $(function() {
+            //Initialize filterizr with default options
+            $('.filtr-container').filterizr();
+        });
+    </script>
 </div>
 
 <!-- Button trigger modal -->

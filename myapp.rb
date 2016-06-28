@@ -69,10 +69,8 @@ get '/:site_nome' do
               
               a = t["cat"]
               if a.to_s.include? "," then
-                 b = a.split(",")
-                 for c in b
-                    @cat << c.strip!
-                 end
+                 @cat +=  a.split(",")
+                 
               else
                  @cat << a
               end
@@ -101,23 +99,22 @@ get '/:site_nome' do
 
   Liquid::Template.register_filter(IndiceArray)
 
-   data = YAML.load_file('maga.yml')
-            items = data["pages"]["portfolio"]["items"]
-           
-            @cat = Array.new
-           
-           for t in items
-              
-              a = t["cat"]
-              if a.to_s.include? "," then
-                 b = a.split(",")
-                 for c in b
-                    @cat << c.strip!
-                 end
-              else
-                 @cat << a
-              end
-            end
+  data = YAML.load_file('maga.yml')
+  items = data["pages"]["portfolio"]["items"]
+ 
+  @cat = Array.new
+ 
+  for t in items
+      a = t["cat"]
+      if a.to_s.include? "," then
+          @cat += a.split(",")
+         # for c in b
+         #    @cat << c
+         # end
+      else
+         @cat << a
+      end
+  end
           
 
   #data = IndiceArray.load(params[:site_nome])

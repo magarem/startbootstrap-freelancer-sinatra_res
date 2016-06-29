@@ -18,25 +18,7 @@ body {
 }
 
 /* Filter controls */
-.simplefilter li, .multifilter li, .sortandshuffle li {
-    color: white;
-    cursor: pointer;
-    display: inline-block;
-    text-transform: uppercase;
-    padding: 1rem 2rem;
-}
-.simplefilter li {
-    background-color: #585858;
-}
-.simplefilter li.active {
-    background-color: #212121;
-}
-.multifilter li {
-    background-color: #4b9eff;
-}
-.multifilter li.active {
-    background-color: #2265b4;
-}
+
 
 /* Shuffle and sort controls */
 select {

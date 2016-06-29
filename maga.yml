@@ -59,7 +59,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: segunda
+      cat:
     - id: 1
       titulo: Site teste
       img: img/portfolio/1926801_358908134247907_476196602_n.jpg
@@ -68,7 +68,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: terceira
+      cat:
     - id: 2
       titulo: Site teste
       img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
@@ -77,7 +77,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: teste
+      cat:
     - id: 3
       titulo: Site teste
       img: img/portfolio/13516311_10207347647982473_8566262067280604324_n.jpg
@@ -86,7 +86,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: legal
+      cat:
     - id: 4
       titulo: Site teste
       img: img/portfolio/13139181_626527064168509_2022078692565878775_n.jpg
@@ -95,7 +95,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat:
     - id: 5
       titulo: Site teste
       img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
@@ -122,7 +122,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat: teste
     - id: 8
       titulo: Site teste
       img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
@@ -131,7 +131,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat:
     - id: 9
       titulo: Projeto 122
       img: img/portfolio/22185_10206768931482492_8018920670780716769_n.jpg
@@ -140,7 +140,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat:
     - id: 10
       titulo: Site teste
       img: img/portfolio/1926801_358908134247907_476196602_n.jpg
@@ -149,7 +149,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat:
     - id: 11
       titulo: Site teste
       img: img/portfolio/10433098_753781931309861_6823199289509207437_n.jpg
@@ -158,7 +158,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat:
     - id: 12
       titulo: Site teste
       img: img/portfolio/12804681_10208785054604310_3739912535591575185_n.jpg
@@ -167,7 +167,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat:
     - id: 13
       titulo: Site teste
       img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
@@ -176,7 +176,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: bagaço
+      cat:
     - id: 14
       titulo: Site teste1
       img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
@@ -185,7 +185,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: legal, fidel, bagaço
+      cat:
     - id: 15
       titulo: Site teste2
       img: img/portfolio/12804681_10208785054604310_3739912535591575185_n.jpg
@@ -194,7 +194,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: super,ninja, teste
+      cat:
     - id: 16
       titulo: Site teste
       img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg
@@ -203,7 +203,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: teste,mantena,super,ninja,fidel
+      cat:
     - id: 17
       titulo: Site teste
       img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
@@ -212,7 +212,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: mantena
+      cat:
     - id: 18
       titulo: Novo
       img: img/portfolio/22185_10206768931482492_8018920670780716769_n.jpg
@@ -221,4 +221,4 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: mantena
+      cat:

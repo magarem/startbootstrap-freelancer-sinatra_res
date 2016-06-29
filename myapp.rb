@@ -9,6 +9,47 @@ require 'fileutils'
 
 enable :sessions
 
+module IndiceArray
+
+   def self.set_site_nome site_nome
+       @site_nome = site_nome
+       IndiceArray.ii.uniq
+   end
+
+   def self.ii 
+    @items = YAML.load_file(@site_nome+'.yml')["pages"]["portfolio"]["items"]
+    @cat = Array.new
+    tem_nil = false
+    @items.each do |item| 
+        item_cat = item["cat"].to_s.gsub(", ", ",")
+        if item_cat == "" then 
+           tem_nil = true 
+        else   
+            if item_cat.include? "," then
+               @cat +=  item_cat.split(",")
+            else
+               @cat << item_cat
+            end
+        end 
+    end
+    if tem_nil then @cat << "Outros" end
+    return @cat
+   end
+ 
+   def indice(input="")
+        input = input.to_s.gsub(", ", ",")
+        if input == "" then input = "Outros" end
+        @cat, @n, @i = [], [], []
+        @cat = IndiceArray.ii      
+        if input.include? "," then
+           input.split(",").each {|c| @i << (@cat.uniq.index(c)+1)}
+           @i.join(", ")
+        else  
+           @cat.uniq.index(input)+1  
+        end
+         #pry
+    end
+end
 
 configure do
   # App Paths
@@ -18,10 +59,6 @@ configure do
   set :public_folder, Proc.new { File.join(root, "public") }
   Liquid::Template.file_system = Liquid::LocalFileSystem.new(File.join(File.dirname(__FILE__),'views'))
 end
-
-#set :public_folder, File.dirname(__FILE__) + '/public'
-
-
 
 
 
@@ -51,55 +88,15 @@ end
 
 get '/:site_nome' do
    
-  # Definindo as categorias de portfolio
-  
-  data = YAML.load_file(params[:site_nome]+'.yml')
-   
-  module IndiceArray
-            
-       @@items = YAML.load_file('maga.yml')["pages"]["portfolio"]["items"]
-     
-       def indice(input="")
-           input = input.to_s.gsub(", ", ",")
-           @cat, @n, @i = [], [], []
-           @@items.each do |item| 
-              item_cat = item["cat"].to_s.gsub(", ", ",")
-              
-              if item_cat.to_s.include? "," then
-                 @cat +=  item_cat.split(",")
-              else
-                 @cat << item_cat
-              end
-           end
-           if input.include? "," then
-              input.split(",").each {|c| @i << (@cat.uniq.index(c)+1)}
-              @i.join(", ")
-           else  
-              @cat.uniq.index(input)+1  
-           end
-           #pry
-        end
-  end
+      # Definindo as categorias de portfolio
+      
+      data = YAML.load_file(params[:site_nome]+'.yml')
 
-  Liquid::Template.register_filter(IndiceArray)
+      Liquid::Template.register_filter(IndiceArray)
 
-  items = YAML.load_file('maga.yml')["pages"]["portfolio"]["items"]
-  @cat = Array.new
-   
-   items.each do |item| 
-
-        item_cat = item["cat"].to_s.gsub(", ", ",")        
-        
-        if item_cat.include? "," then
-           @cat +=  item_cat.split(",")
-        else
-           @cat << item_cat
-        end
-   end
- 
-
-  #data = IndiceArray.load(params[:site_nome])
-  liquid :index, :locals => {:port_cats => @cat.uniq, :data => params[:site_nome], :logado => session[:logado],  :site => data }
+      @cat = IndiceArray.set_site_nome params[:site_nome]
+       
+      liquid :index, :locals => {:port_cats => @cat, :data => params[:site_nome], :logado => session[:logado],  :site => data }
 
 end
 

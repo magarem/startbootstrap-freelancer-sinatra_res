@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  ng-app="app">
 
 <head>
 
@@ -10,6 +10,10 @@
     <meta name="author" content="{{ site.head.author }}">
 
     <title>{{ site.logo.label }}</title>
+
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css">
+
+    
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -40,6 +44,12 @@
     <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
     
     <link rel="stylesheet" href="css/portfolio_filtro.css">
+
+
+
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css">
 
 <!-- <script src="//code.jquery.com/jquery-1.11.2.min.js"></script> -->
 
@@ -105,9 +115,7 @@
     <script src="js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="js/classie.js"></script>
-    <script src="js/cbpAnimatedHeader.js"></script>
+    
 
     <!-- Contact Form JavaScript -->
     <script src="js/jqBootstrapValidation.js"></script>
@@ -129,53 +137,76 @@
         </script>
     {% endif %}
 
-    <script>
-    $( "#save" ).click(function(event) {
-
-                //Envia as imagens
-        $("#uploadimage").submit()
-
-        {% for item in site.pages.portfolio.items %}
-
-           $("#image_port_form_{{item.id}}").submit()
-
-        {% endfor %}
-        
-        $.post("/{{data}}/page_save", 
-
-            editor.serialize()
-
-            );
-
-
-        
-        alert ("Página salva com sucesso!");
-    })
-
-
-
-    </script>
+   
 
 <!-- <script src="js/bootstrap-portfilter.min.js"></script> -->
  <!-- Include jQuery & Filterizr -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
-    <script src="filterizr/jquery.filterizr.js"></script>
-    <script src="js/controls.js"></script>
-
-    <!-- Kick off Filterizr -->
-    <script type="text/javascript">
-        $(function() {
-            //Initialize filterizr with default options
-            $('.filtr-container').filterizr();
-        });
-    </script>
+   
+   
 </div>
 
 <!-- Button trigger modal -->
 
 
+ <script src="bower_components/angular/angular.js"></script>
+ 
+
+  <script src="bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js"></script>
+
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js?v1.3.1"></script>
 
 
+<script>
+    
+angular.module('app', ['bootstrapLightbox']);
+
+angular.module('app').config(function (LightboxProvider) {
+  // set a custom template
+  LightboxProvider.templateUrl = 'demo2-lightbox-modal.html';
+
+  // set the caption of each image as its text color
+  LightboxProvider.getImageCaption = function (imageUrl) {
+    return '#22';
+  };
+
+  // increase the maximum display height of the image
+  LightboxProvider.calculateImageDimensionLimits = function (dimensions) {
+    return {
+      'maxWidth': dimensions.windowWidth >= 768 ? // default
+        dimensions.windowWidth - 92 :
+        dimensions.windowWidth - 52,
+      'maxHeight': 1600                           // custom
+    };
+  };
+
+  // the modal height calculation has to be changed since our custom template is
+  // taller than the default template
+  LightboxProvider.calculateModalDimensions = function (dimensions) {
+    var width = Math.max(400, dimensions.imageDisplayWidth + 32);
+
+    if (width >= dimensions.windowWidth - 20 || dimensions.windowWidth < 768) {
+      width = 'auto';
+    }
+
+    return {
+      'width': width,                             // default
+      'height': 'auto'                            // custom
+    };
+  };
+});
+
+angular.module('app').controller('GalleryCtrl', function ($scope, Lightbox) {
+
+  $scope.Lightbox = Lightbox;
+
+  $scope.images = [
+   {% for item in site.pages.portfolio.items %}
+    '{{item.img}}?{{item.id}}',
+   {% endfor %}
+  ];
+});
+</script>
 </body>
 
 </html>

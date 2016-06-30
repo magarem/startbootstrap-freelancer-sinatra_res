@@ -230,11 +230,11 @@ post "/:site_nome/portfolio/img/upload" do
   #pry
 
   #if session[:logado] then
-      @filename = params[("file_"+id).to_sym][:filename].downcase
+      @filename = params[("file"+id).to_sym][:filename].downcase
 
       file = params[("file_"+id).to_sym][:tempfile]
       imagem_tipo = params[("file_"+id).to_sym][:type]
-      
+      pry
       #pry
       #@filename = Time.now.to_i.to_s+"."+params["file"][:filename].split(".").last
       

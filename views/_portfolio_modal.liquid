@@ -1,59 +1,6 @@
+
 {% for item in site.pages.portfolio.items %}
-<script>
-$(document).ready(function (e) {
-    $("#image_port_form_{{ item.id }}").on('submit',(function(e) {
-        e.preventDefault();
-        //$("#message").empty(); 
-        //$('#loading').show();
-        //data =  new FormData(this);
-        //alert(JSON.stringify((new FormData(this))));
-        $.ajax({
-            url: "/{{data}}/portfolio/img/upload",            // Url to which the request is send
-            type: "POST",                   // Type of request to be send, called as method
-            data:  new FormData(this),      // Data sent to server, a set of key/value pairs representing form fields and values 
-            contentType: false,             // The content type used when sending data to the server. Default is: "application/x-www-form-urlencoded"
-            cache: false,                   // To unable request pages to be cached
-            processData:false,              // To send DOMDocument or non processed data file it is set to false (i.e. data should not be in the form of string)
-            success: function(data)         // A function to be called if request succeeds
-            {
-            //$('#loading').hide();
-            //$("#message").html(data);         
-            }           
-       });
-    }));
 
-// Function to preview image
-    $(function() {
-        $("#file_{{ item.id }}").change(function() {
-            //$("#message").empty();         // To remove the previous error message
-            var file = this.files[0];
-            var imagefile = file.type;
-            var match= ["image/jpeg","image/png","image/jpg"];  
-            if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2])))
-            {
-            //$('#previewing').attr('src','noimage.png');
-            //$("#message").html("<p id='error'>Please Select A valid Image File</p>"+"<h4>Note</h4>"+"<span id='error_message'>Only jpeg, jpg and png Images type allowed</span>");
-            return false;
-            }
-            else
-            {
-                var reader = new FileReader();  
-                reader.onload = imageIsLoaded;
-                reader.readAsDataURL(this.files[0]);
-            }       
-        });
-    });
-    function imageIsLoaded(e) { 
-        
-        $('#port_img_{{ item.id }}').attr('src', e.target.result);
-        $('#port_img_mini_{{ item.id }}').attr('src', e.target.result);
-    };
-});
-
-
-
-
-</script>
     <div class="portfolio-modal modal fade" id="portfolioModal{{ item.id }}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -62,17 +9,18 @@ $(document).ready(function (e) {
                     </div>
                 </div>
             </div>
+
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
                             <h2> <div class="editable">{{ item.titulo }}</div></h2>
                             <hr class="star-primary">
-                            <img id="port_img_{{ item.id }}" src="{{ item.img }}" class="img-responsive img-centered leImage" alt="" onclick="$('#file_{{ item.id }}').click();" >
+                            <img id="port_img_{{ item.id }}" src="{{ item.img }}" class="img-responsive img-centered leImage" alt="" onclick="$('#{{ item.id }}').click();" >
 
-                            <form id="image_port_form_{{ item.id }}" action="" method="POST" enctype="multipart/form-data">
+                            <form id="image_port_form_{{ item.id }}" class="image_port_form" action="" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="site" value="{{site.name}}">
-                                <input type="file" name="file_{{ item.id }}" id="file_{{ item.id }}" style="visibility:hidden">
+                                <input type="file" name="file_{{ item.id }}" id="{{ item.id }}" style="visibility:hidden" class="file">
                                 <input name=item_id id=item_id value="{{item.id}}" type=hidden>
                             </form>
 

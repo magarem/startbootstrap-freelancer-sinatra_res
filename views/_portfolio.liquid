@@ -1,4 +1,4 @@
-<section id="portfolio">
+<section id="portfolio" >
    <div class="container">
        <div class="row">
           <div class="col-lg-12 text-center">
@@ -15,27 +15,44 @@
                   {% endfor %}
                 {% endif %}
            </div>
-        </div>
-        <div class="clearfix"></div>
-        <br />
-        <style>
+       </div>
+       <div class="clearfix"></div>
+       <br />
+       <style>
           .crop {
             width: 380px;
             height: 240px;
             overflow: hidden;
           }
-        </style>
-        <div class="row"> 
-             <div class="filtr-container">
-                {% for item in site.pages.portfolio.items %}                
-                  <div class="col-sm-4 filtr-item  crop" data-category="{{item.cat | indice}}" data-sort="">
+       </style>
+       <div class="row"> 
+          <div class="filtr-container gallery gallery2">
+               
+                  <!-- <div class="col-sm-4 filtr-item  crop" data-category="{{item.cat | indice}}" data-sort="">
                      <a href="#portfolioModal{{item.id}}" class="portfolio-link" data-toggle="modal">               
                       <img id=port_img_mini_{{item.id}} src="{{item.img}}" class="img-responsive centered-and-cropped"  alt="">
                       <span class="item-desc">{{item.titulo}}</span>
                      </a>
-                  </div>
-                {% endfor %}
-             </div>
+                  </div> -->
+                  {%raw-%}
+                  <div  ng-controller="GalleryCtrl">
+                    <div ng-repeat="image in images">
+                     <div class="col-sm-4 filtr-item crop"  >
+                 
+                      <!-- <ul class="gallery gallery2" ng-controller="GalleryCtrl"> -->
+                        <!-- <li ng-repeat="image in images"> -->
+                          <a ng-click="Lightbox.openModal(images, $index)">
+                            <img ng-src="{{image}}" class="img-responsive centered-and-cropped">
+                            <span class="item-desc">{{item.titulo}}</span>
+                          </a>
+                        <!-- </li> -->
+                      <!-- </ul> -->
+                    </div>
+                   </div>
+                </div>
+             {%endraw-%}
+          </div>
         </div>
-    </div>
+   
 </section>
+

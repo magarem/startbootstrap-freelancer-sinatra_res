@@ -30,6 +30,11 @@
                     {% endif %}
                      >
                 </div>
+                <script>
+                $("#file").change(function() {
+                    flag_uploadimage = 1;
+                });
+                </script>
 
                 <form id=uploadimage action="/{{site.name}}/upload" method="POST" enctype="multipart/form-data">
            

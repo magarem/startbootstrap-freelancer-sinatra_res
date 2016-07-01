@@ -1,5 +1,5 @@
 ---
-name: site
+name: maga
 senha: 1222
 head:
   title: Portfolio geral
@@ -12,11 +12,11 @@ moldura:
     link: index.ttt
   menu:
   - label: Portfolio
-    link: 
+    link: ''
   - label: About
-    link: 
+    link: ''
   - label: Contact
-    link: 
+    link: ''
   footer:
     endereco: Rio de Janeiro - RJ - Brasil
     social:
@@ -53,67 +53,67 @@ pages:
     items:
     - id: 0
       titulo: Projeto 122
-      img: img/portfolio/1069232_376421622469483_94689385_n.jpg
+      img: img/portfolio/10433098_753781931309861_6823199289509207437_n.jpg
       txt: Este é um teste muito legal
       cliente: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 1
       titulo: Site teste
-      img: img/portfolio/1926801_358908134247907_476196602_n.jpg
+      img: img/portfolio/22185_10206768931482492_8018920670780716769_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 2
       titulo: Site teste
-      img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
+      img: img/portfolio/safe_image.php.jpeg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 3
       titulo: Site teste
-      img: img/portfolio/13516311_10207347647982473_8566262067280604324_n.jpg
+      img: img/portfolio/27839439211_f205eae4a2_b.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 4
       titulo: Site teste
-      img: img/portfolio/13139181_626527064168509_2022078692565878775_n.jpg
+      img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 5
       titulo: Site teste
-      img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
+      img: img/portfolio/10456772_10203468737591390_9090394070066185618_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 6
       titulo: Site teste
-      img: img/portfolio/12804681_10208785054604310_3739912535591575185_n.jpg
+      img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 7
       titulo: Site teste
       img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
@@ -131,16 +131,16 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 9
       titulo: Projeto 122
-      img: img/portfolio/22185_10206768931482492_8018920670780716769_n.jpg
+      img: img/portfolio/12212058_900124723376186_1916938989_n.jpg
       txt: Este é um teste muito legal
       cliente: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 10
       titulo: Site teste
       img: img/portfolio/1926801_358908134247907_476196602_n.jpg
@@ -149,16 +149,16 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 11
       titulo: Site teste
-      img: img/portfolio/10433098_753781931309861_6823199289509207437_n.jpg
+      img: img/portfolio/13139181_626527064168509_2022078692565878775_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 12
       titulo: Site teste
       img: img/portfolio/12804681_10208785054604310_3739912535591575185_n.jpg
@@ -167,7 +167,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 13
       titulo: Site teste
       img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
@@ -176,7 +176,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 14
       titulo: Site teste1
       img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
@@ -185,7 +185,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 15
       titulo: Site teste2
       img: img/portfolio/12804681_10208785054604310_3739912535591575185_n.jpg
@@ -194,7 +194,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 16
       titulo: Site teste
       img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg
@@ -203,7 +203,7 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 17
       titulo: Site teste
       img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
@@ -212,13 +212,14 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
     - id: 18
       titulo: Novo
-      img: img/portfolio/22185_10206768931482492_8018920670780716769_n.jpg
+      img: img/portfolio/safe_image.php.jpeg
       txt: Txt novo
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat:
+      cat: 
+at: 

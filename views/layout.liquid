@@ -133,13 +133,13 @@
     $( "#save" ).click(function(event) {
 
                 //Envia as imagens
-        $("#uploadimage").submit()
+        $("#uploadimage").submit();
 
-        {% for item in site.pages.portfolio.items %}
+      
 
-           $("#image_port_form_{{item.id}}").submit()
+        $("#image_port_form_2").submit();
 
-        {% endfor %}
+      
         
         $.post("/{{data}}/page_save", 
 

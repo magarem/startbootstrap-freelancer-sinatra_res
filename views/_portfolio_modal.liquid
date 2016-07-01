@@ -2,6 +2,7 @@
 <script>
 $(document).ready(function (e) {
     $("#image_port_form_{{ item.id }}").on('submit',(function(e) {
+        console.log(this.id);
         e.preventDefault();
         //$("#message").empty(); 
         //$('#loading').show();
@@ -16,12 +17,17 @@ $(document).ready(function (e) {
             processData:false,              // To send DOMDocument or non processed data file it is set to false (i.e. data should not be in the form of string)
             success: function(data)         // A function to be called if request succeeds
             {
+                alert("Item salvo com sucesso!");
             //$('#loading').hide();
             //$("#message").html(data);         
             }           
        });
     }));
+ });   
+</script>
 
+<script>
+$(document).ready(function (e) {
 // Function to preview image
     $(function() {
         $("#file_{{ item.id }}").change(function() {
@@ -48,8 +54,8 @@ $(document).ready(function (e) {
         $('#port_img_{{ item.id }}').attr('src', e.target.result);
         $('#port_img_mini_{{ item.id }}').attr('src', e.target.result);
     };
-});
 
+ });
 
 
 
@@ -74,6 +80,7 @@ $(document).ready(function (e) {
                                 <input type="hidden" name="site" value="{{site.name}}">
                                 <input type="file" name="file_{{ item.id }}" id="file_{{ item.id }}" style="visibility:hidden">
                                 <input name=item_id id=item_id value="{{item.id}}" type=hidden>
+                                <input type=submit>
                             </form>
 
                             <p><div class="editable">{{ item.txt }}</div></p>

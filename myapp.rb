@@ -7,6 +7,7 @@ require 'json'
 require 'mini_magick'
 require 'fileutils'
 
+
 enable :sessions
 
 module IndiceArray
@@ -60,7 +61,11 @@ configure do
   Liquid::Template.file_system = Liquid::LocalFileSystem.new(File.join(File.dirname(__FILE__),'views'))
 end
 
-
+helpers do
+  def h(text)
+    Rack::Utils.escape_html(text)
+  end
+end
 
 get '/:site_nome/logout' do
 
@@ -118,9 +123,10 @@ post '/:site_nome/page_save' , :provides => :json do
       site_fonte = params[:site_nome]+".yml"
       data = YAML.load_file site_fonte
       
-      data["moldura"]["logo"]["label"] = params["element-0"]["value"]
-      data["pages"]["home"]["label"] = params["element-1"]["value"]
+      data["moldura"]["logo"]["label"] = params["topo"]["value"]
+      #data["pages"]["home"]["label"] = params["element-1"]["value"]
       
+
 
       #data["pages"]["home"]["label"] = params["element-0"]["value"]
       File.open(site_fonte, 'w') { |f| YAML.dump(data, f) }
@@ -224,16 +230,41 @@ post "/:site_nome/upload" do
   end
 end
 
+post "/:site_nome/portfolio/save/:item_id" do 
+  @site_nome = params[:site_nome]
+  id = params[:item_id]
+
+ 
+  data = YAML.load_file params[:site_nome]+".yml"
+
+  @x = params["p_titulo_1"]["value"]
+  
+ 
+  #Salva os dados do painel do portfolio
+  data["pages"]["portfolio"]["items"][id.to_i]["titulo"]  = params["p_titulo_"+id.to_s]["value"]
+  data["pages"]["portfolio"]["items"][id.to_i]["txt"]     = params["p_txt_"+id.to_s]["value"]
+  data["pages"]["portfolio"]["items"][id.to_i]["cliente"] = params["p_cliente_"+id.to_s]["value"]
+  data["pages"]["portfolio"]["items"][id.to_i]["site"]    = params["p_site_"+id.to_s]["value"]
+  data["pages"]["portfolio"]["items"][id.to_i]["data"]    = params["p_data_"+id.to_s]["value"]
+  data["pages"]["portfolio"]["items"][id.to_i]["servico"] = params["p_servico_"+id.to_s]["value"]
+  data["pages"]["portfolio"]["items"][id.to_i]["cat"]     = params["p_cat_"+id.to_s]["value"]
+
+  File.open(params[:site_nome]+".yml", 'w') { |f| YAML.dump(data, f) }
+  
+  redirect '/'+params[:site_nome]
+  #end
+end
+
 post "/:site_nome/portfolio/img/upload" do 
   @site_nome = params[:site_nome]
   id = params[:item_id]
   #pry
 
   #if session[:logado] then
-      @filename = params[("file_"+id).to_sym][:filename].downcase
+      @filename = params[("file_"+id.to_s).to_sym][:filename].downcase
 
-      file = params[("file_"+id).to_sym][:tempfile]
-      imagem_tipo = params[("file_"+id).to_sym][:type]
+      file = params[("file_"+id.to_s).to_sym][:tempfile]
+      imagem_tipo = params[("file_"+id.to_s).to_sym][:type]
       
       #pry
       #@filename = Time.now.to_i.to_s+"."+params["file"][:filename].split(".").last
@@ -258,6 +289,9 @@ post "/:site_nome/portfolio/img/upload" do
             data = YAML.load_file params[:site_nome]+".yml"
             data["pages"]["portfolio"]["items"][id.to_i]["img"] = "img/portfolio/#{@filename}"
             File.open(params[:site_nome]+".yml", 'w') { |f| YAML.dump(data, f) }
+
+          
+            
 
       end           
       redirect '/'+params[:site_nome]

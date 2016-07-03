@@ -8,6 +8,7 @@ $(document).ready(function (e) {
         //$('#loading').show();
         //data =  new FormData(this);
         //alert(JSON.stringify((new FormData(this))));
+
         $.ajax({
             url: "/{{data}}/portfolio/img/upload",            // Url to which the request is send
             type: "POST",                   // Type of request to be send, called as method
@@ -22,6 +23,16 @@ $(document).ready(function (e) {
             //$("#message").html(data);         
             }           
        });
+  console.log(editor.serialize());
+  
+$.post("/{{data}}/portfolio/save/{{ item.id }}", 
+
+            editor.serialize()
+
+            );
+
+        
+
     }));
  });   
 </script>
@@ -67,12 +78,12 @@ $(document).ready(function (e) {
                     <div class="rl">
                     </div>
                 </div>
-            </div>
+            </div>   
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <h2> <div class="editable">{{ item.titulo }}</div></h2>
+                            <h2> <div class="editable" id="p_titulo_{{ item.id }}">{{ item.titulo }}</div></h2>
                             <hr class="star-primary">
                             <img id="port_img_{{ item.id }}" src="{{ item.img }}" class="img-responsive img-centered leImage" alt="" onclick="$('#file_{{ item.id }}').click();" >
 
@@ -80,39 +91,65 @@ $(document).ready(function (e) {
                                 <input type="hidden" name="site" value="{{site.name}}">
                                 <input type="file" name="file_{{ item.id }}" id="file_{{ item.id }}" style="visibility:hidden">
                                 <input name=item_id id=item_id value="{{item.id}}" type=hidden>
-                                <input type=submit>
+                                
                             </form>
 
-                            <p><div class="editable">{{ item.txt }}</div></p>
+                            <p><div class="editable" id="p_txt_{{ item.id }}">{{ item.txt }}</div></p>
                             <ul class="list-inline item-details">
                                 <li>Id:
-                                    <strong><div class="editable" id=port_item_id>{{ item.id }}</div>
+                                    <strong><div class="editable" id="p_id_{{ item.id }}">{{ item.id }}</div>
                                     </strong>
                                 </li>
                                 <li>Cliente:
-                                    <strong><div class="editable">{{ item.cliente }}</div>
-                                    </strong>
+                                   <strong>
+                                    <div 
+                                      class="editable"
+                                      id="p_cliente_{{ item.id }}">
+                                      {{ item.cliente }}
+                                    </div>
+                                   </strong>
                                 </li>
                                 <li>Data:
-                                    <strong><div class="editable">
+                                    <strong>
+                                     <div 
+                                       class="editable"
+                                       id="p_data_{{ item.id }}"
+                                       >
                                         {{ item.data }}
                                       </div>
                                     </strong>
                                 </li>
                                 <li>Serviço:
-                                    <strong><div class="editable">
-                                           {{ item.servico }}
+                                    <strong>
+                                      <div 
+                                       class="editable"
+                                       id = "p_servico_{{ item.id }}">
+                                       {{ item.servico }}
                                       </div>  
                                     </strong>
                                 </li>
                                 <li>Site:
-                                    <strong><div class="editable">
-                                      <a href="http://{{ item.site}}">
-                                           {{ item.site }}
-                                      </a></div>  
+                                    <strong>
+                                      <div 
+                                        class="editable"
+                                        id="p_site_{{ item.id }}">
+                                      <a href="http://{{item.site}}">{{ item.site }}
+                                      </a>
+                                      </div>  
+                                    </strong>
+                                </li>
+                                 <li>Categorias:
+                                    <strong>
+                                      <div 
+                                        class="editable"
+                                        id="p_cat_{{ item.id }}">
+                                       {{ item.cat }}   
+                                      </div>  
                                     </strong>
                                 </li>
                             </ul>
+                            <button id=save type="button"  class="btn btn-primary btn-sm"
+                            onclick='$("#image_port_form_{{ item.id }}").submit();'>Salvar</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Fechar</button>
                         </div>
                     </div>

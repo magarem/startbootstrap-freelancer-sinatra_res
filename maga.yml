@@ -8,7 +8,7 @@ head:
 moldura:
   label: Portfolio
   logo:
-    label: Maguete Ninja
+    label: "<p>Maga<br></p>"
     link: index.ttt
   menu:
   - label: Portfolio
@@ -52,32 +52,50 @@ pages:
     label: Portfólio
     items:
     - id: 0
-      titulo: Projeto 122
+      titulo: "<p>*122</p>"
       img: img/portfolio/10433098_753781931309861_6823199289509207437_n.jpg
-      txt: Este é um teste muito legal
-      cliente: Fidelito
-      site: fidelis.com
+      txt: "<p>&nbsp;h ih iuh iuh iuh iuh <br></p>"
+      cliente: |-
+        <p>
+                                              l
+                                            </p>
+      site: |-
+        <a href="http://fidelis.com">fidelis.com
+                                              </a>
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat: ''
     - id: 1
-      titulo: Site teste
-      img: img/portfolio/22185_10206768931482492_8018920670780716769_n.jpg
+      titulo: "<p>funcionou?<br></p>"
+      img: img/portfolio/10456772_10203468737591390_9090394070066185618_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
-      site: fidelis.com
+      site: |-
+        <a href="http://<a href=" http:="" <a="" "="" fidelis.com"="">fidelis.com
+                                              </a>"&gt;<a href="http://fidelis.com">fidelis.com
+                                              </a>"&gt;<a href="http://<a href=" http:="" fidelis.com"="">fidelis.com
+                                              </a>"&gt;<a href="http://fidelis.com">fidelis.com
+                                              </a>"&gt;<a href="http://<a href=" http:="" <a="" "="" fidelis.com"="">fidelis.com
+                                              </a>"&gt;<a href="http://fidelis.com">fidelis.com
+                                              </a>"&gt;<a href="http://<a href=" http:="" fidelis.com"="">fidelis.com
+                                              </a>"&gt;<a href="http://fidelis.com">fidelis.com
+                                              </a>
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat: "&lt;p&gt;t,t5\n                                          \n                                      &lt;&#x2F;p&gt;"
+      cliente: ''
     - id: 2
-      titulo: Site teste
-      img: img/portfolio/safe_image.php.jpeg
-      txt: Este é um teste muito legal
+      titulo: "<p>indio</p>"
+      img: img/portfolio/13516311_10207347647982473_8566262067280604324_n.jpg
+      txt: "<p>indio ninja e tal ok? tá!!<br></p>"
       nome: Fidelito
-      site: fidelis.com
+      site: |-
+        <a href="http://fidelis.com">fidelis.com
+                                              </a>
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat: "<p>legal\n                                          \n                                      </p>"
+      cliente: ''
     - id: 3
       titulo: Site teste
       img: img/portfolio/27839439211_f205eae4a2_b.jpg
@@ -214,12 +232,15 @@ pages:
       servico: Programação
       cat: 
     - id: 18
-      titulo: Novo
-      img: img/portfolio/safe_image.php.jpeg
-      txt: Txt novo
+      titulo: "<p>companheiros da floresta<br></p>"
+      img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg
+      txt: "<p>dfdfsdfds</p>"
       nome: Fidelito
-      site: fidelis.com
+      site: |-
+        <a href="http://fidelis.com">fidelis.com
+                                              </a>
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat: ''
+      cliente: ''
 at: 

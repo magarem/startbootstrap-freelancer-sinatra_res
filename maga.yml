@@ -53,48 +53,31 @@ pages:
     items:
     - id: 0
       titulo: "<p>*122</p>"
-      img: img/portfolio/10433098_753781931309861_6823199289509207437_n.jpg
+      img: img/portfolio/lost-in-mars.jpg
       txt: "<p>&nbsp;h ih iuh iuh iuh iuh <br></p>"
-      cliente: |-
-        <p>
-                                              l
-                                            </p>
-      site: |-
-        <a href="http://fidelis.com">fidelis.com
-                                              </a>
-      data: 10/10/12
+      cliente: d
+      site: d
       servico: Programação
-      cat: ''
+      cat: High
     - id: 1
       titulo: "<p>funcionou?<br></p>"
-      img: img/portfolio/10456772_10203468737591390_9090394070066185618_n.jpg
+      img: img/portfolio/904_663298153721554_803580325_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
-      site: |-
-        <a href="http://<a href=" http:="" <a="" "="" fidelis.com"="">fidelis.com
-                                              </a>"&gt;<a href="http://fidelis.com">fidelis.com
-                                              </a>"&gt;<a href="http://<a href=" http:="" fidelis.com"="">fidelis.com
-                                              </a>"&gt;<a href="http://fidelis.com">fidelis.com
-                                              </a>"&gt;<a href="http://<a href=" http:="" <a="" "="" fidelis.com"="">fidelis.com
-                                              </a>"&gt;<a href="http://fidelis.com">fidelis.com
-                                              </a>"&gt;<a href="http://<a href=" http:="" fidelis.com"="">fidelis.com
-                                              </a>"&gt;<a href="http://fidelis.com">fidelis.com
-                                              </a>
+      site: d
       data: 10/10/12
       servico: Programação
-      cat: "&lt;p&gt;t,t5\n                                          \n                                      &lt;&#x2F;p&gt;"
+      cat: High
       cliente: ''
     - id: 2
       titulo: "<p>indio</p>"
-      img: img/portfolio/13516311_10207347647982473_8566262067280604324_n.jpg
+      img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
       txt: "<p>indio ninja e tal ok? tá!!<br></p>"
       nome: Fidelito
-      site: |-
-        <a href="http://fidelis.com">fidelis.com
-                                              </a>
+      site: s
       data: 10/10/12
       servico: Programação
-      cat: "<p>legal\n                                          \n                                      </p>"
+      cat: Medium
       cliente: ''
     - id: 3
       titulo: Site teste
@@ -104,16 +87,16 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat: Medium
     - id: 4
-      titulo: Site teste
-      img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg
+      titulo: Site teste 3
+      img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat: teste2, Medium,zuretinha
     - id: 5
       titulo: Site teste
       img: img/portfolio/10456772_10203468737591390_9090394070066185618_n.jpg
@@ -122,16 +105,16 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat: High
     - id: 6
-      titulo: Site teste
+      titulo: Site teste 22
       img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat: zuretinha
     - id: 7
       titulo: Site teste
       img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
@@ -188,7 +171,7 @@ pages:
       cat: 
     - id: 13
       titulo: Site teste
-      img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
+      img: img/portfolio/lost-in-mars.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
@@ -241,6 +224,6 @@ pages:
                                               </a>
       data: 10/10/12
       servico: Programação
-      cat: ''
+      cat: 
       cliente: ''
 at: 

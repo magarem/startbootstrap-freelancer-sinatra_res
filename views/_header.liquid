@@ -1,10 +1,9 @@
-
 <header>
   <div class="container">
     <div class="row">
         <div class="col-lg-12">
-         <style>
-           .cropcircle{
+            <style>
+               .cropcircle{
                   width: 250px;
                   height: 250px;
                   border-radius: 100%;
@@ -22,17 +21,15 @@
                   background-image: url({{ site.pages.home.img }});
               }
             </style>
-            <img id=imm>
+           
             <div id="image1" 
                  class="cropcircle img-responsive" 
                 {% if logado  %}
                  onclick="$('#file').click();"
-                {% endif %}
-                 >
+                {% endif %} >
             </div>
 
             <form id=uploadimage action="" method="POST" enctype="multipart/form-data">
-       
                 <input type="hidden" name="site" value="{{site.name}}">
                 <input type="hidden" id="flag_form_0" value="">
                 <input 
@@ -41,8 +38,6 @@
                    name="file" 
                    id="file" required 
                    style="visibility:hidden">
-                
-               
             </form>
 
             <div class="intro-text">
@@ -55,12 +50,19 @@
                 <span class="skills">
                  <div class="editable" >
                   {{ site.pages.home.body }}
-                 </div></span>
+                 </div>
+                </span>
             </div>           
         </div>
 
-      </div><div><br><button type="button" onclick="$('#uploadimage').submit();" class="btn btn-primary btn-sm">Salvar</button></div>
-  </div>
+      </div>
+    <div>
+    <br>
+      {% if logado  %}
+        <button type="button" onclick="$('#uploadimage').submit();" class="btn btn-primary btn-sm">Salvar</button></div>
+      {% endif  %}
+   </div>
+  </div> 
 </header>
 <script>
 $(document).ready(function (e) {

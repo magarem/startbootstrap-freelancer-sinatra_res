@@ -27,13 +27,17 @@ module IndiceArray
            tem_nil = true 
         else   
             if item_cat.include? "," then
-               @cat +=  item_cat.split(",")
+               # @cat +=  item_cat.split(",")
+               item_cat.split(",").each do |x|
+                   @cat << "'"+x.to_s+"',"
+               end
+
             else
-               @cat << item_cat
+               @cat << "'"+item_cat+"',"
             end
         end 
     end
-    if tem_nil then @cat << "Outros" end
+    if tem_nil then @cat << "'Outros'" end
     return @cat
    end
  
@@ -101,7 +105,13 @@ get '/:site_nome' do
 
       @cat = IndiceArray.set_site_nome params[:site_nome]
        
-      liquid :index, :locals => {:port_cats => @cat, :data => params[:site_nome], :logado => session[:logado],  :site => data }
+      data_portfolio_json = data["pages"]["portfolio"]["items"]
+      
+      liquid :index, :locals => {:port_cats => @cat, 
+                                 :data_portfolio_json => data_portfolio_json.to_json, 
+                                 :data => params[:site_nome], 
+                                 :logado => session[:logado],  
+                                 :site => data }
 
 end
 

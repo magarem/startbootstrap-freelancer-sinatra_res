@@ -52,32 +52,33 @@ pages:
     label: Portfólio
     items:
     - id: 0
-      titulo: "<p>*122</p>"
-      img: img/portfolio/lost-in-mars.jpg
-      txt: "<p>&nbsp;h ih iuh iuh iuh iuh <br></p>"
-      cliente: d
-      site: d
-      servico: Programação
-      cat: High
+      titulo: ee
+      img: img/portfolio/a8c8dab1485c7968bb77fa351d1bdf09.jpg
+      txt: Essa japinha é massa, npe?! ;)
+      cliente: nem sei quem é
+      site: ofidelis.com
+      servico: desenv
+      cat: desenv,design,web
+      data: 10/02/2016
     - id: 1
-      titulo: "<p>funcionou?<br></p>"
-      img: img/portfolio/904_663298153721554_803580325_n.jpg
-      txt: Este é um teste muito legal
+      titulo: xx
+      img: img/portfolio/hoa_exercise_01_cropped.jpg.400x400_q95_autocrop_crop_upscale.jpg
+      txt: '2323'
       nome: Fidelito
-      site: d
-      data: 10/10/12
-      servico: Programação
-      cat: High
-      cliente: ''
+      site: '23232'
+      data: '323'
+      servico: fff
+      cat: ff,t3
+      cliente: ddfdf
     - id: 2
-      titulo: "<p>indio</p>"
-      img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
-      txt: "<p>indio ninja e tal ok? tá!!<br></p>"
+      titulo: hfhf
+      img: img/portfolio/lost-in-mars.jpg
+      txt: indio ninja e tal ok? tá!!
       nome: Fidelito
       site: s
       data: 10/10/12
       servico: Programação
-      cat: Medium
+      cat: design,desenv
       cliente: ''
     - id: 3
       titulo: Site teste
@@ -98,14 +99,15 @@ pages:
       servico: Programação
       cat: teste2, Medium,zuretinha
     - id: 5
-      titulo: Site teste
+      titulo: Site 22 ss teste
       img: img/portfolio/10456772_10203468737591390_9090394070066185618_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: High
+      cat: teste, t2, t3
+      cliente: ''
     - id: 6
       titulo: Site teste 22
       img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg

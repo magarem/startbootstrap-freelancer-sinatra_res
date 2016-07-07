@@ -1,22 +1,205 @@
+<style type="text/css">
+ .centro {
+ /* centraliza na horizontal */
+  -ms-justify-content: center;
+  -webkit-justify-content: center;
+  justify-content: center;  
+}
+</style>
 <script>
   
-    var mod = angular.module("myapp", []);
-    mod.controller("myCtrl", function($scope){
-        $scope.images = {{data_portfolio_json}}
-        
-        $scope.currentImage = $scope.images[0];
-        $scope.imageCategories = [{{port_cats}}];
-        
-        $scope.valueSelected = function (value) {
+  var mod = angular.module("myapp", ['ngAnimate', 'ui.bootstrap', 'ngFileUpload', 'angular-medium-editor']);
+  mod.controller('myCtrl', function ($scope, $uibModal, $log) {
+      $scope.images = {{data_portfolio_json}}
+      
+      $scope.currentImage = $scope.images[0];
+      $scope.imageCategories = [{{port_cats}}];
+      
+      $scope.valueSelected = function (value) {
 
-            if (value === null) {
-                $scope.catselect = undefined;
+          if (value === null) {
+              $scope.catselect = undefined;
+          }
+      };    
+      //
+      //
+      // Modal
+      //
+      //
+      $scope.animationsEnabled = true;
+
+      $scope.open = function (titulo) {
+
+        var modalInstance = $uibModal.open({
+          animation: $scope.animationsEnabled,
+          
+          windowTopClass: "portfolio-modal modal",
+          templateUrl: 'myModalContent.html',
+          controller: 'ModalInstanceCtrl',
+          size: 'lg',
+          resolve: {
+            item: function () {
+              return titulo;
             }
-        };    
-    });
-</script>
+          }
+        });
+      };
+      $scope.toggleAnimation = function () {
+        $scope.animationsEnabled = !$scope.animationsEnabled;
+      };
+});
+// Please note that $uibModalInstance represents a modal window (instance) dependency.
+// It is not the same as the $uibModal service used above.
 
-  <section id="portfolio" ng-controller="myCtrl">
+mod.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, $timeout, item) {
+ 
+  $scope.item = item;
+
+  $scope.ok = function () {
+    $uibModalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+   //image preview
+   $scope.thumbnail = {
+          dataUrl: item.img
+      };
+   $scope.fileReaderSupported = window.FileReader != null;
+   $scope.photoChanged = function(files){
+        if (files != null) {
+            var file = files[0];
+            if ($scope.fileReaderSupported && file.type.indexOf('image') > -1) {
+                $timeout(function() {
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
+                    fileReader.onload = function(e) {
+                        $timeout(function(){
+                           $scope.thumbnail.dataUrl = e.target.result;
+                        });
+                    }
+                });
+            }
+        }
+   };
+});
+
+mod.controller('MyFormCtrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+
+    $scope.up = function(){
+       angular.element('#file').trigger('click');
+    };
+
+    $scope.uploadPic = function(file) {
+
+    if (file == undefined) {
+
+      Upload.upload({
+        url: '/{{data}}/portfolio/save',
+        data: {item: $scope.item},      
+      });
+
+    }else{
+      file.upload = Upload.upload({
+        url: '/{{data}}/portfolio/save',
+        data: {item: $scope.item, file: file},      
+      });
+    }  
+
+    if (!file == undefined) {
+        file.upload.then(function (response) {
+          $timeout(function () {file.result = response.data; });
+        }, function (response) {
+          if (response.status > 0)
+            $scope.errorMsg = response.status + ': ' + response.data;
+        }, function (evt) {
+          // Math.min is to fix IE which reports 200% sometimes
+          file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+        });
+    }
+  }
+}]);
+
+</script>
+{%raw%}
+
+<div ng-controller="myCtrl">
+    <script type="text/ng-template" id="myModalContent.html">
+      <div class="modal-body">
+         <form name="myForm"  ng-controller="MyFormCtrl">  
+
+            <h2><div medium-editor ng-model="item.titulo"></div></h2>
+            <hr class="star-primary">
+            <fieldset>
+              <input type="file" 
+                   ngf-select 
+                   ng-model="picFile" 
+                   id="file" 
+                   name="file"    
+                   accept="image/*" ngf-max-size="2MB" required
+                   ngf-model-invalid="errorFile" 
+                   style="visibility:hidden">
+              <img  ngf-thumbnail="picFile || '{{item.img}}'" class="thumb" 
+                  ng-click="up();"> 
+              <!-- <button ng-click="picFile = null" ng-show="picFile">Remove</button> -->
+          <br>
+        <p><div medium-editor ng-model="item.txt"></div></p>
+        <ul class="list-inline item-details">
+            <li>Id:
+                <strong><div medium-editor ng-model="item.id"></div>
+                </strong>
+            </li>
+            <li>Cliente:
+               <strong>
+                <div medium-editor ng-model="item.cliente"></div>
+               </strong>
+            </li>
+            <li>Data:
+                <strong>
+                 <div medium-editor ng-model="item.data"></div>
+                </strong>
+            </li>
+            <li>Serviço:
+                <strong>
+                  <div medium-editor ng-model="item.servico"></div>  
+                </strong>
+            </li>
+            <li>Site:
+                <strong>
+                  <div 
+                    medium-editor ng-model="item.site">
+                  <a href="http://{{item.site}}">
+                  </a>
+                  </div>  
+                </strong>
+            </li>
+             <li>Categorias:
+                <strong>
+                  <div medium-editor ng-model="item.cat"></div>  
+                </strong>
+            </li>
+        </ul>
+        <br>
+        <i ng-show="myForm.file.$error.maxSize">Imagem muito pesada 
+            {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+        <span class="progress" ng-show="picFile.progress >= 0">
+          <div style="width:{{picFile.progress}}%" 
+              ng-bind="picFile.progress + '%'"></div>
+        </span>
+        <span ng-show="picFile.result">Dados salvos com sucesso!</span>
+        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+        <br>
+        <button type="button" class="btn btn-default" ng-click="uploadPic(picFile)">Salvar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Fechar</button>
+    </div>
+    </form>
+ </script>
+
+  
+{%endraw%}
+  <section id="portfolio" >
     <div class="container">
        <div class="row">
           <div class="col-lg-12 text-center">
@@ -46,7 +229,7 @@
         <div class="row"> 
               <div ng-repeat="image in images | filter:(!!catselect || undefined) && {cat: catselect}">               
                 <div class="col-sm-4  crop" style="margin-bottom: 10px;">
-                  <a href="#portfolioModal{{image.id}}" class="portfolio-link" data-toggle="modal">               
+                  <a href="" class="portfolio-link" data-toggle="modal" ng-click="open(image)">               
                     <img id="port_img_mini_{{image.id}}" src="{{image.img}}" class="img-responsive centered-and-cropped"  alt="">
                     <span class="item-desc">{{image.titulo}}</span>
                   </a>
@@ -56,6 +239,6 @@
         {% endraw  %}
     </div>
   </section>
-
+</div>
 
 

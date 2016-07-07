@@ -240,71 +240,54 @@ post "/:site_nome/upload" do
   end
 end
 
-post "/:site_nome/portfolio/save/:item_id" do 
+
+post "/:site_nome/portfolio/save" do 
   @site_nome = params[:site_nome]
-  id = params[:item_id]
+  @item = params[:item]
+  @id = @item["id"].to_i
 
- 
-  data = YAML.load_file params[:site_nome]+".yml"
-
-  @x = params["p_titulo_1"]["value"]
+  @file = params[:file]
   
- 
-  #Salva os dados do painel do portfolio
-  data["pages"]["portfolio"]["items"][id.to_i]["titulo"]  = params["p_titulo_"+id.to_s]["value"]
-  data["pages"]["portfolio"]["items"][id.to_i]["txt"]     = params["p_txt_"+id.to_s]["value"]
-  data["pages"]["portfolio"]["items"][id.to_i]["cliente"] = params["p_cliente_"+id.to_s]["value"]
-  data["pages"]["portfolio"]["items"][id.to_i]["site"]    = params["p_site_"+id.to_s]["value"]
-  data["pages"]["portfolio"]["items"][id.to_i]["data"]    = params["p_data_"+id.to_s]["value"]
-  data["pages"]["portfolio"]["items"][id.to_i]["servico"] = params["p_servico_"+id.to_s]["value"]
-  data["pages"]["portfolio"]["items"][id.to_i]["cat"]     = params["p_cat_"+id.to_s]["value"]
-
-  File.open(params[:site_nome]+".yml", 'w') { |f| YAML.dump(data, f) }
-  
-  redirect '/'+params[:site_nome]
-  #end
-end
-
-post "/:site_nome/portfolio/img/upload" do 
-  @site_nome = params[:site_nome]
-  id = params[:item_id]
-  #pry
 
   #if session[:logado] then
-      @filename = params[("file_"+id.to_s).to_sym][:filename].downcase
+  data = YAML.load_file params[:site_nome]+".yml"
 
-      file = params[("file_"+id.to_s).to_sym][:tempfile]
-      imagem_tipo = params[("file_"+id.to_s).to_sym][:type]
-      
-      #pry
-      #@filename = Time.now.to_i.to_s+"."+params["file"][:filename].split(".").last
-      
-      # Testa para ver se é uma imagem que está sendo enviada
-      if (imagem_tipo == 'image/png'  || 
-          imagem_tipo == 'image/jpeg' || 
-          imagem_tipo == 'image/gif') && 
-         file.size < 300000
+  unless @file == nil
+    #pry
+    @filename = params[:file][:filename].downcase
+    file = params[:file][:tempfile]
+    imagem_tipo = params[:file][:type]
+    #@filename = Time.now.to_i.to_s+"."+params["file"][:filename].split(".").last
+    # Testa para ver se é uma imagem que está sendo enviada
+    if (imagem_tipo == 'image/png'  || 
+        imagem_tipo == 'image/jpeg' || 
+        imagem_tipo == 'image/gif') && 
+        file.size < 300000
 
-            File.open("./public/img/portfolio/#{@filename}", 'wb') do |f|
-              f.write(file.read)
-            end
-            
-            image = MiniMagick::Image.open("./public/img/portfolio/#{@filename}")
-            image.resize "600x600"   
-            #image.write "./public/img/#{@filename}"
-            image.write "./public/img/portfolio/#{@filename}"
-            # return "The file was successfully uploaded!"
-
-
-            data = YAML.load_file params[:site_nome]+".yml"
-            data["pages"]["portfolio"]["items"][id.to_i]["img"] = "img/portfolio/#{@filename}"
-            File.open(params[:site_nome]+".yml", 'w') { |f| YAML.dump(data, f) }
-
+          File.open("./public/img/portfolio/#{@filename}", 'wb') do |f|
+            f.write(file.read)
+          end
           
-            
+          image = MiniMagick::Image.open("./public/img/portfolio/#{@filename}")
+          image.resize "600x600"   
+          #image.write "./public/img/#{@filename}"
+          image.write "./public/img/portfolio/#{@filename}"
+          #Salva os dados do painel do portfolio
+          data["pages"]["portfolio"]["items"][@id]["img"] = "img/portfolio/#{@filename}"
+    end
+  end
 
-      end           
-      redirect '/'+params[:site_nome]
+  data["pages"]["portfolio"]["items"][@id]["titulo"]  = @item["titulo"].to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
+  data["pages"]["portfolio"]["items"][@id]["txt"]     = @item["txt"].to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
+  data["pages"]["portfolio"]["items"][@id]["cliente"] = @item["cliente"].to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
+  data["pages"]["portfolio"]["items"][@id]["site"]    = @item["site"].to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
+  data["pages"]["portfolio"]["items"][@id]["data"]    = @item["data"].to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
+  data["pages"]["portfolio"]["items"][@id]["servico"] = @item["servico"].to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
+  data["pages"]["portfolio"]["items"][@id]["cat"]     = @item["cat"].to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
+
+  File.open(params[:site_nome]+".yml", 'w') { |f| YAML.dump(data, f) }
+                 
+  redirect '/'+params[:site_nome]
   #end
 end
 

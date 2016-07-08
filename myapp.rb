@@ -262,7 +262,7 @@ post "/:site_nome/portfolio/save" do
     if (imagem_tipo == 'image/png'  || 
         imagem_tipo == 'image/jpeg' || 
         imagem_tipo == 'image/gif') && 
-        file.size < 300000
+        file.size < 500000
 
           File.open("./public/img/portfolio/#{@filename}", 'wb') do |f|
             f.write(file.read)

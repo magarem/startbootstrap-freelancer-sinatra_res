@@ -104,15 +104,20 @@ mod.controller('MyFormCtrl', ['$scope', 'Upload', '$timeout', 'Service', functio
       });
    
     }else{
-      $scope.item.img = file.name;
-      file.upload = Upload.upload({
-        url: '/{{data}}/portfolio/save',
-        data: {item: $scope.item, file: file},      
-      });
-      Service.images[$scope.item.id].img = "img/portfolio/"+file.name;
-      console.log(file);
-      console.log($scope.item.id);
-      console.log($scope.item.img);
+      if (file.size < 500000) {
+        $scope.item.img = file.name;
+        file.upload = Upload.upload({
+          url: '/{{data}}/portfolio/save',
+          data: {item: $scope.item, file: file},      
+        });
+        Service.images[$scope.item.id].img = "img/portfolio/"+file.name;
+        console.log(file);
+        console.log($scope.item.id);
+        console.log($scope.item.img);
+        alert("Documento salvo com sucesso!");
+      }else{
+        alert("Imagem muito grande");
+      }
     }  
 
     if (!file == undefined) {
@@ -127,7 +132,7 @@ mod.controller('MyFormCtrl', ['$scope', 'Upload', '$timeout', 'Service', functio
         });
     }
 
-    alert("Documento salvo com sucesso!");
+    
   }
 }]);
 
@@ -177,7 +182,7 @@ mod.controller('MyFormCtrl', ['$scope', 'Upload', '$timeout', 'Service', functio
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                    <img  ng-src="{{image.img}}" class="img-responsive centered-and-cropped"  alt="">
+                    <img id={{$index}} ng-src="{{image.img}}" class="img-responsive centered-and-cropped"  alt="">
                   </a>
               </div>
         </div>
@@ -246,8 +251,7 @@ mod.controller('MyFormCtrl', ['$scope', 'Upload', '$timeout', 'Service', functio
         <span ng-show="picFile.result">Dados salvos com sucesso!</span>
         <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
         
-        <button type="button" class="btn btn-default" ng-click="uploadPic(picFile);">Salvar</button>
-        <button type="button" class="btn btn-default" ng-click="ok();"> ok</button>
+        <button type="button" class="btn btn-default" ng-click="uploadPic(picFile);">Salvar</button>      
         <button type="button" class="btn btn-default" ng-click="cancel();"><i class="fa fa-times"></i> Fechar</button>
     </div>
     </form>

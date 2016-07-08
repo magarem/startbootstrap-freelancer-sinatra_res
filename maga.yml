@@ -52,27 +52,27 @@ pages:
     label: Portfólio
     items:
     - id: 0
-      titulo: ee
-      img: img/portfolio/a8c8dab1485c7968bb77fa351d1bdf09.jpg
-      txt: Essa japinha é massa, npe?! ;)
+      titulo: Cachu
+      img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg
+      txt: Essa é uma cachu muchu legal mesmo né?
       cliente: nem sei quem é
       site: ofidelis.com
       servico: desenv
-      cat: desenv,design,web
+      cat: desenv,gg
       data: 10/02/2016
     - id: 1
-      titulo: xx
-      img: img/portfolio/hoa_exercise_01_cropped.jpg.400x400_q95_autocrop_crop_upscale.jpg
+      titulo: É japa ela? :\
+      img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
       txt: '2323'
       nome: Fidelito
       site: '23232'
       data: '323'
       servico: fff
       cat: ff,t3
-      cliente: ddfdf
+      cliente: deodoro japinha
     - id: 2
       titulo: hfhf
-      img: img/portfolio/lost-in-mars.jpg
+      img: img/portfolio/1926801_358908134247907_476196602_n.jpg
       txt: indio ninja e tal ok? tá!!
       nome: Fidelito
       site: s
@@ -100,7 +100,7 @@ pages:
       cat: teste2, Medium,zuretinha
     - id: 5
       titulo: Site 22 ss teste
-      img: img/portfolio/10456772_10203468737591390_9090394070066185618_n.jpg
+      img: img/portfolio/904_663298153721554_803580325_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
@@ -110,13 +110,14 @@ pages:
       cliente: ''
     - id: 6
       titulo: Site teste 22
-      img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg
+      img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
       cat: zuretinha
+      cliente: ''
     - id: 7
       titulo: Site teste
       img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
@@ -128,13 +129,14 @@ pages:
       cat: teste
     - id: 8
       titulo: Site teste
-      img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
+      img: img/portfolio/reports_overview_hero.jpg.460x230_q95_autocrop_crop_upscale.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat: 'null'
+      cliente: ''
     - id: 9
       titulo: Projeto 122
       img: img/portfolio/12212058_900124723376186_1916938989_n.jpg
@@ -146,22 +148,24 @@ pages:
       cat: 
     - id: 10
       titulo: Site teste
-      img: img/portfolio/1926801_358908134247907_476196602_n.jpg
+      img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat: 'null'
+      cliente: ''
     - id: 11
       titulo: Site teste
-      img: img/portfolio/13139181_626527064168509_2022078692565878775_n.jpg
+      img: img/portfolio/reports_overview_hero.jpg.460x230_q95_autocrop_crop_upscale.jpg
       txt: Este é um teste muito legal
       nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat: 'null'
+      cliente: ''
     - id: 12
       titulo: Site teste
       img: img/portfolio/12804681_10208785054604310_3739912535591575185_n.jpg
@@ -215,7 +219,8 @@ pages:
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
+      cat: krisna
+      cliente: '44'
     - id: 18
       titulo: "<p>companheiros da floresta<br></p>"
       img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg

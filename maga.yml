@@ -52,29 +52,60 @@ pages:
     label: Portfólio
     items:
     - id: '3'
-      titulo: Novo2t
-      img: "/img/portfolio/27913163315_3b23d0f140_b.jpg"
-      txt: Txt novo
-      cliente: ''
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: t
-    - id: '4'
-      titulo: Novo22
-      img: img/portfolio/reports_overview_hero.jpg.460x230_q95_autocrop_crop_upscale.jpg
+      titulo: Cachu legal!
+      img: img/portfolio/27839439211_f205eae4a2_b.jpg
       txt: Txt novo
       cliente: ''
       site: fidelis.com
       data: 10/10/12
       servico: Programação
       cat: ''
-    - id: '2'
-      titulo: Novo445
-      img: img/portfolio/27841590941_d76818d484_b.jpg
+    - id: '0'
+      titulo: novelos
+      img: img/portfolio/7583863176_df8dfc3da4_k.jpg
       txt: Txt novo
       cliente: ''
       site: fidelis.com
       data: 10/10/12
       servico: Programação
       cat: t
+      ordem: 0
+    - id: '2'
+      titulo: Rastafari!!!
+      img: img/portfolio/jah-rastafari.jpg
+      txt: Txt novo
+      cliente: ''
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+      cat: ''
+    - id: '5'
+      titulo: prainha
+      img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
+      txt: Txt novo
+      cliente: ''
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+      cat: ''
+      ordem: 5
+    - id: '4'
+      titulo: Krsinha&amp;Radha
+      img: "/img/portfolio/1926801_358908134247907_476196602_n.jpg"
+      txt: Txt novo
+      cliente: ''
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+      cat: k
+      ordem: 4
+    - id: '1'
+      titulo: Cachu
+      img: img/portfolio/27839439211_f205eae4a2_b.jpg
+      txt: Txt novo
+      cliente: ''
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+      cat: ''
+      ordem: 0

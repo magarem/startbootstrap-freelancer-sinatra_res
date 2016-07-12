@@ -270,6 +270,23 @@ post "/:site_nome/portfolio/delete/:id" do
   #pry
 end
 
+#
+#
+#  Mudança na ordenação
+#
+#
+post "/:site_nome/portfolio/ordena" do
+
+  @siteNome = params[:site_nome]
+  @post_data = JSON.parse(request.body.read)  
+  #pry  
+  data = YAML.load_file @siteNome+".yml"
+  
+  data["pages"]["portfolio"]["items"] = @post_data  
+  
+  File.open(@siteNome+".yml", 'w') { |f| YAML.dump(data, f) }
+end
+
 
 post "/:site_nome/portfolio/save/:index" do 
 

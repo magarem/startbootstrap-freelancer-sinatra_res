@@ -8,7 +8,7 @@
 </style>
 <script>
   
-  var mod = angular.module("myapp", ['ngAnimate', 'ui.bootstrap', 'ngFileUpload', 'angular-medium-editor']);
+  var mod = angular.module("myapp", ['ng-sortable','ngAnimate', 'ui.bootstrap', 'ngFileUpload', 'angular-medium-editor']);
 
   
   mod.directive('onErrorSrc', function() {
@@ -56,9 +56,30 @@
   //   return Service;
   // });
     
-  mod.controller('imgGridCtrl', function ($scope, $rootScope, $uibModal, $log, $http) {
+  mod.controller('imgGridCtrl', function ($scope, $rootScope, $uibModal, $log, $http, $httpParamSerializer) {
       
       $scope.imgs = [];
+
+      $scope.barConfig = {
+            onSort: function (evt){
+              console.log("barconfig [evt]:",evt)
+              // $http.post('/{{data}}/portfolio/ordena/'+evt.models); 
+
+              $http({
+                  headers : {
+                     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8;"
+                   },
+                  method: 'POST',
+                  url: "/{{data}}/portfolio/ordena",                  
+                  data: evt.models
+              }).success(function () {})
+
+            //   $http.post('/{{data}}/portfolio/ordena', $httpParamSerializer(evt)).
+            // success(function(data){/* response status 200-299 */}).
+            // error(function(data){/* response status 400-999 */});
+
+            }
+        };
 
       $rootScope.$on("CallDelImg", function(event, item_index){
            delImg(item_index);
@@ -114,7 +135,7 @@
         console.log("id_last:",id_last)
         img_new =  {  "id"     : id_last,
                       "titulo" : "Novo",
-                      "img"    : "img/noimage.png?"+id_last,
+                      "img"    : "/img/portfolio/safe.png?"+id_last,
                       "txt"    : "Txt novo",
                       "nome"   : "Fidelito",
                       "site"   : "fidelis.com",
@@ -258,13 +279,13 @@
        <br />
        <style>
           .crop {
-            width: 380px;
-            height: 240px;
+            width: 360px;
+            height: 260px;
             overflow: hidden;
           }
           .resize-img {
            max-width: 100%;
-           height: 240px;
+           height: 260px;
             overflow: hidden;
           }
           .resize-img2 {
@@ -274,8 +295,8 @@
           }
        </style>
        <!-- images:{{imgs}} -->
-        <div class="row"> 
-              <div  class="col-sm-4 portfolio-item resize-img" ng-repeat="image in imgs | filter:(!!catselect || undefined) && {cat: catselect}">               
+        <div class="row"  ng-sortable="barConfig"> 
+              <div  class="col-sm-4 portfolio-item resize-img" ng-repeat="image in imgs  | filter:(!!catselect || undefined) && {cat: catselect}">               
                  
                   <a href=""  class="portfolio-link" 
                      ng-click="open(image, $index);mostra($index);">               
@@ -287,7 +308,7 @@
                     <img id={{$index}} 
                          
                          ng-src="{{image.img}}" 
-                         on-error-src = "img/noimage.png"
+                         on-error-src = "img/safe.png"
                          class="img-responsive centered-and-cropped"  alt="">
                   </a>
 

@@ -51,188 +51,30 @@ pages:
   portfolio:
     label: Portfólio
     items:
-    - id: 0
-      titulo: Cachu
-      img: img/portfolio/27839439211_f205eae4a2_b.jpg
-      txt: Essa é uma cachu muchu legal mesmo né?
-      cliente: nem sei quem é
-      site: ofidelis.com
-      servico: desenv
-      cat: desenv,gg
-      data: 10/02/2016
-    - id: 1
-      titulo: É japa ela? :\
-      img: img/portfolio/27841590941_d76818d484_b.jpg
-      txt: '2323'
-      nome: Fidelito
-      site: '23232'
-      data: '323'
-      servico: fff
-      cat: ff,t3
-      cliente: teste 22
-    - id: 2
-      titulo: hfhf
-      img: img/portfolio/27841590941_d76818d484_b.jpg
-      txt: indio ninja e tal ok? tá!!
-      nome: Fidelito
-      site: s
-      data: 10/10/12
-      servico: Programação
-      cat: design,22,desenv
+    - id: '3'
+      titulo: Novo2t
+      img: "/img/portfolio/27913163315_3b23d0f140_b.jpg"
+      txt: Txt novo
       cliente: ''
-    - id: 3
-      titulo: Site teste
-      img: img/portfolio/27839439211_f205eae4a2_b.jpg
-      txt: Este é um teste muito legal
-      nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: Medium
-    - id: 4
-      titulo: Site teste 3
-      img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: teste2, Medium,zuretinha
-    - id: 5
-      titulo: Site 22 ss teste
-      img: img/portfolio/904_663298153721554_803580325_n.jpg
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: teste, t2, t3
-      cliente: ''
-    - id: 6
-      titulo: Site teste 22
-      img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: zuretinha
-      cliente: ''
-    - id: 7
-      titulo: Site teste
-      img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: teste
-    - id: 8
-      titulo: Site teste
+      cat: t
+    - id: '4'
+      titulo: Novo22
       img: img/portfolio/reports_overview_hero.jpg.460x230_q95_autocrop_crop_upscale.jpg
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: 'null'
+      txt: Txt novo
       cliente: ''
-    - id: 9
-      titulo: Projeto 122
-      img: img/portfolio/12212058_900124723376186_1916938989_n.jpg
-      txt: Este é um teste muito legal
-      cliente: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 
-    - id: 10
-      titulo: Site teste
-      img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: 'null'
+      cat: ''
+    - id: '2'
+      titulo: Novo445
+      img: img/portfolio/27841590941_d76818d484_b.jpg
+      txt: Txt novo
       cliente: ''
-    - id: 11
-      titulo: Site teste
-      img: img/portfolio/reports_overview_hero.jpg.460x230_q95_autocrop_crop_upscale.jpg
-      txt: Este é um teste muito legal
-      nome: Fidelito
       site: fidelis.com
       data: 10/10/12
       servico: Programação
-      cat: 'null'
-      cliente: ''
-    - id: 12
-      titulo: Site teste
-      img: img/portfolio/12804681_10208785054604310_3739912535591575185_n.jpg
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: 
-    - id: 13
-      titulo: Site teste
-      img: img/portfolio/22185_10206768931482492_8018920670780716769_n.jpg
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: 'null'
-      cliente: ''
-    - id: 14
-      titulo: Site teste1
-      img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: 
-    - id: 15
-      titulo: Site teste2
-      img: img/portfolio/safe_image.php.jpeg
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: 'null'
-      cliente: ''
-    - id: 16
-      titulo: Site teste
-      img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: 
-    - id: 17
-      titulo: Site teste
-      img: img/portfolio/1513660_350843348387719_1572721940_n.jpg
-      txt: Este é um teste muito legal
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: krisna
-      cliente: '44'
-    - id: 18
-      titulo: "<p>companheiros da floresta<br></p>"
-      img: img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg
-      txt: "<p>dfdfsdfds</p>"
-      nome: Fidelito
-      site: |-
-        <a href="http://fidelis.com">fidelis.com
-                                              </a>
-      data: 10/10/12
-      servico: Programação
-      cat: 
-      cliente: ''
-at: 
+      cat: t

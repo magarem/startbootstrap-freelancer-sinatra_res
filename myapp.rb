@@ -116,6 +116,17 @@ get '/:site_nome' do
 end
 
 
+
+get '/:site_nome/getdata' do      
+      data = YAML.load_file(params[:site_nome]+'.yml') || {}
+      data["pages"]["portfolio"]["items"].to_json
+end
+
+
+
+
+
+
 get '/create' do
     @logfile = File.open("site.yml","r")
     @contents = @logfile.read
@@ -239,14 +250,36 @@ post "/:site_nome/upload" do
       redirect '/'+params[:site_nome]
   end
 end
+# 
+# 
+#     Excluindo um item do portfolio     
+#
+# 
+post "/:site_nome/portfolio/delete/:id" do 
+
+  @site_nome = params[:site_nome]
+  @id = params[:id]
+  @data = YAML.load_file @site_nome+".yml"
+  @data["pages"]["portfolio"]["items"].delete_at(@id.to_i)
+  @p = @data["pages"]["portfolio"]["items"]
+  # .reject { |n| n 
+  #   # % @id.to_i == 0  }  
+  
+  File.open(@site_nome+".yml", 'w') { |f| YAML.dump(@data, f) }
+  "Admin Area, Access denied!"
+  #pry
+end
 
 
-post "/:site_nome/portfolio/save" do 
+post "/:site_nome/portfolio/save/:index" do 
+
   @site_nome = params[:site_nome]
   @item = params[:item]
-  @id = @item["id"].to_i
+  @index = params[:index].to_i
 
   @file = params[:file]
+
+  port_img = ""
   
 
   #if session[:logado] then
@@ -262,7 +295,7 @@ post "/:site_nome/portfolio/save" do
     if (imagem_tipo == 'image/png'  || 
         imagem_tipo == 'image/jpeg' || 
         imagem_tipo == 'image/gif') && 
-        file.size < 500000
+        file.size < 600000
 
           File.open("./public/img/portfolio/#{@filename}", 'wb') do |f|
             f.write(file.read)
@@ -273,21 +306,32 @@ post "/:site_nome/portfolio/save" do
           #image.write "./public/img/#{@filename}"
           image.write "./public/img/portfolio/#{@filename}"
           #Salva os dados do painel do portfolio
-          data["pages"]["portfolio"]["items"][@id]["img"] = "img/portfolio/#{@filename}"
+          
+          port_img = "img/portfolio/#{@filename}"
     end
   end
+  
+  def string_limpa str
+    str.to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
+  end
+  if (port_img == "" || port_img == "undefined" || port_img == nil) then port_img = @item["img"] end
+  port_novo = {
+    "id"     => @item["id"],
+    "titulo"  => string_limpa(@item["titulo"]),
+    "img"     => port_img,
+    "txt"     => string_limpa(@item["txt"]),
+    "cliente" => string_limpa(@item["cliente"]),
+    "site"    => string_limpa(@item["site"]),
+    "data"    => string_limpa(@item["data"]),
+    "servico" => string_limpa(@item["servico"]),
+    "cat"     => string_limpa(@item["cat"])
+  } 
 
-  data["pages"]["portfolio"]["items"][@id]["titulo"]  = @item["titulo"].to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
-  data["pages"]["portfolio"]["items"][@id]["txt"]     = @item["txt"].to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
-  data["pages"]["portfolio"]["items"][@id]["cliente"] = @item["cliente"].to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
-  data["pages"]["portfolio"]["items"][@id]["site"]    = @item["site"].to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
-  data["pages"]["portfolio"]["items"][@id]["data"]    = @item["data"].to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
-  data["pages"]["portfolio"]["items"][@id]["servico"] = @item["servico"].to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
-  data["pages"]["portfolio"]["items"][@id]["cat"]     = @item["cat"].to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
-
+  data["pages"]["portfolio"]["items"][@index] = port_novo
+  
   File.open(params[:site_nome]+".yml", 'w') { |f| YAML.dump(data, f) }
                  
-  redirect '/'+params[:site_nome]
+  #redirect '/'+params[:site_nome]
   #end
 end
 

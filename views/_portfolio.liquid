@@ -21,42 +21,9 @@
           });
         }
     }
-});
-
-  // mod.factory('mainInfo',  function($rootScope, $resource) {
-
-
-  //   var Service = {};
-
-  //   // $http.get('/{{data}}/getdata').then(function(response) {
-  //   //     // you can do some processing here
-  //   //     Service.images = response.data;
-  //   //     console.log(":",Service.images)
-  //   // });    
-
-  //   Service.getPhotos = $resource('/{{data}}/getdata', {}, {
-  //       'images': {method: 'GET', isArray: true}
-  //   });
-
-  //   console.log(getPhotos.images())
-  //   // return obj;  
+  });
     
-
-  //   // Service.ex = function(item){
-  //   //    alert(item);
-  //   //    //$scope.cancel();
-  //   //    function t(obj) {
-  //   //        return obj.id != item;
-  //   //    }
-  //   //    Service.images = Service.images.filter(t); 
-  //   //    $rootScope.$broadcast("valuesUpdated");
-  //   //    console.log(Service.images);
-  //   // };
-    
-  //   return Service;
-  // });
-    
-  mod.controller('imgGridCtrl', function ($scope, $rootScope, $uibModal, $log, $http, $httpParamSerializer) {
+  mod.controller('imgGridCtrl', function ($scope, $rootScope, $uibModal, $log, $http) {
       
       $scope.imgs = [];
 
@@ -91,7 +58,34 @@
            // console.log("$scope.imgs[index].img:", $scope.imgs[index].img)
            ImgChange(index, src)
       });
+
+      $rootScope.$on("categoriasUpdate", function(event){  
+           // console.log("ImgChange - src:",src,", index:",index)
+           // $scope.imgs[index].img = src
+           console.log("categoriasUpdate:", event)
+           categoriasUpdate()
+      });
+
+      function onlyUnique(value, index, self) { 
+          return self.indexOf(value) === index;
+      }
      
+      var categoriasUpdate = function (){
+          regex = /(<([^>]+)>)/ig
+          b = []
+          // $scope.imageCategories = $scope.imgs.map(function(val){return val.cat.replace(regex, "").split(",")})[0]
+          $scope.imgs.forEach(function(x){
+              v = x.cat.replace(regex, "").trim()              
+              if (v.split(",").length > 1){
+                  v.split(",").forEach(function(t){
+                    b.push(t)  
+                  })                  
+              }else{
+                b.push(v)
+              }
+          })
+          $scope.imageCategories = b.filter( onlyUnique )          
+      }
       
       var ImgChange = function (index, src){
             console.log("ImgChange - src:",src,", index:",index)
@@ -102,11 +96,13 @@
 
       var carregaImgs = function (){
          $http.get('/{{data}}/getdata').then(function(response) {
-             $scope.imgs = response.data;
+             $scope.imgs = response.data;             
              console.log("response.data:",response.data) 
+             categoriasUpdate();
          });
+         
       }
-
+   
       var delImg = function(item_index){         
          console.log("item_index:",item_index)
          $scope.imgs.splice(item_index, 1)
@@ -117,7 +113,7 @@
       };
       
       // $scope.currentImage = $scope.images[0];
-      $scope.imageCategories = [{{port_cats}}];
+      // $scope.imageCategories = [{{port_cats}}];
       
       $scope.valueSelected = function (value) {
 
@@ -140,7 +136,8 @@
                       "nome"   : "Fidelito",
                       "site"   : "fidelis.com",
                       "data"   : "10/10/12",
-                      "servico": "Programação"
+                      "servico": "Programação",
+                      "cat": ""
                     }
         $scope.imgs.push(img_new)
         //Service.images.push(img_new)
@@ -180,6 +177,7 @@
       };
 
       carregaImgs();
+      
   });
 
   mod.controller('ModalInstanceCtrl', function ($scope, $rootScope, $uibModalInstance, $timeout, item, i) {
@@ -230,7 +228,8 @@
               data: {item: $scope.item, file: file},      
             });       
             //Service.images[$scope.item.id].img = "img/portfolio/"+file.name;    
-            $rootScope.$emit("ImgChange", "/img/portfolio/"+file.name, index);  
+            $rootScope.$emit("ImgChange", "/img/portfolio/"+file.name, index); 
+
             ok = true
           }else{
             alert("Imagem muito grande.");
@@ -238,7 +237,10 @@
           }
         
         }  
-    if (ok) {alert("Documento salvo com sucesso!");}
+    if (ok) {
+      $rootScope.$emit("categoriasUpdate"); 
+      alert("Documento salvo com sucesso!");
+    }
     if (!file == undefined) {
         file.upload.then(function (response) {
           $timeout(function () {file.result = response.data; });

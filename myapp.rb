@@ -11,49 +11,9 @@ require 'fileutils'
 enable :sessions
 
 module IndiceArray
-
    def self.set_site_nome site_nome
-       @site_nome = site_nome
-       IndiceArray.ii.uniq
+       @site_nome = site_nome       
    end
-
-   def self.ii 
-    @items = YAML.load_file(@site_nome+'.yml')["pages"]["portfolio"]["items"]
-    @cat = Array.new
-    tem_nil = false
-    @items.each do |item| 
-        item_cat = item["cat"].to_s.gsub(", ", ",")
-        if item_cat == "" then 
-           tem_nil = true 
-        else   
-            if item_cat.include? "," then
-               # @cat +=  item_cat.split(",")
-               item_cat.split(",").each do |x|
-                   @cat << "'"+x.to_s+"',"
-               end
-
-            else
-               @cat << "'"+item_cat+"',"
-            end
-        end 
-    end
-    if tem_nil then @cat << "'Outros'" end
-    return @cat
-   end
- 
-   def indice(input="")
-        input = input.to_s.gsub(", ", ",")
-        if input == "" then input = "Outros" end
-        @cat, @n, @i = [], [], []
-        @cat = IndiceArray.ii      
-        if input.include? "," then
-           input.split(",").each {|c| @i << (@cat.uniq.index(c)+1)}
-           @i.join(", ")
-        else  
-           @cat.uniq.index(input)+1  
-        end
-         #pry
-    end
 end
 
 configure do
@@ -123,6 +83,10 @@ get '/:site_nome/getdata' do
 end
 
 
+get '/:site_nome/getImgsCategorias' do      
+      data = YAML.load_file(params[:site_nome]+'.yml') || {}
+      data["pages"]["portfolio"]["items"].to_json
+end
 
 
 
@@ -333,7 +297,7 @@ post "/:site_nome/portfolio/save/:index" do
   end
   if (port_img == "" || port_img == "undefined" || port_img == nil) then port_img = @item["img"] end
   port_novo = {
-    "id"     => @item["id"],
+    "id"      => @item["id"],
     "titulo"  => string_limpa(@item["titulo"]),
     "img"     => port_img,
     "txt"     => string_limpa(@item["txt"]),

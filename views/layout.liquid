@@ -43,6 +43,9 @@
 
     <!-- Medium editor -->
     <script src="js/angular-medium-editor.min.js"></script>
+
+     
+
     
 </head>
 
@@ -55,7 +58,8 @@
         </a>
     </div>
   <!-- Footer -->
-    <footer class="text-center">
+    {%raw%}
+    <footer class="text-center" ng-controller="footerCtrl">
         <div class="footer-above">
             <div class="container">
                 <div class="row">
@@ -66,11 +70,9 @@
                     <div class="footer-col col-md-4">
                         <h3>Around the Web</h3>
                          <ul class="list-inline">
-							{% for item in site.moldura.footer.social %}
-		                       <li>
+		                       <li ng-repeat="item in site.moldura.footer.social"  >
                                 <a href="{{item.link}}" class="btn-social btn-outline"><i class="fa fa-fw fa-{{item.label}}"></i></a>
                                </li>
-		                    {% endfor %}
                         </ul>
                     </div>
                     <div class="footer-col col-md-4">
@@ -92,12 +94,11 @@
         </div>
     </footer>
      <!-- jQuery -->
-    
+    {%endraw%}
 
   
     
-    
-    {% if logado  %}
+ 
     <script src="medium-editor/dist/js/medium-editor.js"></script>
         <script>
             var editor = new MediumEditor('.editable', {
@@ -106,7 +107,7 @@
             })
          
         </script>
-    {% endif %}
+ 
 
     <script>
     $( "#save" ).click(function(event) {
@@ -136,6 +137,7 @@
     <!-- <script src="js/img_upload_ajax.js"></script> -->
     <script src="js/ui-bootstrap-0.14.3.min.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
+    <script src="js/angular_script.js"></script>
 </body>
 
 </html>

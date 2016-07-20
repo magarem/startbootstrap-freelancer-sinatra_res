@@ -1,69 +1,66 @@
-<header>
+{%raw%}
+<header ng-controller="headerCtrl">
   <div class="container">
     <div class="row">
-        <div class="col-lg-12">
-            <style>
-               .cropcircle{
-                  width: 250px;
-                  height: 250px;
-                  border-radius: 100%;
-                  background: #eee no-repeat center;
-                  background-size: cover;
-
-                  box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-                  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-                  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-
-                  margin: 0 auto;
-              }
-
-              #image1{
-                  background-image: url({{ site.pages.home.img }});
-              }
-            </style>
-           
-            <div id="image1" 
-                 class="cropcircle img-responsive" 
-                {% if logado  %}
-                 onclick="$('#file').click();"
-                {% endif %} >
-            </div>
-
-            <form id=uploadimage action="" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="site" value="{{site.name}}">
-                <input type="hidden" id="flag_form_0" value="">
-                <input 
-                   class="btn btn-info" 
-                   type="file" 
-                   name="file" 
-                   id="file" required 
-                   style="visibility:hidden">
-            </form>
-
-            <div class="intro-text">
-                <span class="name">
-                  <div class="editable">
-                   {{ site.pages.home.label }}
-                  </div>
-                </span>
-                <hr class="star-light">
-                <span class="skills">
-                 <div class="editable" >
-                  {{ site.pages.home.body }}
-                 </div>
-                </span>
-            </div>           
+      <div class="col-lg-12">
+        <style>
+          .cropcircle{
+            width: 250px;
+            height: 250px;
+            border-radius: 100%;
+            background: #eee no-repeat center;
+            background-size: cover;
+            box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+            -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+            -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+            margin: 0 auto;
+          }
+          #image1{
+            background-image: url({{ site.pages.home.img }});
+          }
+        </style>
+         
+        <div id="image1" class="cropcircle img-responsive" 
+            {% if logado  %}
+             onclick="$('#file').click();"
+            {% endif %} >
         </div>
 
+        <form id=uploadimage action="" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="site" value="{{site.name}}">
+          <input type="hidden" id="flag_form_0" value="">
+          <input 
+             class="btn btn-info" 
+             type="file" 
+             name="file" 
+             id="file" required 
+             style="visibility:hidden">
+        </form>
+
+        <div class="intro-text">
+          <span class="name">
+            <div class="editable">
+             {{ site.pages.home.label }}
+            </div>
+          </span>
+          <hr class="star-light">
+          <span class="skills">
+           <div class="editable" >
+            {{ site.pages.home.body }}
+           </div>
+          </span>
+        </div>           
       </div>
+    </div>
     <div>
     <br>
-      {% if logado  %}
+      <!-- {% if logado  %}
         <button type="button" onclick="$('#uploadimage').submit();" class="btn btn-primary btn-sm">Salvar</button></div>
-      {% endif  %}
+      {% endif  %} -->
    </div>
   </div> 
 </header>
+{%endraw%}
 <script>
 $(document).ready(function (e) {
     $("#uploadimage").on('submit',(function(e) {
@@ -89,8 +86,8 @@ $(document).ready(function (e) {
        });
     }));
  });   
-</script>
-<script>
+
+
 $(document).ready(function (e) {
 // Function to preview image
     $(function() {

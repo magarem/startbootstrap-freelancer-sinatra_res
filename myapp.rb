@@ -75,6 +75,11 @@ get '/:site_nome' do
 
 end
 
+get '/:site_nome/dataLoad' do
+      # Definindo as categorias de portfolio      
+      data = YAML.load_file(params[:site_nome]+'.yml')
+      data.to_json
+end
 
 
 get '/:site_nome/getdata' do      

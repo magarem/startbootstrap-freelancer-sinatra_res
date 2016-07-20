@@ -8,7 +8,7 @@ head:
 moldura:
   label: Portfolio
   logo:
-    label: "<p>Maga<br></p>"
+    label: Maga22
     link: index.ttt
   menu:
   - label: Portfolio
@@ -34,7 +34,7 @@ moldura:
     creditos: Copyright © magaweb 2016
 pages:
   home:
-    label: 22 Bem 22<br>
+    label: 22 Bem 22
     img: img/maga.jpg
     body: Web Developer - Web master
   about:
@@ -51,15 +51,6 @@ pages:
   portfolio:
     label: Portfólio
     items:
-    - id: 6
-      titulo: Novo
-      img: "/img/portfolio/12212058_900124723376186_1916938989_n.jpg"
-      txt: Txt novo
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: "<p>fofoca</p>"
     - id: '3'
       titulo: Cachu legal!
       img: "/img/portfolio/jah-rastafari.jpg"
@@ -69,6 +60,33 @@ pages:
       data: 10/10/12
       servico: Programação
       cat: "<p>desenho</p>"
+    - id: '5'
+      titulo: prainha
+      img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
+      txt: Txt novo
+      cliente: ''
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+      cat: fot
+    - id: '0'
+      titulo: novelos
+      img: img/portfolio/7583863176_df8dfc3da4_k.jpg
+      txt: Txt novo
+      cliente: ''
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+      cat: "<p>tecelagem</p>"
+    - id: 6
+      titulo: Novo
+      img: "/img/portfolio/12212058_900124723376186_1916938989_n.jpg"
+      txt: Txt novo
+      nome: Fidelito
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+      cat: fotografia
     - id: '3'
       titulo: Cachu legal!
       img: img/portfolio/27839439211_f205eae4a2_b.jpg
@@ -87,15 +105,6 @@ pages:
       data: 10/10/12
       servico: Programação
       cat: pintura,fotolandia,krisna,f
-    - id: '0'
-      titulo: novelos
-      img: img/portfolio/7583863176_df8dfc3da4_k.jpg
-      txt: Txt novo
-      cliente: ''
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: "<p>tecelagem</p>"
     - id: '3'
       titulo: Cachu legal!
       img: "/img/portfolio/27841590941_d76818d484_b.jpg"
@@ -105,12 +114,3 @@ pages:
       data: 10/10/12
       servico: Programação
       cat: "<p>fotografia</p>"
-    - id: '5'
-      titulo: prainha
-      img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
-      txt: Txt novo
-      cliente: ''
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: fot

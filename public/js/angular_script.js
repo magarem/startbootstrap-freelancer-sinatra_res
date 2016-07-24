@@ -12,45 +12,45 @@ mod.directive('onErrorSrc', function() {
   }
 });
 
-mod.controller('navCtrl', function ($scope, $http) {
+mod.factory('SiteData', ['$http', function($http){
+    return{
+      name: 'Site Service',
+      get: function(callback){
+        $http.get('/maga/dataLoad').then(function(response) {
+          callback(response.data);             
+          //console.log("dataLoad - response.data:",response.data)              
+        });
+      }
+    };
+  }]);
 
+mod.controller('navCtrl',['$scope', 'SiteData', function ($scope, SiteData) {
   $scope.site = {}; 
+  SiteData.get(function(data){
+    $scope.site = data;
+    console.log("SiteData:", data);
+  });
+}])
 
-  var dataLoad = function (){
-     $http.get('/maga/dataLoad').then(function(response) {
-         $scope.site = response.data;             
-         console.log("dataLoad - response.data:",response.data)              
-     });
-  }
-  dataLoad();
-})
-
-mod.controller('headerCtrl', function ($scope, $http) {
-
+mod.controller('headerCtrl',['$scope', 'SiteData', function ($scope, SiteData) {
   $scope.site = {}; 
+  SiteData.get(function(data){
+    $scope.site = data;
+    console.log("SiteData:", data);
+  });
+}])
 
-  var dataLoad = function (){
-     $http.get('/maga/dataLoad').then(function(response) {
-         $scope.site = response.data;             
-         console.log("dataLoad - response.data:",response.data)              
-     });
-  }
-  dataLoad();
-})
-
-mod.controller('imgGridCtrl', function ($scope, $rootScope, $uibModal, $log, $http) {
+mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'SiteData', function ($scope, $rootScope, $uibModal, $log, SiteData) {
     
   $scope.imgs = [];
+  $scope.imageCategories = [];
 
-  $scope.site = {}; 
-
-    var dataLoad = function (){
-      $http.get('/maga/dataLoad').then(function(response) {
-        $scope.site = response.data;             
-        console.log("dataLoad - response.data:",response.data)              
-      });
-    }
-  dataLoad();
+  SiteData.get(function(data){
+    $scope.imgs = data.pages.portfolio.items;
+    console.log("SiteData2:", $scope.imgs);
+    categoriasUpdate();
+  });
+  
 
   $scope.barConfig = {
     onSort: function (evt){
@@ -107,7 +107,8 @@ mod.controller('imgGridCtrl', function ($scope, $rootScope, $uibModal, $log, $ht
           b.push(v)
         }
     })
-    $scope.imageCategories = b.filter( onlyUnique )          
+    $scope.imageCategories = b.filter( onlyUnique )
+    console.log("$scope.imgs:",$scope.imgs)          
   }
     
   var ImgChange = function (index, src){
@@ -115,14 +116,6 @@ mod.controller('imgGridCtrl', function ($scope, $rootScope, $uibModal, $log, $ht
     // $scope.imgs[index].img = src
     // console.log("$scope.imgs[index].img:", $scope.imgs[index].img)
     $scope.imgs[index].img = src
-  }
-
-  var carregaImgs = function (){
-    $http.get('/maga/getdata').then(function(response) {
-      $scope.imgs = response.data;             
-      console.log("response.data:",response.data) 
-      categoriasUpdate();
-    });
   }
  
   var delImg = function(item_index){         
@@ -195,9 +188,9 @@ mod.controller('imgGridCtrl', function ($scope, $rootScope, $uibModal, $log, $ht
     $scope.animationsEnabled = !$scope.animationsEnabled;
   };
 
-  carregaImgs();
- 
-});
+  
+  
+}]);
 
 
 mod.controller('ModalInstanceCtrl', function ($scope, $rootScope, $uibModalInstance, $timeout, item, i) {

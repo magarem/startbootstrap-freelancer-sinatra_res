@@ -12,32 +12,57 @@ mod.directive('onErrorSrc', function() {
   }
 });
 
-mod.factory('SiteData', ['$http', function($http){
-    return{
-      name: 'Site Service',
-      get: function(callback){
-        $http.get('/maga/dataLoad').then(function(response) {
-          callback(response.data);             
-          //console.log("dataLoad - response.data:",response.data)              
-        });
-      }
-    };
+mod.factory('SiteData', ['$http', '$location', function($http, $location){
+
+    var url = document.URL;
+    var urlArray = url.split("/");
+    var siteNome = urlArray[urlArray.length-1];
+
+    console.log("url:", siteNome);
+    
+    var _getSiteData = function(){
+      return $http.get('/'+siteNome+'/dataLoad');
+    }
+
+    var _savePortfolioOrder = function(data){
+      return $http.post('/'+siteNome+'/portfolio/ordena', data);
+    }
+
+    return {
+      getSiteData: _getSiteData,
+      savePortfolioOrder: _savePortfolioOrder
+    }
+    // return{
+    //   name: 'Site Service',
+    //   get: function(callback){
+    //     $http.get('/maga/dataLoad').then(function(response) {
+    //       callback(response.data);             
+    //       //console.log("dataLoad - response.data:",response.data)              
+    //     });
+    //   }
+    // };
   }]);
 
 mod.controller('navCtrl',['$scope', 'SiteData', function ($scope, SiteData) {
   $scope.site = {}; 
-  SiteData.get(function(data){
-    $scope.site = data;
-    console.log("SiteData:", data);
-  });
+  
+  SiteData.getSiteData().then(function(response) {
+    $scope.site = response.data;
+    console.log("SiteData[1]:", response.data);
+  })
+  
+  // SiteData.get(function(data){
+  //   $scope.site = data;
+  //   console.log("SiteData:", data);
+  // });
+
 }])
 
 mod.controller('headerCtrl',['$scope', 'SiteData', function ($scope, SiteData) {
   $scope.site = {}; 
-  SiteData.get(function(data){
-    $scope.site = data;
-    console.log("SiteData:", data);
-  });
+  SiteData.getSiteData().then(function(response) {
+    $scope.site = response.data;
+  })
 }])
 
 mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'SiteData', function ($scope, $rootScope, $uibModal, $log, SiteData) {
@@ -45,26 +70,37 @@ mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'Site
   $scope.imgs = [];
   $scope.imageCategories = [];
 
-  SiteData.get(function(data){
-    $scope.imgs = data.pages.portfolio.items;
+  SiteData.getSiteData().then(function(response) {
+    $scope.site = response.data;
+    console.log("SiteData[1]:", response.data);
+  })
+
+  SiteData.getSiteData().then(function(response) {
+    $scope.imgs = response.data.pages.portfolio.items;
     console.log("SiteData2:", $scope.imgs);
     categoriasUpdate();
-  });
+  })
+  // SiteData.get(function(data){
+  //   $scope.imgs = data.pages.portfolio.items;
+  //   console.log("SiteData2:", $scope.imgs);
+  //   categoriasUpdate();
+  // });
   
 
   $scope.barConfig = {
     onSort: function (evt){
       console.log("barconfig [evt]:",evt)
       // $http.post('/{{data}}/portfolio/ordena/'+evt.models); 
+      SiteData.savePortfolioOrder(evt.models).success(function () {})
 
-      $http({
-        headers : {
-          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8;"
-        },
-        method: 'POST',
-        url: "/maga/portfolio/ordena",                  
-        data: evt.models
-      }).success(function () {})
+      // $http({
+      //   headers : {
+      //     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8;"
+      //   },
+      //   method: 'POST',
+      //   url: "/maga/portfolio/ordena",                  
+      //   data: evt.models
+      // }).success(function () {})
       //   $http.post('/{{data}}/portfolio/ordena', $httpParamSerializer(evt)).
       // success(function(data){/* response status 200-299 */}).
       // error(function(data){/* response status 400-999 */});
@@ -263,28 +299,18 @@ mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$ht
 }]);
 
 
-mod.controller('aboutCtrl', function ($scope, $http) {
-
+mod.controller('aboutCtrl', function ($scope, $http, SiteData) {
   $scope.site = {}; 
-
-  var dataLoad = function (){
-     $http.get('/maga/dataLoad').then(function(response) {
-         $scope.site = response.data;             
-         console.log("dataLoad - response.data:",response.data)              
-     });
-  }
-  dataLoad();
+  SiteData.getSiteData().then(function(response) {
+    $scope.site = response.data;
+    console.log("SiteData[aboutCtrl]:", response.data);
+  })
 })
 
-mod.controller('footerCtrl', function ($scope, $http) {
-
+mod.controller('footerCtrl', function ($scope, $http, SiteData) {
   $scope.site = {}; 
-
-  var dataLoad = function (){
-     $http.get('/maga/dataLoad').then(function(response) {
-         $scope.site = response.data;             
-         console.log("dataLoad - response.data:",response.data)              
-     });
-  }
-  dataLoad();
+   SiteData.getSiteData().then(function(response) {
+    $scope.site = response.data;
+    console.log("SiteData[footerCtrl]:", response.data);
+  })
 })

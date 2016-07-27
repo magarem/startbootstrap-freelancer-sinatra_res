@@ -103,6 +103,60 @@ get '/create' do
     erb :create
 end
 
+# post '/:site_nome/obj_save/logo' do
+
+#   site_nome = params[:site_nome]+".yml"
+#   @logo = params[:logo]
+
+#   data = YAML.load_file site_nome
+#   data["moldura"]["logo"]["label"] = @logo
+
+#   File.open(site_nome, 'w') { |f| YAML.dump(data, f) }
+
+# end
+
+# post '/:site_nome/obj_save/txt1' do
+
+#   site_nome = params[:site_nome]+".yml"
+#   @txt1 = params[:txt1]
+
+#   data = YAML.load_file site_nome
+#   data["pages"]["home"]["label"] = @txt1
+
+#   File.open(site_nome, 'w') { |f| YAML.dump(data, f) }
+
+# end
+
+post '/:site_nome/obj_save' do
+
+  site_nome = params[:site_nome]+".yml"
+  
+  @obj = params[:obj]
+  @val = params[:val]
+
+  data = YAML.load_file site_nome
+
+  if @obj == "logo" then
+     data["moldura"]["logo"]["label"] = @val
+  end
+
+  if @obj == "txt1" then
+     data["pages"]["home"]["label"] = @val
+  end
+
+  if @obj == "txt2" then
+     data["pages"]["home"]["body"] = @val
+  end
+
+  File.open(site_nome, 'w') { |f| YAML.dump(data, f) }
+
+end
+
+
+
+
+
+
 post '/:site_nome/page_save' , :provides => :json do
   if session[:logado] then
       # I'd use a 201 as the status if actually creating something,
@@ -115,8 +169,6 @@ post '/:site_nome/page_save' , :provides => :json do
       
       data["moldura"]["logo"]["label"] = params["topo"]["value"]
       #data["pages"]["home"]["label"] = params["element-1"]["value"]
-      
-
 
       #data["pages"]["home"]["label"] = params["element-0"]["value"]
       File.open(site_fonte, 'w') { |f| YAML.dump(data, f) }

@@ -44,18 +44,11 @@ mod.factory('SiteData', ['$http', '$location', function($http, $location){
   }]);
 
 mod.controller('navCtrl',['$scope', 'SiteData', function ($scope, SiteData) {
-  $scope.site = {}; 
-  
+  $scope.site = {};   
   SiteData.getSiteData().then(function(response) {
     $scope.site = response.data;
     console.log("SiteData[1]:", response.data);
   })
-  
-  // SiteData.get(function(data){
-  //   $scope.site = data;
-  //   console.log("SiteData:", data);
-  // });
-
 }])
 
 mod.controller('headerCtrl',['$scope', 'SiteData', function ($scope, SiteData) {
@@ -80,16 +73,10 @@ mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'Site
     console.log("SiteData2:", $scope.imgs);
     categoriasUpdate();
   })
-  // SiteData.get(function(data){
-  //   $scope.imgs = data.pages.portfolio.items;
-  //   console.log("SiteData2:", $scope.imgs);
-  //   categoriasUpdate();
-  // });
   
-
   $scope.barConfig = {
     onSort: function (evt){
-      console.log("barconfig [evt]:",evt)
+      console.log("barconfig [evt]:",evt.models)
       // $http.post('/{{data}}/portfolio/ordena/'+evt.models); 
       SiteData.savePortfolioOrder(evt.models).success(function () {})
 
@@ -223,9 +210,6 @@ mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'Site
   $scope.toggleAnimation = function () {
     $scope.animationsEnabled = !$scope.animationsEnabled;
   };
-
-  
-  
 }]);
 
 
@@ -279,6 +263,7 @@ mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$ht
         alert("Imagem muito grande.");
         ok = false
       }
+      
     }  
     if (ok) {
       $rootScope.$emit("categoriasUpdate"); 

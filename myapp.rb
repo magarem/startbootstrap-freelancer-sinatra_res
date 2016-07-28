@@ -76,6 +76,9 @@ get '/:site_nome' do
 end
 
 get '/:site_nome/dataLoad' do
+      # def str_change str
+      #   str.to_s.gsub("\n", "<br>")
+      # end 
       # Definindo as categorias de portfolio      
       data = YAML.load_file(params[:site_nome]+'.yml')
       data.to_json
@@ -129,26 +132,40 @@ end
 
 post '/:site_nome/obj_save' do
 
-  site_nome = params[:site_nome]+".yml"
-  
-  @obj = params[:obj]
-  @val = params[:val]
+  def str_clean str
+    str.to_s.gsub("<br>", "\n").gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
+  end  
 
-  data = YAML.load_file site_nome
+  @site_nome = params[:site_nome]+".yml"
+  
+  @obj = params[:obj]  
+  # @val = params[:val].gsub! "\n", "<br>"
+  @val = params[:val]#.gsub! /(\n +)/, ""
+
+
+  data = YAML.load_file @site_nome
 
   if @obj == "logo" then
      data["moldura"]["logo"]["label"] = @val
   end
 
-  if @obj == "txt1" then
+  if @obj == "site.pages.home.label" then
      data["pages"]["home"]["label"] = @val
   end
 
-  if @obj == "txt2" then
+  if @obj == "site.pages.home.body" then
      data["pages"]["home"]["body"] = @val
   end
 
-  File.open(site_nome, 'w') { |f| YAML.dump(data, f) }
+  if @obj == "about_body1" then
+     data["pages"]["about"]["body1"] = @val
+  end
+
+  if @obj == "about_body2" then
+     data["pages"]["about"]["body2"] = @val
+  end
+
+  File.open(@site_nome, 'w') { |f| YAML.dump(data, f) }
 
 end
 

@@ -1,4 +1,4 @@
-var mod = angular.module("myapp", ['ng-sortable','ngAnimate', 'ui.bootstrap', 'ngFileUpload', 'angular-medium-editor']);
+var mod = angular.module("myapp", ['content-editable', 'ng-sortable','ngAnimate', 'ui.bootstrap', 'ngFileUpload', 'angular-medium-editor']);
 
 mod.directive('onErrorSrc', function() {
   return {
@@ -11,6 +11,31 @@ mod.directive('onErrorSrc', function() {
     }
   }
 });
+
+
+
+mod.directive("contentedit", function() {
+  return {
+    restrict: "A",
+    require: "ngModel",
+    link: function(scope, element, attrs, ngModel) {
+
+      function read() {
+        var html = element.html();
+        html = html.replace(/&nbsp;/g, "\u00a0");
+        ngModel.$setViewValue(html);
+      }
+
+      ngModel.$render = function() {
+        element.html(ngModel.$viewValue || "");
+      };
+
+      element.bind("blur keyup change", function() {
+        scope.$apply(read);
+      });
+    }
+  }
+})
 
 mod.factory('SiteData', ['$http', '$location', function($http, $location){
 
@@ -28,9 +53,15 @@ mod.factory('SiteData', ['$http', '$location', function($http, $location){
       return $http.post('/'+siteNome+'/portfolio/ordena', data);
     }
 
+    var _saveDiv = function(obj, val){    
+      console.log(obj, val);
+      return $.post("/"+siteNome+"/obj_save", {obj: obj, val: val});
+    }
+
     return {
       getSiteData: _getSiteData,
-      savePortfolioOrder: _savePortfolioOrder
+      savePortfolioOrder: _savePortfolioOrder,
+      saveDiv: _saveDiv
     }
     // return{
     //   name: 'Site Service',
@@ -56,6 +87,14 @@ mod.controller('headerCtrl',['$scope', 'SiteData', function ($scope, SiteData) {
   SiteData.getSiteData().then(function(response) {
     $scope.site = response.data;
   })
+  
+  $scope.saveDiv = function(obj){    
+    SiteData.saveDiv(obj, $scope.$eval(obj)).then(function(response) {
+       // console.log(response.data);
+    })    
+  }
+
+
 }])
 
 mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'SiteData', function ($scope, $rootScope, $uibModal, $log, SiteData) {
@@ -285,10 +324,12 @@ mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$ht
 
 
 mod.controller('aboutCtrl', function ($scope, $http, SiteData) {
-  $scope.site = {}; 
+  $scope.about = {}; 
   SiteData.getSiteData().then(function(response) {
-    $scope.site = response.data;
-    console.log("SiteData[aboutCtrl]:", response.data);
+    str = response.data.pages.about    
+    $scope.about = str
+    $scope.about_body1 = str.body1
+    console.log("SiteData[aboutCtrl]:", str);
   })
 })
 

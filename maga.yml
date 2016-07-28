@@ -8,7 +8,7 @@ head:
 moldura:
   label: Portfolio
   logo:
-    label: "\n                Raion22\n              \n              \n              "
+    label: mAGAWEB
     link: index.ttt
   menu:
   - label: Portfolio
@@ -34,35 +34,18 @@ moldura:
     creditos: Copyright © magaweb 2016
 pages:
   home:
-    label: "\n             \n             \n             \n             muito legal
-      !!\n            \n            "
+    label: Recreio!!
     img: img/maga.jpg
-    body: |2-
-
-                  Tudo certo ;)
+    body: Apartamentos para temporada
   about:
     label: About
-    body1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Praesent aliquam
-      purus in tristique cursus.  Etiam at magna enim. Fusce auctor nec lectus non
-      porta.  Nam quis pharetra purus, sit amet imperdiet sapien.  Aliquam a mollis
-      neque. Donec velit dolor
-
-'
-    body2: "Aliquam ut nisi nec, eleifend consequat ipsum.  Cras feugiat vulputate
-      metus, ut consequat elit porttitor non. Aliquam ut nisi nec, eleifend consequat
-      ipsum.  Cras feugiat vulputate metus, ut consequat elit porttitor non.  \n"
+    body1: "aa&lt;br&gt;ss\r\naa&amp;lt;br&amp;gt;ss\r\nbr&amp;gt;dd&amp;lt;br&amp;gt;"
+    body2: "\n                 Este é um teste 22 titakdfdsfsdfdsf sdf df dfsdf sdf
+      sfd dsfdsfsdfsf sdfsdfdsfsgfgjjjhkj hkj kj jkh kjh kjh kjh jkh jkh jkh jkh kjhkljhjkhkjhjhk
+      kjhjkh kjh kjh kj\n             \n             \n             "
   portfolio:
     label: Portfólio
     items:
-    - id: '3'
-      titulo: Cachu legal!
-      img: "/img/portfolio/jah-rastafari.jpg"
-      txt: Txt novo
-      cliente: ''
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: "<p>desenho</p>"
     - id: '0'
       titulo: novelos
       img: img/portfolio/7583863176_df8dfc3da4_k.jpg
@@ -72,6 +55,15 @@ pages:
       data: 10/10/12
       servico: Programação
       cat: "<p>tecelagem</p>"
+    - id: '3'
+      titulo: Cachu legal!
+      img: "/img/portfolio/jah-rastafari.jpg"
+      txt: Txt novo
+      cliente: ''
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+      cat: "<p>desenho</p>"
     - id: '5'
       titulo: prainha
       img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg

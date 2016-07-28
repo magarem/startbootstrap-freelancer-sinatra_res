@@ -13,9 +13,21 @@
            <!--  {% if logado  %}
              <button id=save type="button"  class="btn btn-primary btn-sm">Salvar</button>
             {% endif  %}   --> 
+            <style>
+              .edit { 
+                margin-bottom: 1px; 
+                white-space: pre-line;
+              }
+              .edit0 { 
+                margin-bottom: 1px; 
+                white-space: normal;
+              }
+              [contenteditable="true"] { padding: 1px; outline: 2px dashed #CCC; }
+              [contenteditable="true"]:hover { outline: 2px dashed #0090D2; }
+            </style>
             <a class="navbar-brand"
                href="#page-top">
-              <div class="editable" id=topo>
+              <div class=edit0 contenteditable="true" id=topo>           
                 {{ site.moldura.logo.label }}
               </div>
             </a>              

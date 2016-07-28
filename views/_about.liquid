@@ -4,19 +4,17 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2>{{ site.pages.about.label }}</h2>
+                <h2>{{ about.label }}</h2>
                 <hr class="star-light">
             </div>
         </div>
         <div class="row">
             <div class="col-lg-4 col-lg-offset-2">
-              <div class="editable">
-                 <p>{{ site.pages.about.body1 }}</p>
-              </div>
+              <div class="edit" contentedit ng-model="about.body1" id=about_body1>{{ about.body1 }}</div>
             </div>
             <div class="col-lg-4">
-             <div class="editable">
-                 <p>{{ site.pages.about.body2 }}</p>
+             <div class="edit" contenteditable="true" id=about_body2>
+                 <p>{{ about.body2 }}</p>
              </div>
             </div>
             <!-- <div class="col-lg-8 col-lg-offset-2 text-center">

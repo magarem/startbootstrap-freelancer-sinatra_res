@@ -39,15 +39,32 @@
 
         <div class="intro-text">
           <span class="name">
-            <div class="editable" id=txt1>
-             {{ site.pages.home.label }}
-            </div>
+           <!--  <div class=edit contentedit contenteditable="true" ng-bind="site.pages.home.label" id=txt1>{{ site.pages.home.label }}</div> -->
+          <div            
+            contenteditable2
+            contenteditable=true
+            class="edit"
+            ng-model="site.pages.home.label"
+            ng-maxlength=1000
+            ng-minlength=3
+            only-text="true"
+            convert-new-lines="true"
+            ng-blur="saveDiv('site.pages.home.label')"           
+          />{{ site.pages.home.label }}</div>
           </span>
           <hr class="star-light">
           <span class="skills">
-           <div class="editable" id=txt2>
-            {{ site.pages.home.body }}
-           </div>
+           <div            
+            contenteditable2
+            contenteditable=true
+            class="edit"
+            ng-model="site.pages.home.body"
+            ng-maxlength=1000
+            ng-minlength=3
+            only-text="true"
+            convert-new-lines="true"
+            ng-blur="saveDiv('site.pages.home.body')"           
+          />{{ site.pages.home.body }}</div>
           </span>
         </div>           
       </div>

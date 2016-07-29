@@ -137,15 +137,21 @@ post '/:site_nome/obj_save' do
   end  
 
   @site_nome = params[:site_nome]+".yml"
+
+  @post_data = JSON.parse(request.body.read)
   
-  @obj = params[:obj]  
+  @obj = @post_data["obj"]  
   # @val = params[:val].gsub! "\n", "<br>"
-  @val = params[:val]#.gsub! /(\n +)/, ""
+  @val = @post_data["val"]#.gsub! /(\n +)/, ""
+
+   
+
+  # pry
 
 
   data = YAML.load_file @site_nome
 
-  if @obj == "logo" then
+  if @obj == "site.moldura.logo.label" then
      data["moldura"]["logo"]["label"] = @val
   end
 
@@ -157,11 +163,11 @@ post '/:site_nome/obj_save' do
      data["pages"]["home"]["body"] = @val
   end
 
-  if @obj == "about_body1" then
+  if @obj == "about.body1" then
      data["pages"]["about"]["body1"] = @val
   end
 
-  if @obj == "about_body2" then
+  if @obj == "about.body2" then
      data["pages"]["about"]["body2"] = @val
   end
 

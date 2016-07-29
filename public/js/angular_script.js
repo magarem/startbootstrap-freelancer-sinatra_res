@@ -1,4 +1,4 @@
-var mod = angular.module("myapp", ['content-editable', 'ng-sortable','ngAnimate', 'ui.bootstrap', 'ngFileUpload', 'angular-medium-editor']);
+var mod = angular.module("myapp", ['ngSanitize', 'ng-sortable','ngAnimate', 'ui.bootstrap', 'ngFileUpload']);
 
 mod.directive('onErrorSrc', function() {
   return {
@@ -14,28 +14,37 @@ mod.directive('onErrorSrc', function() {
 
 
 
-mod.directive("contentedit", function() {
+mod.directive('contenteditable', ['$sce', function($sce) {
   return {
-    restrict: "A",
-    require: "ngModel",
+    restrict: 'A', // only activate on element attribute
+    require: '?ngModel', // get a hold of NgModelController
     link: function(scope, element, attrs, ngModel) {
+      if (!ngModel) return; // do nothing if no ng-model
 
-      function read() {
-        var html = element.html();
-        html = html.replace(/&nbsp;/g, "\u00a0");
-        ngModel.$setViewValue(html);
-      }
-
+      // Specify how UI should be updated
       ngModel.$render = function() {
-        element.html(ngModel.$viewValue || "");
+        element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
       };
 
-      element.bind("blur keyup change", function() {
-        scope.$apply(read);
+      // Listen for change events to enable binding
+      element.on('blur keyup change', function() {
+        scope.$evalAsync(read);
       });
+      read(); // initialize
+
+      // Write data to the model
+      function read() {
+        var html = element.html();
+        // When we clear the content editable the browser leaves a <br> behind
+        // If strip-br attribute is provided then we strip this out
+        if ( attrs.stripBr && html == '<br>' ) {
+          html = '';
+        }
+        ngModel.$setViewValue(html);
+      }
     }
-  }
-})
+  };
+}]);
 
 mod.factory('SiteData', ['$http', '$location', function($http, $location){
 
@@ -55,7 +64,7 @@ mod.factory('SiteData', ['$http', '$location', function($http, $location){
 
     var _saveDiv = function(obj, val){    
       console.log(obj, val);
-      return $.post("/"+siteNome+"/obj_save", {obj: obj, val: val});
+      return $http.post("/"+siteNome+"/obj_save", {obj: obj, val: val});
     }
 
     return {
@@ -80,6 +89,11 @@ mod.controller('navCtrl',['$scope', 'SiteData', function ($scope, SiteData) {
     $scope.site = response.data;
     console.log("SiteData[1]:", response.data);
   })
+  $scope.saveDiv = function(obj){    
+    SiteData.saveDiv(obj, $scope.$eval(obj)).then(function(response) {
+       // console.log(response.data);
+    })    
+  }
 }])
 
 mod.controller('headerCtrl',['$scope', 'SiteData', function ($scope, SiteData) {
@@ -331,6 +345,11 @@ mod.controller('aboutCtrl', function ($scope, $http, SiteData) {
     $scope.about_body1 = str.body1
     console.log("SiteData[aboutCtrl]:", str);
   })
+  $scope.saveDiv = function(obj){    
+    SiteData.saveDiv(obj, $scope.$eval(obj)).then(function(response) {
+       // console.log(response.data);
+    })    
+  }
 })
 
 mod.controller('footerCtrl', function ($scope, $http, SiteData) {

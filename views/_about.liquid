@@ -9,13 +9,29 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-lg-offset-2">
-              <div class="edit" contentedit ng-model="about.body1" id=about_body1>{{ about.body1 }}</div>
+            <div class="col-lg-4 col-lg-offset-2">             
+              <div            
+                contenteditable
+                class="edit"
+                ng-model="about.body1"
+                ng-maxlength=1000
+                ng-minlength=3
+                only-text="true"
+                convert-new-lines="true"
+                ng-blur="saveDiv('about.body1')"           
+              />{{ about.body1 }}</div>
             </div>
             <div class="col-lg-4">
-             <div class="edit" contenteditable="true" id=about_body2>
-                 <p>{{ about.body2 }}</p>
-             </div>
+             <div            
+                contenteditable
+                class="edit"
+                ng-model="about.body2"
+                ng-maxlength=1000
+                ng-minlength=3
+                only-text="true"
+                convert-new-lines="true"
+                ng-blur="saveDiv('about.body2')"           
+              />{{ about.body2 }}</div>
             </div>
             <!-- <div class="col-lg-8 col-lg-offset-2 text-center">
                 <a href="/s?txt=" class="btn btn-lg btn-outline">

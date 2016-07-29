@@ -26,10 +26,17 @@
               [contenteditable="true"]:hover { outline: 2px dashed #0090D2; }
             </style>
             <a class="navbar-brand"
-               href="#page-top">
-              <div class=edit0 contenteditable="true" id=topo>           
-                {{ site.moldura.logo.label }}
-              </div>
+               href="#page-top">              
+              <div            
+                contenteditable
+                class="edit"
+                ng-model="site.moldura.logo.label"
+                ng-maxlength=100
+                ng-minlength=3
+                only-text="true"
+                convert-new-lines="true"
+                ng-blur="saveDiv('site.moldura.logo.label')"           
+              />{{ site.moldura.logo.label }}</div>
             </a>              
         </div>       
         <!-- Collect the nav links, forms, and other content for toggling -->

@@ -8,7 +8,7 @@ head:
 moldura:
   label: Portfolio
   logo:
-    label: mAGAWEB
+    label: 55mAGAWEB
     link: index.ttt
   menu:
   - label: Portfolio
@@ -34,7 +34,7 @@ moldura:
     creditos: Copyright © magaweb 2016
 pages:
   home:
-    label: Recreio!!
+    label: só<br>maguete<br>mesmo ;)<br>
     img: img/maga.jpg
     body: Apartamentos para temporada
   about:

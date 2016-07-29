@@ -122,39 +122,39 @@
         //     }
         //   });
 
-        var url = document.URL;
-        var urlArray = url.split("/");
-        var siteNome = urlArray[urlArray.length-1];
+        // var url = document.URL;
+        // var urlArray = url.split("/");
+        // var siteNome = urlArray[urlArray.length-1];
 
-        $( "#topo" ).focusout(function(event) {
-            var val = $( "#topo" ).text();
-            console.log(val);
-            $.post("/"+siteNome+"/obj_save", {obj: 'logo', val: val});       
-        })
-
-        $( "#txt1" ).focusout(function(event) {
-            var val = $( "#txt1" ).html();
-            console.log(val);
-            $.post("/"+siteNome+"/obj_save", {obj: 'txt1', val: val});       
-        })
-
-        $( "#txt2" ).focusout(function(event) {
-            var val = $( "#txt2" ).text();
-            console.log(val);
-            $.post("/"+siteNome+"/obj_save", {obj: 'txt2', val: val});       
-        })
-
-        // $( "#about_body1" ).focusout(function(event) {
-        //     var val = $( "#about_body1" ).text();
+        // $( "#topo" ).focusout(function(event) {
+        //     var val = $( "#topo" ).text();
         //     console.log(val);
-        //     $.post("/"+siteNome+"/obj_save", {obj: 'about_body1', val: val});       
+        //     $.post("/"+siteNome+"/obj_save", {obj: 'logo', val: val});       
         // })
 
-        $( "#about_body2" ).focusout(function(event) {
-            var val = $( "#about_body2" ).text();
-            console.log(val);
-            $.post("/"+siteNome+"/obj_save", {obj: 'about_body2', val: val});       
-        })
+        // $( "#txt1" ).focusout(function(event) {
+        //     var val = $( "#txt1" ).html();
+        //     console.log(val);
+        //     $.post("/"+siteNome+"/obj_save", {obj: 'txt1', val: val});       
+        // })
+
+        // $( "#txt2" ).focusout(function(event) {
+        //     var val = $( "#txt2" ).text();
+        //     console.log(val);
+        //     $.post("/"+siteNome+"/obj_save", {obj: 'txt2', val: val});       
+        // })
+
+        // // $( "#about_body1" ).focusout(function(event) {
+        // //     var val = $( "#about_body1" ).text();
+        // //     console.log(val);
+        // //     $.post("/"+siteNome+"/obj_save", {obj: 'about_body1', val: val});       
+        // // })
+
+        // $( "#about_body2" ).focusout(function(event) {
+        //     var val = $( "#about_body2" ).text();
+        //     console.log(val);
+        //     $.post("/"+siteNome+"/obj_save", {obj: 'about_body2', val: val});       
+        // })
     
 
     </script>
@@ -177,7 +177,8 @@
     <script src="js/ui-bootstrap-0.14.3.min.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
     <script src="js/angular_script.js"></script>
-    <script src="js/ng-content-editable.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-sanitize.js"></script>
+    <!-- <script src="js/ng-content-editable.min.js"></script> -->
 </body>
 
 </html>

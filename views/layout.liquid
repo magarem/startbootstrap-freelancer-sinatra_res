@@ -66,7 +66,13 @@
                 <div class="row">
                     <div class="footer-col col-md-4">
                         <h3>Location</h3>
-                        <p>{{ site.moldura.footer.endereco }}</p>
+                        <div            
+                           contenteditable
+                           class="edit"
+                           ng-model="site.moldura.footer.endereco"
+                           strip-br="true"
+                           ng-blur="saveDiv('site.moldura.footer.endereco')"/>
+                        </div>
                     </div>
                     <div class="footer-col col-md-4">
                         <h3>Around the Web</h3>
@@ -78,7 +84,13 @@
                     </div>
                     <div class="footer-col col-md-4">
                         <h3>About Freelancer</h3>
-                        <p>{{site.moldura.footer.about_resumo}}</p>
+                        <div            
+                           contenteditable
+                           class="edit"
+                           ng-model="site.moldura.footer.about_resumo"
+                           strip-br="true"
+                           ng-blur="saveDiv('site.moldura.footer.about_resumo')"/>
+                        </div>                        
                     </div>
                 </div>
             </div>
@@ -107,57 +119,9 @@
                 toolbar: false
             })
          
-        </script>
- 
+        </script> 
 
-    <script>
-        // Troca a tag P por um <br> quando é precionado o Enter
-        // $('div[contenteditable]').keydown(function(e) {
-        //     // trap the return key being pressed
-        //     if (e.keyCode === 13) {
-        //       // insert 2 br tags (if only one br tag is inserted the cursor won't go to the next line)
-        //       document.execCommand('insertHTML', false, '<br>');
-        //       // prevent the default behaviour of return key pressed
-        //       return false;
-        //     }
-        //   });
-
-        // var url = document.URL;
-        // var urlArray = url.split("/");
-        // var siteNome = urlArray[urlArray.length-1];
-
-        // $( "#topo" ).focusout(function(event) {
-        //     var val = $( "#topo" ).text();
-        //     console.log(val);
-        //     $.post("/"+siteNome+"/obj_save", {obj: 'logo', val: val});       
-        // })
-
-        // $( "#txt1" ).focusout(function(event) {
-        //     var val = $( "#txt1" ).html();
-        //     console.log(val);
-        //     $.post("/"+siteNome+"/obj_save", {obj: 'txt1', val: val});       
-        // })
-
-        // $( "#txt2" ).focusout(function(event) {
-        //     var val = $( "#txt2" ).text();
-        //     console.log(val);
-        //     $.post("/"+siteNome+"/obj_save", {obj: 'txt2', val: val});       
-        // })
-
-        // // $( "#about_body1" ).focusout(function(event) {
-        // //     var val = $( "#about_body1" ).text();
-        // //     console.log(val);
-        // //     $.post("/"+siteNome+"/obj_save", {obj: 'about_body1', val: val});       
-        // // })
-
-        // $( "#about_body2" ).focusout(function(event) {
-        //     var val = $( "#about_body2" ).text();
-        //     console.log(val);
-        //     $.post("/"+siteNome+"/obj_save", {obj: 'about_body2', val: val});       
-        // })
     
-
-    </script>
 
       <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>

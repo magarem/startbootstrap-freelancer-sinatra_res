@@ -20,10 +20,9 @@
           }
         </style>
          
-        <div id="image1" class="cropcircle img-responsive" 
-            {% if logado  %}
-             onclick="$('#file').click();"
-            {% endif %} >
+        <div id="image1" 
+             class="cropcircle img-responsive" 
+             onclick="$('#file').click();" >
         </div>
 
         <form id=uploadimage action="" method="POST" enctype="multipart/form-data">
@@ -45,22 +44,18 @@
             class="edit"
             ng-model="site.pages.home.label"
             strip-br="true"
-            ng-blur="saveDiv('site.pages.home.label')"
-                       
+            ng-blur="saveDiv('site.pages.home.label')"                  
           /></div>
           </span>
           <hr class="star-light">
           <span class="skills">
-           <div            
+          <div            
             contenteditable
             class="edit"
             ng-model="site.pages.home.body"
-            ng-maxlength=1000
-            ng-minlength=3
-            only-text="true"
-            convert-new-lines="true"
-            ng-blur="saveDiv('site.pages.home.body')"           
-          />{{ site.pages.home.body }}</div>
+            strip-br="true"
+            ng-blur="saveDiv('site.pages.home.body')"                  
+          /></div>          
           </span>
         </div>           
       </div>
@@ -83,8 +78,11 @@ $(document).ready(function (e) {
         //$('#loading').show();
         //data =  new FormData(this);
         //alert(JSON.stringify((new FormData(this))));
+        var url = document.URL;
+        var urlArray = url.split("/");
+        var siteNome = urlArray[urlArray.length-1];
         $.ajax({
-            url: "/{{site.name}}/upload",            // Url to which the request is send
+            url: "/"+siteNome+"/upload",            // Url to which the request is send
             type: "POST",                   // Type of request to be send, called as method
             data:  new FormData(this),      // Data sent to server, a set of key/value pairs representing form fields and values 
             contentType: false,             // The content type used when sending data to the server. Default is: "application/x-www-form-urlencoded"
@@ -105,6 +103,7 @@ $(document).ready(function (e) {
 // Function to preview image
     $(function() {
         $("#file").change(function() {
+            console.log("upload")
             var file = this.files[0];
             var imagefile = file.type;
             var match= ["image/jpeg","image/png","image/jpg"];  
@@ -117,6 +116,7 @@ $(document).ready(function (e) {
                 var reader = new FileReader();  
                 reader.onload = imageIsLoaded;
                 reader.readAsDataURL(this.files[0]);
+                $('#uploadimage').submit();
             }       
         });
     });

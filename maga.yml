@@ -8,7 +8,7 @@ head:
 moldura:
   label: Portfolio
   logo:
-    label: 55mAGAWEB
+    label: "!recreio!"
     link: index.ttt
   menu:
   - label: Portfolio
@@ -18,7 +18,7 @@ moldura:
   - label: Contact
     link: ''
   footer:
-    endereco: Rio de Janeiro - RJ - Brasil
+    endereco: dfdjkdsfhdkjf hdskjf fsdf<br>
     social:
     - label: facebook
       link: marcelo.a.magalhaes
@@ -30,22 +30,29 @@ moldura:
       link: mmm
     - label: dribbble
       link: ddrrible
-    about_resumo: jaksfh sdkjhs djkash djkasdh
+    about_resumo: jaksfh sdkjhs djkasda as d<br>sh djkasdh
     creditos: Copyright © magaweb 2016
 pages:
   home:
-    label: só<br>maguete<br>mesmo ;)<br>
+    label: Tempordada
     img: img/maga.jpg
-    body: Apartamentos para temporada
+    body: Recreio - RJ<br>
   about:
     label: About
-    body1: "aa&lt;br&gt;ss\r\naa&amp;lt;br&amp;gt;ss\r\nbr&amp;gt;dd&amp;lt;br&amp;gt;"
-    body2: "\n                 Este é um teste 22 titakdfdsfsdfdsf sdf df dfsdf sdf
-      sfd dsfdsfsdfsf sdfsdfdsfsgfgjjjhkj hkj kj jkh kjh kjh kjh jkh jkh jkh jkh kjhkljhjkhkjhjhk
-      kjhjkh kjh kjh kj\n             \n             \n             "
+    body1: Os melhores apartamentos de frente para o mar!<br>
+    body2: Você merece esse luxo!!<br>
   portfolio:
-    label: Portfólio
+    label: Catálogo23
     items:
+    - id: '3'
+      titulo: "!!Fidelis!!"
+      img: "/img/portfolio/jah-rastafari.jpg"
+      txt: Txt novo
+      cliente: ''
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+      cat: "<p>desenho</p>"
     - id: '0'
       titulo: novelos
       img: img/portfolio/7583863176_df8dfc3da4_k.jpg
@@ -55,15 +62,6 @@ pages:
       data: 10/10/12
       servico: Programação
       cat: "<p>tecelagem</p>"
-    - id: '3'
-      titulo: Cachu legal!
-      img: "/img/portfolio/jah-rastafari.jpg"
-      txt: Txt novo
-      cliente: ''
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: "<p>desenho</p>"
     - id: '5'
       titulo: prainha
       img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg

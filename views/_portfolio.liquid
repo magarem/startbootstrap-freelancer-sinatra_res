@@ -12,7 +12,15 @@
     <div class="container">
        <div class="row">
           <div class="col-lg-12 text-center">
-              <h2>{{site.pages.portfolio.label}}</h2>
+              <h2>
+                <div            
+                  contenteditable
+                  class="edit"
+                  ng-model="site.pages.portfolio.label"
+                  strip-br="true"
+                  ng-blur="saveDiv('site.pages.portfolio.label')"               
+                /></div>              
+              </h2>
               <hr class="star-primary">                
           </div>
        </div>
@@ -47,7 +55,7 @@
           }
        </style>
        <!-- images:{{imgs}} -->
-        <div class="row"  ng-sortable="barConfig"> 
+        <div class="row"  ng-sortable="barConfig"> >>{{$id}}<<
               <div  class="col-sm-4 portfolio-item resize-img" ng-repeat="image in imgs  | filter:(!!catselect || undefined) && {cat: catselect}">               
                  
                   <a href=""  class="portfolio-link" 
@@ -57,8 +65,7 @@
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                    <img id={{$index}} 
-                         
+                    <img id={{$index}}                         
                          ng-src="{{image.img}}" 
                          on-error-src = "img/safe.png"
                          class="img-responsive centered-and-cropped"  alt="">
@@ -71,9 +78,18 @@
 </div>
 
 <script type="text/ng-template" id="myModalContent.html">
-    <div class="modal-body">
-       <form name="myForm" ng-controller="MyFormCtrl">
-          <h2><div medium-editor ng-model="item.titulo"></div></h2>
+    <div class="modal-body">{{a}}
+       <h2>
+         <div contenteditable="true"
+          ng-model="item.titulo"
+          strip-br="true"
+          select-non-editable="true"
+          ng-blur="saveDiv('item.titulo', i)"
+          >
+    </div>
+         
+       </h2>
+       <form name="myForm" ng-controller="MyFormCtrl">         
           <hr class="star-primary">
           
             <input type="file" 

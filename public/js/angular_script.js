@@ -14,37 +14,97 @@ mod.directive('onErrorSrc', function() {
 
 
 
-mod.directive('contenteditable', ['$sce', function($sce) {
-  return {
-    restrict: 'A', // only activate on element attribute
-    require: '?ngModel', // get a hold of NgModelController
+mod.directive('contenteditable', ['$timeout', function($timeout) { return {
+    restrict: 'A',
+    require: '?ngModel',
     link: function(scope, element, attrs, ngModel) {
-      if (!ngModel) return; // do nothing if no ng-model
+      // don't do anything unless this is actually bound to a model
+      if (!ngModel) {
+        return
+      }
 
-      // Specify how UI should be updated
+      // options
+      var opts = {}
+      angular.forEach([
+        'stripBr',
+        'noLineBreaks',
+        'selectNonEditable',
+        'moveCaretToEndOnChange',
+      ], function(opt) {
+        var o = attrs[opt]
+        opts[opt] = o && o !== 'false'
+      })
+
+      // view -> model
+      element.bind('input', function(e) {
+        scope.$apply(function() {
+          var html, html2, rerender
+          html = element.html()
+          rerender = false
+          if (opts.stripBr) {
+            html = html.replace(/<br>$/, '')
+          }
+          if (opts.noLineBreaks) {
+            html2 = html.replace(/<div>/g, '').replace(/<br>/g, '').replace(/<\/div>/g, '')
+            if (html2 !== html) {
+              rerender = true
+              html = html2
+            }
+          }
+          ngModel.$setViewValue(html)
+          if (rerender) {
+            ngModel.$render()
+          }
+          if (html === '') {
+            // the cursor disappears if the contents is empty
+            // so we need to refocus
+            $timeout(function(){
+              element[0].blur()
+              element[0].focus()
+            })
+          }
+        })
+      })
+
+      // model -> view
+      var oldRender = ngModel.$render
       ngModel.$render = function() {
-        element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
-      };
-
-      // Listen for change events to enable binding
-      element.on('blur keyup change', function() {
-        scope.$evalAsync(read);
-      });
-      read(); // initialize
-
-      // Write data to the model
-      function read() {
-        var html = element.html();
-        // When we clear the content editable the browser leaves a <br> behind
-        // If strip-br attribute is provided then we strip this out
-        if ( attrs.stripBr && html == '<br>' ) {
-          html = '';
+        var el, el2, range, sel
+        if (!!oldRender) {
+          oldRender()
         }
-        ngModel.$setViewValue(html);
+        element.html(ngModel.$viewValue || '')
+        if (opts.moveCaretToEndOnChange) {
+          el = element[0]
+          range = document.createRange()
+          sel = window.getSelection()
+          if (el.childNodes.length > 0) {
+            el2 = el.childNodes[el.childNodes.length - 1]
+            range.setStartAfter(el2)
+          } else {
+            range.setStartAfter(el)
+          }
+          range.collapse(true)
+          sel.removeAllRanges()
+          sel.addRange(range)
+        }
+      }
+      if (opts.selectNonEditable) {
+        element.bind('click', function(e) {
+          var range, sel, target
+          target = e.toElement
+          if (target !== this && angular.element(target).attr('contenteditable') === 'false') {
+            range = document.createRange()
+            sel = window.getSelection()
+            range.setStartBefore(target)
+            range.setEndAfter(target)
+            sel.removeAllRanges()
+            sel.addRange(range)
+          }
+        })
       }
     }
-  };
-}]);
+  }}])
 
 mod.factory('SiteData', ['$http', '$location', function($http, $location){
 
@@ -62,9 +122,9 @@ mod.factory('SiteData', ['$http', '$location', function($http, $location){
       return $http.post('/'+siteNome+'/portfolio/ordena', data);
     }
 
-    var _saveDiv = function(obj, val){    
-      console.log(obj, val);
-      return $http.post("/"+siteNome+"/obj_save", {obj: obj, val: val});
+    var _saveDiv = function(obj, val, item_n){    
+      console.log(obj, val, item_n);
+      return $http.post("/"+siteNome+"/obj_save", {obj: obj, val: val, item_n: item_n});
     }
 
     return {
@@ -112,21 +172,28 @@ mod.controller('headerCtrl',['$scope', 'SiteData', function ($scope, SiteData) {
 }])
 
 mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'SiteData', function ($scope, $rootScope, $uibModal, $log, SiteData) {
-    
+  $scope.portfolio_label = ""
   $scope.imgs = [];
   $scope.imageCategories = [];
 
-  SiteData.getSiteData().then(function(response) {
-    $scope.site = response.data;
-    console.log("SiteData[1]:", response.data);
-  })
+  // SiteData.getSiteData().then(function(response) {
+  //   $scope.site = response.data;
+  //   console.log("SiteData[imgGridCtrl]:", response.data);
+  // })
 
   SiteData.getSiteData().then(function(response) {
+    $scope.site = response.data8;
     $scope.imgs = response.data.pages.portfolio.items;
-    console.log("SiteData2:", $scope.imgs);
+    console.log("SiteData[imgGridCtrl]:", $scope.imgs);
     categoriasUpdate();
   })
   
+  $scope.saveDiv = function(obj){    
+      SiteData.saveDiv(obj, $scope.$eval(obj)).then(function(response) {
+         // console.log(response.data);
+      })    
+  }
+
   $scope.barConfig = {
     onSort: function (evt){
       console.log("barconfig [evt]:",evt.models)
@@ -266,9 +333,11 @@ mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'Site
 }]);
 
 
-mod.controller('ModalInstanceCtrl', function ($scope, $rootScope, $uibModalInstance, $timeout, item, i) {
+mod.controller('ModalInstanceCtrl', function ($scope, $rootScope, $uibModalInstance, $timeout, SiteData, item, i) {
   $scope.item = item;
+  $scope.a = 10;
   $scope.i = i;
+  console.log("item.titulo>", item)
 
   $rootScope.$on("ModalClose", function(){  
       $scope.cancel();
@@ -276,7 +345,13 @@ mod.controller('ModalInstanceCtrl', function ($scope, $rootScope, $uibModalInsta
 
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
-  };       
+  };   
+
+  $scope.saveDiv = function(obj, i){    
+    SiteData.saveDiv(obj, $scope.$eval(obj), i).then(function(response) {
+       // console.log(response.data);
+    })    
+  }    
 });
 
 
@@ -292,7 +367,13 @@ mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$ht
     $http.post('/maga/portfolio/delete/'+item_index); 
     $rootScope.$emit("CallDelImg", item_index);             
     $rootScope.$emit("ModalClose", item_index);
-  };    
+  };   
+
+  $scope.saveDiv = function(obj){    
+    SiteData.saveDiv(obj, $scope.$eval(obj)).then(function(response) {
+       // console.log(response.data);
+    })    
+  } 
   
   $scope.uploadPic = function(file, index) {
     console.log("file:",file,"index:",index)
@@ -338,6 +419,7 @@ mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$ht
 
 
 mod.controller('aboutCtrl', function ($scope, $http, SiteData) {
+  
   $scope.about = {}; 
   SiteData.getSiteData().then(function(response) {
     str = response.data.pages.about    
@@ -350,12 +432,21 @@ mod.controller('aboutCtrl', function ($scope, $http, SiteData) {
        // console.log(response.data);
     })    
   }
+
 })
 
 mod.controller('footerCtrl', function ($scope, $http, SiteData) {
+  
   $scope.site = {}; 
    SiteData.getSiteData().then(function(response) {
     $scope.site = response.data;
     console.log("SiteData[footerCtrl]:", response.data);
   })
+
+  $scope.saveDiv = function(obj){   
+    console.log(obj); 
+    SiteData.saveDiv(obj, $scope.$eval(obj)).then(function(response) {
+       // console.log(response.data);
+    })    
+  }
 })

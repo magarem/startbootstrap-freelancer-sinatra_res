@@ -80,8 +80,9 @@ get '/:site_nome/dataLoad' do
       #   str.to_s.gsub("\n", "<br>")
       # end 
       # Definindo as categorias de portfolio      
-      data = YAML.load_file(params[:site_nome]+'.yml')
-      data.to_json
+      @data = YAML.load_file(params[:site_nome]+'.yml')
+      @data.to_json
+      # pry
 end
 
 
@@ -171,13 +172,28 @@ post '/:site_nome/obj_save' do
      data["pages"]["about"]["body2"] = @val
   end
 
+  if @obj == "site.moldura.footer.endereco" then
+     data["moldura"]["footer"]["endereco"] = @val
+  end
+
+  if @obj == "site.moldura.footer.about_resumo" then
+     data["moldura"]["footer"]["about_resumo"] = @val
+  end
+
+  if @obj == "site.pages.portfolio.label" then
+     data["pages"]["portfolio"]["label"] = @val
+  end
+
+  if @obj == "item.titulo" then
+     @item_n = @post_data["item_n"]
+     data["pages"]["portfolio"]["items"][@item_n]["titulo"] = @val
+  end
+
+  
+
   File.open(@site_nome, 'w') { |f| YAML.dump(data, f) }
 
 end
-
-
-
-
 
 
 post '/:site_nome/page_save' , :provides => :json do
@@ -289,9 +305,7 @@ post "/:site_nome/upload" do
             data = YAML.load_file params[:site_nome]+".yml"
             data["pages"]["home"]["img"] = "img/#{@filename}"
             File.open(params[:site_nome]+".yml", 'w') { |f| YAML.dump(data, f) }
-
       end          
-      redirect '/'+params[:site_nome]
   end
 end
 # 

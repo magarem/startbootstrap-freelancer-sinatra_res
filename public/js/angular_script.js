@@ -182,7 +182,7 @@ mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'Site
   // })
 
   SiteData.getSiteData().then(function(response) {
-    $scope.site = response.data8;
+    $scope.site = response.data;
     $scope.imgs = response.data.pages.portfolio.items;
     console.log("SiteData[imgGridCtrl]:", $scope.imgs);
     categoriasUpdate();
@@ -355,7 +355,7 @@ mod.controller('ModalInstanceCtrl', function ($scope, $rootScope, $uibModalInsta
 });
 
 
-mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$http', function ($scope, $rootScope, Upload, $timeout, $http) {
+mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$http', 'SiteData', function ($scope, $rootScope, Upload, $timeout, $http, SiteData) {
   
   $scope.up = function(){
      angular.element('#file').trigger('click');
@@ -377,17 +377,20 @@ mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$ht
   
   $scope.uploadPic = function(file, index) {
     console.log("file:",file,"index:",index)
+    var url = document.URL;
+    var urlArray = url.split("/");
+    var siteNome = urlArray[urlArray.length-1];
     if (file == undefined) {
-      Upload.upload({
-        url: '/maga/portfolio/save/'+index,
-        data: {item: $scope.item},      
-      }); 
+      // Upload.upload({
+      //   url: '/maga/portfolio/save/'+index,
+      //   data: {item: $scope.item},      
+      // }); 
       ok = true       
     }else{
       if (file.size < 600000) {
         $scope.item.img = "img/portfolio/"+file.name;
         file.upload = Upload.upload({
-          url: '/maga/portfolio/save/'+index,
+          url: '/'+siteNome+'/portfolio/save/'+index,
           data: {item: $scope.item, file: file},      
         });       
         //Service.images[$scope.item.id].img = "img/portfolio/"+file.name;    
@@ -425,6 +428,20 @@ mod.controller('aboutCtrl', function ($scope, $http, SiteData) {
     str = response.data.pages.about    
     $scope.about = str
     $scope.about_body1 = str.body1
+    console.log("SiteData[aboutCtrl]:", str);
+  })
+  $scope.saveDiv = function(obj){    
+    SiteData.saveDiv(obj, $scope.$eval(obj)).then(function(response) {
+       // console.log(response.data);
+    })    
+  }
+
+})
+
+mod.controller('ContactCtrl', function ($scope, $http, SiteData) {
+  $scope.contact = {}; 
+  SiteData.getSiteData().then(function(response) {    
+    $scope.contact = response.data.pages.contact
     console.log("SiteData[aboutCtrl]:", str);
   })
   $scope.saveDiv = function(obj){    

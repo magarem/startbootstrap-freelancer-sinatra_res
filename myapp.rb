@@ -182,6 +182,7 @@ post '/:site_nome/obj_save' do
 
   if @obj == "site.pages.portfolio.label" then
      data["pages"]["portfolio"]["label"] = @val
+     data["moldura"]["menu"][0]["label"] = @val
   end
 
   if @obj == "item.titulo" then
@@ -189,7 +190,45 @@ post '/:site_nome/obj_save' do
      data["pages"]["portfolio"]["items"][@item_n]["titulo"] = @val
   end
 
-  
+  if @obj == "item.txt" then
+     @item_n = @post_data["item_n"]
+     data["pages"]["portfolio"]["items"][@item_n]["txt"] = @val
+  end
+
+  if @obj == "item.cliente" then
+     @item_n = @post_data["item_n"]
+     data["pages"]["portfolio"]["items"][@item_n]["cliente"] = @val
+  end
+
+  if @obj == "item.site" then
+     @item_n = @post_data["item_n"]
+     data["pages"]["portfolio"]["items"][@item_n]["site"] = @val
+  end
+
+  if @obj == "item.data" then
+     @item_n = @post_data["item_n"]
+     data["pages"]["portfolio"]["items"][@item_n]["data"] = @val
+  end
+
+  if @obj == "item.servico" then
+     @item_n = @post_data["item_n"]
+     data["pages"]["portfolio"]["items"][@item_n]["servico"] = @val
+  end
+
+  if @obj == "item.cat" then
+     @item_n = @post_data["item_n"]
+     data["pages"]["portfolio"]["items"][@item_n]["cat"] = @val
+  end
+
+  if @obj == "about.label" then
+     data["pages"]["about"]["label"] = @val
+     data["moldura"]["menu"][1]["label"] = @val
+  end
+
+  if @obj == "contact.label" then
+     data["pages"]["contact"]["label"] = @val
+     data["moldura"]["menu"][2]["label"] = @val
+  end
 
   File.open(@site_nome, 'w') { |f| YAML.dump(data, f) }
 
@@ -386,23 +425,24 @@ post "/:site_nome/portfolio/save/:index" do
     end
   end
   
-  def string_limpa str
-    str.to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
-  end
+  # def string_limpa str
+  #   str.to_s.gsub(/<\/?[^>]*>/, "").gsub("&nbsp;", "")
+  # end
   if (port_img == "" || port_img == "undefined" || port_img == nil) then port_img = @item["img"] end
-  port_novo = {
-    "id"      => @item["id"],
-    "titulo"  => string_limpa(@item["titulo"]),
-    "img"     => port_img,
-    "txt"     => string_limpa(@item["txt"]),
-    "cliente" => string_limpa(@item["cliente"]),
-    "site"    => string_limpa(@item["site"]),
-    "data"    => string_limpa(@item["data"]),
-    "servico" => string_limpa(@item["servico"]),
-    "cat"     => string_limpa(@item["cat"])
-  } 
+  # port_novo = {
+  #   # "id"      => @item["id"],
+  #   # "titulo"  => string_limpa(@item["titulo"]),
+  #   # "img"     => port_img
+  #   # "txt"     => string_limpa(@item["txt"]),
+  #   # "cliente" => string_limpa(@item["cliente"]),
+  #   # "site"    => string_limpa(@item["site"]),
+  #   # "data"    => string_limpa(@item["data"]),
+  #   # "servico" => string_limpa(@item["servico"]),
+  #   # "cat"     => string_limpa(@item["cat"])
+  # } 
 
-  data["pages"]["portfolio"]["items"][@index] = port_novo
+  # data["pages"]["portfolio"]["items"][@index] = port_novo
+  data["pages"]["portfolio"]["items"][@index]["img"] = port_img
   
   File.open(params[:site_nome]+".yml", 'w') { |f| YAML.dump(data, f) }
                  

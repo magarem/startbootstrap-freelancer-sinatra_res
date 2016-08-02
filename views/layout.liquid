@@ -65,17 +65,16 @@
             <div class="container">
                 <div class="row">
                     <div class="footer-col col-md-4">
-                        <h3>Location</h3>
-                        <div            
-                           contenteditable
-                           class="edit"
-                           ng-model="site.moldura.footer.endereco"
-                           strip-br="true"
-                           ng-blur="saveDiv('site.moldura.footer.endereco')"/>
-                        </div>
+                        <h3>Endereço</h3>
+                        <div contenteditable="true"
+                          ng-model="site.moldura.footer.endereco"
+                          strip-br="true"
+                          select-non-editable="true"
+                          ng-blur="saveDiv('site.moldura.footer.endereco')">
+                        </div>                          
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>Around the Web</h3>
+                        <h3>Links</h3>
                          <ul class="list-inline">
 		                       <li ng-repeat="item in site.moldura.footer.social"  >
                                 <a href="{{item.link}}" class="btn-social btn-outline"><i class="fa fa-fw fa-{{item.label}}"></i></a>
@@ -83,14 +82,13 @@
                         </ul>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>About Freelancer</h3>
-                        <div            
-                           contenteditable
-                           class="edit"
-                           ng-model="site.moldura.footer.about_resumo"
-                           strip-br="true"
-                           ng-blur="saveDiv('site.moldura.footer.about_resumo')"/>
-                        </div>                        
+                        <h3>Sobre</h3>
+                        <div contenteditable="true"
+                          ng-model="site.moldura.footer.about_resumo"
+                          strip-br="true"
+                          select-non-editable="true"
+                          ng-blur="saveDiv('site.moldura.footer.about_resumo')">
+                        </div>                                           
                     </div>
                 </div>
             </div>
@@ -111,7 +109,7 @@
 
   
     
- 
+ <!-- 
     <script src="medium-editor/dist/js/medium-editor.js"></script>
         <script>
             var editor = new MediumEditor('.editable', {
@@ -119,7 +117,7 @@
                 toolbar: false
             })
          
-        </script> 
+        </script>  -->
 
     
 

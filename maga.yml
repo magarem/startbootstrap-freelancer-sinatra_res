@@ -8,17 +8,17 @@ head:
 moldura:
   label: Portfolio
   logo:
-    label: "!recreio!"
+    label: Magaweb
     link: index.ttt
   menu:
-  - label: Portfolio
-    link: ''
-  - label: About
-    link: ''
-  - label: Contact
-    link: ''
+  - label: Catálogo
+    link: "#portfolio"
+  - label: Sobre
+    link: "#about"
+  - label: To aqui ;)
+    link: "#contact"
   footer:
-    endereco: dfdjkdsfhdkjf hdskjf fsdf<br>
+    endereco: Lá em casa
     social:
     - label: facebook
       link: marcelo.a.magalhaes
@@ -30,32 +30,39 @@ moldura:
       link: mmm
     - label: dribbble
       link: ddrrible
-    about_resumo: jaksfh sdkjhs djkasda as d<br>sh djkasdh
+    about_resumo: Esse sistema<br>é bom demais tá?
     creditos: Copyright © magaweb 2016
 pages:
   home:
-    label: Tempordada
+    label: Temporadada
     img: img/maga.jpg
-    body: Recreio - RJ<br>
+    body: Recreio - RJ<br>Rio de janeiro
   about:
-    label: About
-    body1: Os melhores apartamentos de frente para o mar!<br>
-    body2: Você merece esse luxo!!<br>
+    label: Sobre
+    body1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquet,
+      \naugue in porta vulputate, risus justo bibendum sapien, suscipit dictum \nenim
+      ante auctor nisl. Nunc eu massa in orci efficitur egestas. In \ngravida sem
+      eu nibh cursus, sit amet lacinia odio egestas. Maecenas \ndapibus commodo justo
+      eu rhoncus."
+    body2: "Phasellus sit amet lorem lacinia, semper est non, accumsan lectus. In\n
+      at rutrum metus. Sed viverra massa nisi, eget pretium velit euismod ut.\n Donec
+      nec efficitur odio. Nullam rutrum ante nec viverra condimentum. \nCras in ante
+      id neque sagittis sollicitudin. Praesent vestibulum eget \nenim nec pellentesque.\n\n"
   portfolio:
-    label: Catálogo23
+    label: Catálogo
     items:
     - id: '3'
-      titulo: "!!Fidelis!!"
-      img: "/img/portfolio/jah-rastafari.jpg"
-      txt: Txt novo
-      cliente: ''
+      titulo: Buda
+      img: img/portfolio/13718574_10210357240346915_3458193529924077363_n.jpg
+      txt: Esse é realmente um site rastafari
+      cliente: Macedo
       site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: "<p>desenho</p>"
+      data: 11/10/16
+      servico: ProgramaçãoDesign
+      cat: desenho
     - id: '0'
       titulo: novelos
-      img: img/portfolio/7583863176_df8dfc3da4_k.jpg
+      img: img/portfolio/7.jpg
       txt: Txt novo
       cliente: ''
       site: fidelis.com
@@ -63,8 +70,8 @@ pages:
       servico: Programação
       cat: "<p>tecelagem</p>"
     - id: '5'
-      titulo: prainha
-      img: img/portfolio/photo-highway1_joshua-sortino-1421091242698-34f6ad7fc088.jpeg.jpeg
+      titulo: Paisagem
+      img: img/portfolio/27839439211_f205eae4a2_b.jpg
       txt: Txt novo
       cliente: ''
       site: fidelis.com
@@ -81,8 +88,8 @@ pages:
       servico: Programação
       cat: fotografia
     - id: '3'
-      titulo: Cachu legal!
-      img: img/portfolio/27839439211_f205eae4a2_b.jpg
+      titulo: Japinha ninja
+      img: img/portfolio/7.jpg
       txt: Txt novo
       cliente: ''
       site: fidelis.com
@@ -107,3 +114,5 @@ pages:
       data: 10/10/12
       servico: Programação
       cat: "<p>fotografia</p>"
+  contact:
+    label: To aqui ;)

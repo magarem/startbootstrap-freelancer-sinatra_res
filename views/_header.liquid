@@ -38,24 +38,22 @@
 
         <div class="intro-text">
           <span class="name">
-           <!--  <div class=edit contentedit contenteditable="true" ng-bind="site.pages.home.label" id=txt1>{{ site.pages.home.label }}</div> -->
-          <div            
-            contenteditable
-            class="edit"
-            ng-model="site.pages.home.label"
-            strip-br="true"
-            ng-blur="saveDiv('site.pages.home.label')"                  
-          /></div>
+           <!--  <div class=edit contentedit contenteditable="true" ng-bind="site.pages.home.label" id=txt1>{{ site.pages.home.label }}</div> -->          
+            <div contenteditable="true"
+                ng-model="site.pages.home.label"
+                strip-br="true"
+                select-non-editable="true"
+                ng-blur="saveDiv('site.pages.home.label')">
+            </div>
           </span>
           <hr class="star-light">
-          <span class="skills">
-          <div            
-            contenteditable
-            class="edit"
-            ng-model="site.pages.home.body"
-            strip-br="true"
-            ng-blur="saveDiv('site.pages.home.body')"                  
-          /></div>          
+          <span class="skills">          
+            <div contenteditable="true"
+                ng-model="site.pages.home.body"
+                strip-br="true"
+                select-non-editable="true"
+                ng-blur="saveDiv('site.pages.home.body')">
+            </div>          
           </span>
         </div>           
       </div>

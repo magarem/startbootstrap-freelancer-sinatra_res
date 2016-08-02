@@ -4,28 +4,33 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2>{{ about.label }}</h2>
+                <h2>
+                  <div contenteditable="true"
+                    ng-model="about.label"
+                    strip-br="true"
+                    select-non-editable="true"
+                    ng-blur="saveDiv('about.label')">
+                  </div>  
+                </h2>
                 <hr class="star-light">
             </div>
         </div>
         <div class="row">
             <div class="col-lg-4 col-lg-offset-2">    
-              <div            
-                contenteditable
-                class="edit"
+              <div contenteditable="true"
                 ng-model="about.body1"
                 strip-br="true"
-                ng-blur="saveDiv('about.body1')"/>
-              </div>            
+                select-non-editable="true"
+                ng-blur="saveDiv('about.body1')">
+              </div>  
             </div>
             <div class="col-lg-4">
-             <div            
-                contenteditable
-                class="edit"
+             <div contenteditable="true"
                 ng-model="about.body2"
                 strip-br="true"
-                ng-blur="saveDiv('about.body2')"/>
-              </div>     
+                select-non-editable="true"
+                ng-blur="saveDiv('about.body2')">
+              </div>  
             </div>
             <!-- <div class="col-lg-8 col-lg-offset-2 text-center">
                 <a href="/s?txt=" class="btn btn-lg btn-outline">

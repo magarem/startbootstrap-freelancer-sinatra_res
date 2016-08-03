@@ -55,21 +55,18 @@
        </style>
        <!-- images:{{imgs}} -->
         <div class="row"  ng-sortable="barConfig">
-              <div  class="col-sm-4 portfolio-item resize-img" ng-repeat="image in imgs  | filter:(!!catselect || undefined) && {cat: catselect}">               
-                 
-                  <a href=""  class="portfolio-link" 
-                     ng-click="open(image, $index);mostra($index);">               
-                   <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
+              <div  class="col-sm-4 portfolio-item resize-img" ng-repeat="image in imgs  | filter:(!!catselect || undefined) && {cat: catselect}">
+                  <a href="" class="portfolio-link" 
+                     ng-click="open(image, $index);mostra($index);">     
+                    <div class="caption">
+                      <div class="caption-content">
+                        <i class="fa fa-search-plus fa-3x"></i>
+                      </div>
+                    </div>
                     <img id={{$index}}                         
-                         ng-src="{{image.img}}" 
-                         on-error-src = "img/safe.png"
-                         class="img-responsive centered-and-cropped"  alt="">
+                      ng-src="{{image.img}}"                       
+                      class="img-responsive centered-and-cropped">
                   </a>
-
               </div>
         </div>
     </div>
@@ -87,30 +84,49 @@
           >
          </div>         
        </h2>
+       <style>
+         .thumb {
+            width: 24px;
+            height: 24px;
+            float: none;
+            position: relative;
+            top: 7px;
+         }
+       </style>
        <form name="myForm" ng-controller="MyFormCtrl">         
-          <hr class="star-primary">
-          
+          <hr class="star-primary" >
+            <!-- <img ng-src="{{item.img}}" class="resize-img2"> -->
+            <img  ngf-thumbnail="picFile || item.img" class="resize-img2" ng-click="up();">
             <input type="file" 
                  ngf-select 
-                 ng-model="picFile" 
+                 ng-model="picFile"                  
                  id="file" 
                  name="file"    
                  accept="image/*" ngf-max-size="2MB" 
                  ngf-model-invalid="errorFile" 
-                 style="visibility:hidden">
-                 <style>
-            #preview img{max-width: 400px; max-height: 400px;height:100px;}
+                 style="visibility:hidden"
+                 ><br>
+            <!-- <button type="file" ngf-select="uploadPic(picFile, i);"
+          accept="image/*" ngf-max-height="1000" ngf-max-size="1MB"
+          ng-model="picFile" 
+                 id="file" 
+                 name="file">
+      Select File</button>  -->  
+            <style>
+              #preview img{max-width: 400px; max-height: 400px;height:100px;}
             </style>
-            
-            <div ng-if="picFile">                
+            <i ng-show="myForm.file.$error.maxSize">File too large 
+          {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+          <!-- <img ngf-thumbnail="picFile" class="thumb"> -->
+            <!-- <div ng-if="picFile">                
               <img id=preview ngf-thumbnail="picFile" class="resize-img2" ng-click="up();">
             </div>
             <div ng-if="!picFile">
                  <img id=preview ngf-thumbnail="item.img" class="resize-img2" 
                 ng-click="up();" >
-            </div>
-            <!-- <button ng-click="picFile = null" ng-show="picFile">Remove</button> -->             
-        <br>
+            </div> -->
+            <!-- <button ng-click="picFile = null" ng-show="picFile">Remove</button> -->                             
+        <button type="button" class="btn btn-default" ng-click="uploadPic(picFile, i);">Enviar imagem</button>
       <p>
         <div contenteditable="true"
           ng-model="item.txt"

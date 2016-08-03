@@ -1,5 +1,7 @@
 var mod = angular.module("myapp", ['ngSanitize', 'ng-sortable','ngAnimate', 'ui.bootstrap', 'ngFileUpload']);
 
+
+
 mod.directive('onErrorSrc', function() {
   return {
     link: function(scope, element, attrs) {
@@ -172,7 +174,6 @@ mod.controller('headerCtrl',['$scope', 'SiteData', function ($scope, SiteData) {
 }])
 
 mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'SiteData', function ($scope, $rootScope, $uibModal, $log, SiteData) {
-  $scope.portfolio_label = ""
   $scope.imgs = [];
   $scope.imageCategories = [];
 
@@ -218,11 +219,11 @@ mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'Site
     delImg(item_index);
   });
 
-  $rootScope.$on("ImgChange", function(event, src, index){  
+  $rootScope.$on("ImgChange", function(event, src, index, siteNome){  
     // console.log("ImgChange - src:",src,", index:",index)
     // $scope.imgs[index].img = src
     // console.log("$scope.imgs[index].img:", $scope.imgs[index].img)
-    ImgChange(index, src)
+    ImgChange(src, index, siteNome)
   });
 
   $rootScope.$on("categoriasUpdate", function(event){  
@@ -254,10 +255,11 @@ mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'Site
     console.log("$scope.imgs:",$scope.imgs)          
   }
     
-  var ImgChange = function (index, src){
+  var ImgChange = function (src, index, conta){
     console.log("ImgChange - src:",src,", index:",index)
     // $scope.imgs[index].img = src
-    // console.log("$scope.imgs[index].img:", $scope.imgs[index].img)
+    console.log("$scope.imgs[index].img:", $scope.imgs[index].img)
+    src = "/contas/"+conta+"/img/portfolio/"+src
     $scope.imgs[index].img = src
   }
  
@@ -357,6 +359,29 @@ mod.controller('ModalInstanceCtrl', function ($scope, $rootScope, $uibModalInsta
 
 mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$http', 'SiteData', function ($scope, $rootScope, Upload, $timeout, $http, SiteData) {
   
+   $scope.uploadFile = function(index){
+
+        console.log("file:",file,"index:",index)
+        var url = document.URL;
+        var urlArray = url.split("/");
+        var siteNome = urlArray[urlArray.length-1];
+
+        var file = $scope.myFile;
+        console.log('file is ' );
+        console.dir(file);
+        var uploadUrl = '/'+siteNome+'/portfolio/save/'+index;
+        fileUpload.uploadFileToUrl(file, uploadUrl)
+          .then(function () {
+              console.log('success');
+          }, function () {
+              $rootScope.$emit("ImgChange",file.name, index, siteNome); 
+          }, function () {
+              console.log('progress');
+          });
+    }
+    
+
+
   $scope.up = function(){
      angular.element('#file').trigger('click');
   };
@@ -376,6 +401,7 @@ mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$ht
   } 
   
   $scope.uploadPic = function(file, index) {
+    a = 0
     console.log("file:",file,"index:",index)
     var url = document.URL;
     var urlArray = url.split("/");
@@ -388,35 +414,62 @@ mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$ht
       ok = true       
     }else{
       if (file.size < 600000) {
-        $scope.item.img = "img/portfolio/"+file.name;
+        console.log('upload')
+
         file.upload = Upload.upload({
-          url: '/'+siteNome+'/portfolio/save/'+index,
-          data: {item: $scope.item, file: file},      
-        });       
+            url: '/'+siteNome+'/portfolio/save/'+index,
+            data: {item: $scope.item, file: file},
+        })
+
+        file.upload.then(function () {
+
+          }, function () {
+              console.log('error');
+          }, function () {
+              console.log('progress');
+              console.log('success');
+              
+              $rootScope.$emit("ImgChange",file.name, index, siteNome); 
+          }
+        );
+        
+        // Upload.upload({
+        //   url: '/'+siteNome+'/portfolio/save/'+index,
+        //   data: {item: $scope.item, file: file},      
+        // }).then(function (resp) {
+        //   $scope.item.img = "img/portfolio/"+file.name;
+        //   console.log('$scope.item.img:',$scope.item.img)
+        //   console.log('resp:', resp)
+        // })       
         //Service.images[$scope.item.id].img = "img/portfolio/"+file.name;    
-        $rootScope.$emit("ImgChange", "/img/portfolio/"+file.name, index); 
-        ok = true
+        // console.log("response.data:", a)
+        // if (a) {
+        //   alert();
+        //   $rootScope.$emit("ImgChange",file.name, index, siteNome); 
+        // }
+        // ok = true
       }else{
         alert("Imagem muito grande.");
-        ok = false
+        ok = 0
       }
       
     }  
-    if (ok) {
-      $rootScope.$emit("categoriasUpdate"); 
-      alert("Documento salvo com sucesso!");
-    }
-    if (!file == undefined) {
-        file.upload.then(function (response) {
-          $timeout(function () {file.result = response.data; });
-        }, function (response) {
-          if (response.status > 0)
-            $scope.errorMsg = response.status + ': ' + response.data;
-        }, function (evt) {
-          // Math.min is to fix IE which reports 200% sometimes
-          file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-        });
-    }
+    // if (ok) {
+      
+    //   $rootScope.$emit("categoriasUpdate"); 
+    //   alert("Documento salvo com sucesso!");
+    // }
+    // if (!file == undefined) {
+    //     file.upload.then(function (response) {
+    //       $timeout(function () {file.result = response.data; });
+    //     }, function (response) {
+    //       if (response.status > 0)
+    //         $scope.errorMsg = response.status + ': ' + response.data;
+    //     }, function (evt) {
+    //       // Math.min is to fix IE which reports 200% sometimes
+    //       file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+    //     });
+    // }
   }
 }]);
 
@@ -442,7 +495,6 @@ mod.controller('ContactCtrl', function ($scope, $http, SiteData) {
   $scope.contact = {}; 
   SiteData.getSiteData().then(function(response) {    
     $scope.contact = response.data.pages.contact
-    console.log("SiteData[aboutCtrl]:", str);
   })
   $scope.saveDiv = function(obj){    
     SiteData.saveDiv(obj, $scope.$eval(obj)).then(function(response) {

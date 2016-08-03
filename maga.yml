@@ -53,7 +53,7 @@ pages:
     items:
     - id: '3'
       titulo: Buda
-      img: img/portfolio/13718574_10210357240346915_3458193529924077363_n.jpg
+      img: contas/maga/img/portfolio/13139181_626527064168509_2022078692565878775_n.jpg
       txt: Esse é realmente um site rastafari
       cliente: Macedo
       site: fidelis.com
@@ -62,7 +62,7 @@ pages:
       cat: desenho
     - id: '0'
       titulo: novelos
-      img: img/portfolio/7.jpg
+      img: contas/maga/img/portfolio/1926801_358908134247907_476196602_n.jpg
       txt: Txt novo
       cliente: ''
       site: fidelis.com
@@ -71,25 +71,16 @@ pages:
       cat: "<p>tecelagem</p>"
     - id: '5'
       titulo: Paisagem
-      img: img/portfolio/27839439211_f205eae4a2_b.jpg
+      img: contas/maga/img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg
       txt: Txt novo
       cliente: ''
       site: fidelis.com
       data: 10/10/12
       servico: Programação
       cat: fot
-    - id: 6
-      titulo: Novo
-      img: "/img/portfolio/12212058_900124723376186_1916938989_n.jpg"
-      txt: Txt novo
-      nome: Fidelito
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: fotografia
     - id: '3'
       titulo: Japinha ninja
-      img: img/portfolio/7.jpg
+      img: contas/maga/img/portfolio/12212058_900124723376186_1916938989_n.jpg
       txt: Txt novo
       cliente: ''
       site: fidelis.com
@@ -98,21 +89,12 @@ pages:
       cat: fotografia
     - id: '4'
       titulo: Krsinha&amp;Radha
-      img: "/img/portfolio/1926801_358908134247907_476196602_n.jpg"
+      img: contas/maga/img/portfolio/1175646_10200352699052225_323875014_n.jpg
       txt: Txt novo
       cliente: ''
       site: fidelis.com
       data: 10/10/12
       servico: Programação
       cat: pintura,fotolandia,krisna,f
-    - id: '3'
-      titulo: Cachu legal!
-      img: "/img/portfolio/27841590941_d76818d484_b.jpg"
-      txt: Txt novo
-      cliente: ''
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: "<p>fotografia</p>"
   contact:
     label: To aqui ;)

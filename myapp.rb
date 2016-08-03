@@ -316,7 +316,7 @@ end
 post "/:site_nome/upload" do 
 
   if session[:logado] then
-      @filename = params[:file][:filename].downcase
+      @filename = params[:file][:filename]
       file = params[:file][:tempfile]
       imagem_tipo = params[:file][:type]
       
@@ -400,8 +400,9 @@ post "/:site_nome/portfolio/save/:index" do
   data = YAML.load_file params[:site_nome]+".yml"
 
   unless @file == nil
-    #pry
-    @filename = params[:file][:filename].downcase
+    
+    @filename = params[:file][:filename]
+    # pry
     file = params[:file][:tempfile]
     imagem_tipo = params[:file][:type]
     #@filename = Time.now.to_i.to_s+"."+params["file"][:filename].split(".").last
@@ -410,18 +411,19 @@ post "/:site_nome/portfolio/save/:index" do
         imagem_tipo == 'image/jpeg' || 
         imagem_tipo == 'image/gif') && 
         file.size < 600000
-
-          File.open("./public/img/portfolio/#{@filename}", 'wb') do |f|
+          img_path = "./public/contas/#{@site_nome}/img/portfolio/#{@filename}"
+          File.open(img_path, 'wb') do |f|
             f.write(file.read)
           end
           
-          image = MiniMagick::Image.open("./public/img/portfolio/#{@filename}")
+          image = MiniMagick::Image.open(img_path)
           image.resize "600x600"   
           #image.write "./public/img/#{@filename}"
-          image.write "./public/img/portfolio/#{@filename}"
+          image.write img_path
           #Salva os dados do painel do portfolio
           
-          port_img = "img/portfolio/#{@filename}"
+          port_img = "contas/#{@site_nome}/img/portfolio/#{@filename}"
+          # port_img = @filename
     end
   end
   

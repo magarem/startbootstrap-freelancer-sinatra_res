@@ -1,5 +1,5 @@
 ---
-name: site
+name: s1
 senha: 12345
 head:
   title: Portfolio
@@ -35,7 +35,7 @@ moldura:
 pages:
   home:
     label: texto 1
-    img: contas/maga/img/portfolio/site_agencia.jpg
+    img: img/maga.jpg
     body: texto 2
   about:
     label: Sobre
@@ -43,15 +43,6 @@ pages:
     body2: texto 2
   portfolio:
     label: Portfolio
-    items:  
-      - id: '0'
-        titulo: Novo
-        img: "/img/noimage.png"
-        txt: ''
-        cliente: ''
-        site: ''
-        data: ''
-        servico: ''
-        cat: ''  
+    items: 
   contact:
     label: Contato

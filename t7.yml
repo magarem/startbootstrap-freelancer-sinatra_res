@@ -1,5 +1,5 @@
 ---
-name: site
+name: t7
 senha: 12345
 head:
   title: Portfolio
@@ -35,7 +35,7 @@ moldura:
 pages:
   home:
     label: texto 1
-    img: contas/maga/img/portfolio/site_agencia.jpg
+    img: img/t7.jpg
     body: texto 2
   about:
     label: Sobre
@@ -43,15 +43,33 @@ pages:
     body2: texto 2
   portfolio:
     label: Portfolio
-    items:  
-      - id: '0'
-        titulo: Novo
-        img: "/img/noimage.png"
-        txt: ''
-        cliente: ''
-        site: ''
-        data: ''
-        servico: ''
-        cat: ''  
+    items:
+    - id: '0'
+      titulo: Novo
+      img: "/contas/t7/img/portfolio/10456772_10203468737591390_9090394070066185618_n.jpg"
+      txt: ''
+      cliente: ''
+      site: ''
+      data: ''
+      servico: ''
+      cat: 22,local
+    - id: '0'
+      titulo: Novo22
+      img: contas/t7/img/portfolio/site_agencia.jpg
+      txt: ''
+      cliente: ''
+      site: ''
+      data: ''
+      servico: ''
+      cat: ''
+    - id: 1
+      titulo: Novo
+      img: "/contas/t7/img/portfolio/87755-900-1459844057-_tznk_meey0.jpg"
+      txt: Txt novo
+      nome: ''
+      site: ''
+      data: ''
+      servico: ''
+      cat: local,km
   contact:
     label: Contato

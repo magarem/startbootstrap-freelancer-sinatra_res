@@ -56,41 +56,5 @@ pages:
       data: 10/10/12
       servico: Programação
       cat: fot
-    - id: '0'
-      titulo: Petrobras
-      img: contas/maga/img/portfolio/site_agencia.jpg
-      txt: ''
-      cliente: ''
-      site: ''
-      data: ''
-      servico: ''
-      cat: ''
-    - id: '0'
-      titulo: Novo
-      img: "/img/noimage.png"
-      txt: ''
-      cliente: ''
-      site: ''
-      data: ''
-      servico: ''
-      cat: ''
-    - id: '3'
-      titulo: Japinha ninja
-      img: contas/maga/img/portfolio/12212058_900124723376186_1916938989_n.jpg
-      txt: Txt novo
-      cliente: ''
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: fotografia
-    - id: '4'
-      titulo: Krsinha&amp;Radha
-      img: contas/maga/img/portfolio/1175646_10200352699052225_323875014_n.jpg
-      txt: Txt novo
-      cliente: ''
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: pintura,fotolandia,krisna,f
   contact:
     label: To aqui ;)

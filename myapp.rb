@@ -1,7 +1,6 @@
 require 'sinatra'
 require 'pry'
 require 'yaml'
-require 'liquid'
 require 'pony'
 require 'json'
 require 'mini_magick'
@@ -22,7 +21,7 @@ configure do
   set :views, File.dirname(__FILE__) + '/views'
   #set :controlers, File.dirname(__FILE__) + '/controlers'
   set :public_folder, Proc.new { File.join(root, "public") }
-  Liquid::Template.file_system = Liquid::LocalFileSystem.new(File.join(File.dirname(__FILE__),'views'))
+  #Liquid::Template.file_system = Liquid::LocalFileSystem.new(File.join(File.dirname(__FILE__),'views'))
 end
 
 helpers do
@@ -277,8 +276,31 @@ post '/edit_about_save' do
     redirect '/'
 end
 
-get "/site_new/:site_nome" do 
-    FileUtils.cp("site.yml",params[:site_nome]+".yml")
+get "/novo_site/:site_nome" do 
+
+    site_nome = params[:site_nome]
+    
+    #Clona o site base
+    FileUtils.cp("site.yml",site_nome+".yml")
+    
+    #Cria diretorio de imagens
+    install_dir = "public/contas/#{site_nome}/img/portfolio"
+    FileUtils::mkdir_p install_dir
+
+    #Altera o nome do site no arquivo fonte
+    data = YAML.load_file site_nome+".yml"
+    data["name"] = site_nome
+    File.open(site_nome+".yml", 'w') { |f| YAML.dump(data, f) }
+
+    #copia imagem da capa
+    FileUtils.cp("public/img/noimage.png","public/contas/#{site_nome}/img/noimage.png")
+    #Altera a capa do site
+    data = YAML.load_file site_nome+".yml"
+    data["pages"]["home"]["img"] = "contas/#{site_nome}/img/noimage.png"
+    
+    File.open(site_nome+".yml", 'w') { |f| YAML.dump(data, f) }
+
+    redirect "/#{site_nome}"
 end
 
 # Handle POST-request (Receive and save the uploaded file)
@@ -421,7 +443,7 @@ post "/:site_nome/portfolio/save/:index" do
   #end
 end
 
-get "/:site_nome/portfolio/add" do 
+post "/:site_nome/portfolio/add" do 
   
   @site_nome = params[:site_nome]
 
@@ -430,9 +452,9 @@ get "/:site_nome/portfolio/add" do
   
   data = YAML.load_file @site_nome+".yml"
   
-  for t in data["pages"]["portfolio"]["items"]
-     id_last = t["id"]
-  end
+  # for t in data["pages"]["portfolio"]["items"]
+  #    id_last = t["id"]
+  # end
 
   d = { "id" => "0",
         "titulo" => "Novo",
@@ -445,9 +467,9 @@ get "/:site_nome/portfolio/add" do
         "cat"    => ""
       }
   
-  data["pages"]["portfolio"]["items"][(id_last.to_i)+1] = d
+  data["pages"]["portfolio"]["items"] << d
   
-  File.open(params[:site_nome]+".yml", 'w') { |f| YAML.dump(data, f) }
+  File.open(@site_nome+".yml", 'w') { |f| YAML.dump(data, f) }
 
   # redirect '/'+params[:site_nome]
 end

@@ -101,7 +101,10 @@
        <form name="myForm" ng-controller="MyFormCtrl">         
           <hr class="star-primary" >
             <!-- <img ng-src="{{item.img}}" class="resize-img2"> -->
-            <img  ngf-thumbnail="picFile || item.img" class="resize-img2" ng-click="up();">
+            <img  ngf-thumbnail="picFile || item.img" class="resize-img2" 
+            <% if @edit_flag == true %>
+             ng-click="up();"
+            <% end %> >
             <input type="file" 
                  ngf-select 
                  ng-model="picFile"                  

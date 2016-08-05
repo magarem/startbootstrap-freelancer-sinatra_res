@@ -21,7 +21,9 @@
          
         <div id="image1" 
              class="cropcircle img-responsive" 
-             onclick="$('#file').click();" >
+             <% if @edit_flag == true %>
+                onclick="$('#file').click();" 
+             <% end %> >
         </div>
 
         <form id=uploadimage action="" method="POST" enctype="multipart/form-data">

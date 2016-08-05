@@ -1,5 +1,5 @@
 ---
-name: site
+name: t6
 senha: 12345
 head:
   title: Portfolio
@@ -8,7 +8,7 @@ head:
 moldura:
   label: Portfolio
   logo:
-    label: Portfólio
+    label: Japinha
     link: index.ttt
   menu:
   - label: Portfolio
@@ -34,24 +34,33 @@ moldura:
     creditos: Copyright © Magaweb 2016
 pages:
   home:
-    label: texto 1
-    img: contas/maga/img/portfolio/site_agencia.jpg
-    body: texto 2
+    label: Ninja
+    img: img/t6.jpg
+    body: várias artes marciais
   about:
     label: Sobre
     body1: Texto 1
     body2: texto 2
   portfolio:
     label: Portfolio
-    items:  
-      - id: '0'
-        titulo: Novo
-        img: "/img/noimage.png"
-        txt: ''
-        cliente: ''
-        site: ''
-        data: ''
-        servico: ''
-        cat: ''  
+    items:
+    - id: '0'
+      titulo: Novo
+      img: "/img/noimage.png"
+      txt: ''
+      cliente: ''
+      site: ''
+      data: ''
+      servico: ''
+      cat: ''
+    - id: '0'
+      titulo: Novo
+      img: "/img/noimage.png"
+      txt: ''
+      cliente: ''
+      site: ''
+      data: ''
+      servico: ''
+      cat: ''
   contact:
     label: Contato

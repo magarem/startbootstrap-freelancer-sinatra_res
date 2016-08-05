@@ -1,0 +1,94 @@
+---
+name: site
+head:
+  title: Portfolio geral
+  description: Site pra garela
+  author: Maguete
+moldura:
+  label: Portfolio
+  logo:
+    label: Maguete Ninja
+    link: index.ttt
+  menu:
+  - label: Portfolio
+    link: 
+  - label: About
+    link: 
+  - label: Contact
+    link: 
+  footer:
+    endereco: Rio de Janeiro - RJ - Brasil
+    social:
+    - label: facebook
+      link: marcelo.a.magalhaes
+    - label: google-plus
+      link: Maguete
+    - label: twitter
+      link: magalhaes
+    - label: linkedin
+      link: mmm
+    - label: dribbble
+      link: ddrrible
+    about_resumo: jaksfh sdkjhs djkash djkasdh
+    creditos: Copyright © magaweb 2016
+pages:
+  home:
+    label: 22 Bem 22<br>
+    img: img/site.jpg
+    body: Web Developer - Web master
+  about:
+    label: About
+    body1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Praesent aliquam
+      purus in tristique cursus.  Etiam at magna enim. Fusce auctor nec lectus non
+      porta.  Nam quis pharetra purus, sit amet imperdiet sapien.  Aliquam a mollis
+      neque. Donec velit dolor
+
+'
+    body2: "Aliquam ut nisi nec, eleifend consequat ipsum.  Cras feugiat vulputate
+      metus, ut consequat elit porttitor non. Aliquam ut nisi nec, eleifend consequat
+      ipsum.  Cras feugiat vulputate metus, ut consequat elit porttitor non.  \n"
+  portfolio:
+    label: Portfólio
+    items:
+    - titulo: Projeto 122
+      img: img/portfolio/cabin.png
+      txt: Este é um teste muito legal
+      cliente: Fidelito
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+    - titulo: Site teste
+      img: img/portfolio/cake.png
+      txt: Este é um teste muito legal
+      nome: Fidelito
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+    - titulo: Site teste
+      img: img/portfolio/circus.png
+      txt: Este é um teste muito legal
+      nome: Fidelito
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+    - titulo: Site teste
+      img: img/portfolio/game.png
+      txt: Este é um teste muito legal
+      nome: Fidelito
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+    - titulo: Site teste
+      img: img/portfolio/safe.png
+      txt: Este é um teste muito legal
+      nome: Fidelito
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação
+    - titulo: Site teste
+      img: img/portfolio/submarine.png
+      txt: Este é um teste muito legal
+      nome: Fidelito
+      site: fidelis.com
+      data: 10/10/12
+      servico: Programação

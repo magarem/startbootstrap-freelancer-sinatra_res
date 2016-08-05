@@ -131,7 +131,7 @@ mod.factory('SiteData', ['$http', '$location', function($http, $location){
 
     var _portAdd = function(){    
       // console.log(obj);
-      return $http.get("/"+siteNome+"/portfolio/add");
+      return $http.post("/"+siteNome+"/portfolio/add");
     }
 
     return {
@@ -213,7 +213,7 @@ mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'Site
   
   $scope.saveDiv = function(obj){    
       SiteData.saveDiv(obj, $scope.$eval(obj)).then(function(response) {
-         // console.log(response.data);
+         
       })    
   }
 
@@ -328,7 +328,7 @@ mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'Site
     })    
 
     //Service.images.push(img_new)
-    $scope.open(img_new, id_last)
+    //$scope.open(img_new, id_last)
     // console.log(img_new)
   }; 
         
@@ -415,17 +415,22 @@ mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$ht
   };
 
   $scope.excluir = function(item_index){
+    var url = document.URL;
+    var urlArray = url.split("/");
+    var siteNome = urlArray[urlArray.length-1];
+    
     console.log("Excluir:",item_index);      
     //Service.ex(item); 
-    $http.post('/maga/portfolio/delete/'+item_index); 
+    $http.post('/'+siteNome+'/portfolio/delete/'+item_index); 
     $rootScope.$emit("CallDelImg", item_index);             
     $rootScope.$emit("ModalClose", item_index);
   };   
 
-  $scope.saveDiv = function(obj){    
-    SiteData.saveDiv(obj, $scope.$eval(obj)).then(function(response) {
-       // console.log(response.data);
-    })    
+  $scope.saveDiv = function(obj, i){        
+    SiteData.saveDiv(obj, $scope.$eval(obj), i).then(function(response) { 
+
+    })   
+    $rootScope.$emit("categoriasUpdate"); 
   } 
   
   $scope.uploadPic = function(file, index) {
@@ -458,6 +463,7 @@ mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$ht
               console.log('success');
               
               $rootScope.$emit("ImgChange",file.name, index, siteNome); 
+
           }
         );
         
@@ -482,6 +488,7 @@ mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$ht
       }
       
     }  
+    $rootScope.$emit("categoriasUpdate");
     // if (ok) {
       
     //   $rootScope.$emit("categoriasUpdate"); 

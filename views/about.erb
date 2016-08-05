@@ -1,11 +1,10 @@
 <!-- About Section -->
-{%raw%}
 <section class="success" id="about" ng-controller="aboutCtrl">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2>
-                  <div contenteditable="true"
+                  <div contenteditable="<%=@edit_flag%>"
                     ng-model="about.label"
                     strip-br="true"
                     select-non-editable="true"
@@ -16,21 +15,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-lg-offset-2">    
-              <div contenteditable="true"
+            <div class="col-lg-4 col-lg-offset-2"><p> 
+              <p contenteditable="<%=@edit_flag%>"
                 ng-model="about.body1"
                 strip-br="true"
                 select-non-editable="true"
                 ng-blur="saveDiv('about.body1')">
-              </div>  
+              </p>  
             </div>
-            <div class="col-lg-4">
-             <div contenteditable="true"
+            <div class="col-lg-4"><p>
+             <p contenteditable="<%=@edit_flag%>"
                 ng-model="about.body2"
                 strip-br="true"
                 select-non-editable="true"
                 ng-blur="saveDiv('about.body2')">
-              </div>  
+              </p>  
             </div>
             <!-- <div class="col-lg-8 col-lg-offset-2 text-center">
                 <a href="/s?txt=" class="btn btn-lg btn-outline">
@@ -40,4 +39,3 @@
         </div>
     </div>
 </section>
-{%endraw%}

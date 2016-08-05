@@ -129,10 +129,16 @@ mod.factory('SiteData', ['$http', '$location', function($http, $location){
       return $http.post("/"+siteNome+"/obj_save", {obj: obj, val: val, item_n: item_n});
     }
 
+    var _portAdd = function(){    
+      // console.log(obj);
+      return $http.get("/"+siteNome+"/portfolio/add");
+    }
+
     return {
       getSiteData: _getSiteData,
       savePortfolioOrder: _savePortfolioOrder,
-      saveDiv: _saveDiv
+      saveDiv: _saveDiv,
+      portAdd: _portAdd
     }
     // return{
     //   name: 'Site Service',
@@ -144,6 +150,22 @@ mod.factory('SiteData', ['$http', '$location', function($http, $location){
     //   }
     // };
   }]);
+
+mod.controller('topCtrl', function ($scope, $http, SiteData) {
+  
+  $scope.site = {}; 
+   SiteData.getSiteData().then(function(response) {
+    $scope.site = response.data;
+    console.log("SiteData[top]:", response.data);
+  })
+
+  $scope.saveDiv = function(obj){   
+    console.log(obj); 
+    SiteData.saveDiv(obj, $scope.$eval(obj)).then(function(response) {
+       // console.log(response.data);
+    })    
+  }
+})
 
 mod.controller('navCtrl',['$scope', 'SiteData', function ($scope, SiteData) {
   $scope.site = {};   
@@ -290,18 +312,24 @@ mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'Site
     console.log("id_last:",id_last)
     img_new =  {  "id"     : id_last,
                   "titulo" : "Novo",
-                  "img"    : "/img/portfolio/safe.png?"+id_last,
+                  "img"    : "/img/noimage.png?"+id_last,
                   "txt"    : "Txt novo",
-                  "nome"   : "Fidelito",
-                  "site"   : "fidelis.com",
-                  "data"   : "10/10/12",
-                  "servico": "Programação",
+                  "nome"   : "",
+                  "site"   : "",
+                  "data"   : "",
+                  "servico": "",
                   "cat"    : ""
                 }
     $scope.imgs.push(img_new)
+
+    //Salva no disco o novo registro
+    SiteData.portAdd().then(function(response) {
+       // console.log(response.data);
+    })    
+
     //Service.images.push(img_new)
     $scope.open(img_new, id_last)
-    console.log(img_new)
+    // console.log(img_new)
   }; 
         
   //
@@ -510,6 +538,22 @@ mod.controller('footerCtrl', function ($scope, $http, SiteData) {
    SiteData.getSiteData().then(function(response) {
     $scope.site = response.data;
     console.log("SiteData[footerCtrl]:", response.data);
+  })
+
+  $scope.saveDiv = function(obj){   
+    console.log(obj); 
+    SiteData.saveDiv(obj, $scope.$eval(obj)).then(function(response) {
+       // console.log(response.data);
+    })    
+  }
+})
+
+mod.controller('loginCtrl', function ($scope, $http, SiteData) {
+  
+  $scope.site = {}; 
+   SiteData.getSiteData().then(function(response) {
+    $scope.site = response.data;
+    console.log("SiteData[top]:", response.data);
   })
 
   $scope.saveDiv = function(obj){   

@@ -38,41 +38,42 @@ get '/:site_nome/logout' do
     redirect '/'+params[:site_nome]
 end
 
-post '/:site_nome/login_do' do
-
-    @form_senha = params["senha"]
-    @site_nome = params[:site_nome]
-    @data = YAML.load_file(@site_nome+'.yml')
+post '/login_do' do    
+   
+    @post = params[:post]    
+    @site_nome = @post["site"]
+    @form_senha = @post["senha"]
+    @data_senha = YAML.load_file(@site_nome+'.yml')["senha"]
 
     #Compara a senha digitada no formulário de login com a senha do fonte
-    if @form_senha.to_s == @data["senha"].to_s then 
+    if @form_senha.to_s == @data_senha.to_s then 
       session[:logado] = true       
+      @edit_flag = "true"
     else 
       session[:logado] = false
+      @edit_flag = "false"      
     end
 
-    redirect '/'+params[:site_nome]
+    redirect '/'+@site_nome
+    # erb :index
 end
 
 
 get '/:site_nome' do
-   
+
+      #testa a senha se for uma chamada de login
       # Definindo as categorias de portfolio
-      
-      data = YAML.load_file(params[:site_nome]+'.yml')
-
-      Liquid::Template.register_filter(IndiceArray)
-
-      @cat = IndiceArray.set_site_nome params[:site_nome]
-       
-      data_portfolio_json = data["pages"]["portfolio"]["items"]
-      
-      liquid :index, :locals => {:port_cats => @cat, 
-                                 :data_portfolio_json => data_portfolio_json.to_json, 
-                                 :data => params[:site_nome], 
-                                 :logado => session[:logado],  
-                                 :site => data }
-
+      # @data = YAML.load_file(params[:site_nome]+'.yml')
+      # Liquid::Template.register_filter(IndiceArray)
+      # @cat = IndiceArray.set_site_nome params[:site_nome]
+      # @data_portfolio_json = @data["pages"]["portfolio"]["items"]
+      @site_nome = params[:site_nome]
+      @edit_flag = session[:logado]
+      erb :index #, :locals => {:port_cats => @cat, 
+                    #             :data_portfolio_json => data_portfolio_json.to_json, 
+                    #             :data => params[:site_nome], 
+                    #             :logado => session[:logado],  
+                    #             :site => data }
 end
 
 get '/:site_nome/dataLoad' do
@@ -97,39 +98,12 @@ get '/:site_nome/getImgsCategorias' do
       data["pages"]["portfolio"]["items"].to_json
 end
 
-
-
-
 get '/create' do
     @logfile = File.open("site.yml","r")
     @contents = @logfile.read
     @logfile.close
     erb :create
 end
-
-# post '/:site_nome/obj_save/logo' do
-
-#   site_nome = params[:site_nome]+".yml"
-#   @logo = params[:logo]
-
-#   data = YAML.load_file site_nome
-#   data["moldura"]["logo"]["label"] = @logo
-
-#   File.open(site_nome, 'w') { |f| YAML.dump(data, f) }
-
-# end
-
-# post '/:site_nome/obj_save/txt1' do
-
-#   site_nome = params[:site_nome]+".yml"
-#   @txt1 = params[:txt1]
-
-#   data = YAML.load_file site_nome
-#   data["pages"]["home"]["label"] = @txt1
-
-#   File.open(site_nome, 'w') { |f| YAML.dump(data, f) }
-
-# end
 
 post '/:site_nome/obj_save' do
 
@@ -144,11 +118,6 @@ post '/:site_nome/obj_save' do
   @obj = @post_data["obj"]  
   # @val = params[:val].gsub! "\n", "<br>"
   @val = @post_data["val"]#.gsub! /(\n +)/, ""
-
-   
-
-  # pry
-
 
   data = YAML.load_file @site_nome
 
@@ -455,27 +424,31 @@ end
 get "/:site_nome/portfolio/add" do 
   
   @site_nome = params[:site_nome]
+
+  # @post_data = JSON.parse(request.body.read)
+  # @obj = @post_data["obj"]
   
-  data = YAML.load_file params[:site_nome]+".yml"
+  data = YAML.load_file @site_nome+".yml"
   
   for t in data["pages"]["portfolio"]["items"]
      id_last = t["id"]
   end
 
-  d = { "id" => id_last+1,
+  d = { "id" => "0",
         "titulo" => "Novo",
-        "img" => "img/noimage.png",
-        "txt" => "Txt novo",
-        "nome" => "Fidelito",
-        "site" => "fidelis.com",
-        "data" => "10/10/12",
-        "servico" => "Programação"
+        "img" => "/img/noimage.png",
+        "txt" => "",
+        "cliente" => "",
+        "site" => "",
+        "data" => "",
+        "servico" => "",
+        "cat"    => ""
       }
   
   data["pages"]["portfolio"]["items"][(id_last.to_i)+1] = d
   
   File.open(params[:site_nome]+".yml", 'w') { |f| YAML.dump(data, f) }
 
-  redirect '/'+params[:site_nome]
+  # redirect '/'+params[:site_nome]
 end
 

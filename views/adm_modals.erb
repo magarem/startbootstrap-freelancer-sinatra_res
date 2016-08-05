@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  ng-controller="loginCtrl">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,9 +9,9 @@
         <h4 class="modal-title" id="myModalLabel">Login para {{site.name}}</h4>
       </div>
       <div class="modal-body">
-        <form id=login_form action="{{data}}/login_do" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="site" value="{{site.name}}">
-            <input type="password" name="senha" value="" class="form-control" id="exampleInputEmail1" placeholder="Entre com a senha">
+        <form id=login_form action=/login_do method="POST" >
+            <input type="hidden" name="post[site]" value="{{site.name}}">
+            <input type="password" name="post[senha]" value="" class="form-control"  placeholder="Entre com a senha">
         </form>
       </div>
       <div class="modal-footer">

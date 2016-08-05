@@ -1,6 +1,6 @@
 ---
 name: maga
-senha: 1222
+senha: 1
 head:
   title: Portfolio geral
   description: Site pra garela
@@ -8,7 +8,7 @@ head:
 moldura:
   label: Portfolio
   logo:
-    label: Magaweb
+    label: marcelo maga
     link: index.ttt
   menu:
   - label: Catálogo
@@ -18,7 +18,7 @@ moldura:
   - label: To aqui ;)
     link: "#contact"
   footer:
-    endereco: Lá em casa
+    endereco: Rua dos andradas, 1222
     social:
     - label: facebook
       link: marcelo.a.magalhaes
@@ -30,20 +30,16 @@ moldura:
       link: mmm
     - label: dribbble
       link: ddrrible
-    about_resumo: Esse sistema<br>é bom demais tá?
+    about_resumo: Várias expertizes
     creditos: Copyright © magaweb 2016
 pages:
   home:
-    label: Temporadada
+    label: Desenvolvedor
     img: img/maga.jpg
-    body: Recreio - RJ<br>Rio de janeiro
+    body: Software para web
   about:
     label: Sobre
-    body1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquet,
-      \naugue in porta vulputate, risus justo bibendum sapien, suscipit dictum \nenim
-      ante auctor nisl. Nunc eu massa in orci efficitur egestas. In \ngravida sem
-      eu nibh cursus, sit amet lacinia odio egestas. Maecenas \ndapibus commodo justo
-      eu rhoncus."
+    body1: Toda as habilidades reunidas em um só lugar! <br>é exatamente isso!!!!
     body2: "Phasellus sit amet lorem lacinia, semper est non, accumsan lectus. In\n
       at rutrum metus. Sed viverra massa nisi, eget pretium velit euismod ut.\n Donec
       nec efficitur odio. Nullam rutrum ante nec viverra condimentum. \nCras in ante
@@ -51,24 +47,6 @@ pages:
   portfolio:
     label: Catálogo
     items:
-    - id: '3'
-      titulo: Buda
-      img: contas/maga/img/portfolio/13139181_626527064168509_2022078692565878775_n.jpg
-      txt: Esse é realmente um site rastafari
-      cliente: Macedo
-      site: fidelis.com
-      data: 11/10/16
-      servico: ProgramaçãoDesign
-      cat: desenho
-    - id: '0'
-      titulo: novelos
-      img: contas/maga/img/portfolio/1926801_358908134247907_476196602_n.jpg
-      txt: Txt novo
-      cliente: ''
-      site: fidelis.com
-      data: 10/10/12
-      servico: Programação
-      cat: "<p>tecelagem</p>"
     - id: '5'
       titulo: Paisagem
       img: contas/maga/img/portfolio/11182359_10206694457100679_489193282754551638_n.jpg
@@ -78,6 +56,24 @@ pages:
       data: 10/10/12
       servico: Programação
       cat: fot
+    - id: '0'
+      titulo: Petrobras
+      img: contas/maga/img/portfolio/site_agencia.jpg
+      txt: ''
+      cliente: ''
+      site: ''
+      data: ''
+      servico: ''
+      cat: ''
+    - id: '0'
+      titulo: Novo
+      img: "/img/noimage.png"
+      txt: ''
+      cliente: ''
+      site: ''
+      data: ''
+      servico: ''
+      cat: ''
     - id: '3'
       titulo: Japinha ninja
       img: contas/maga/img/portfolio/12212058_900124723376186_1916938989_n.jpg

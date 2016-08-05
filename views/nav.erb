@@ -1,5 +1,4 @@
  <!-- Navigation -->
-{%raw%}
 <nav ng-controller="navCtrl" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -26,8 +25,8 @@
               [contenteditable="true"]:hover { outline: 2px dashed #0090D2; }
             </style>
             <a class="navbar-brand"
-               href="#page-top">              
-              <div contenteditable="true"
+               href="#page-top">         
+              <div contenteditable="<%=@edit_flag%>"
                 ng-model="site.moldura.logo.label"
                 strip-br="true"
                 select-non-editable="true"
@@ -36,7 +35,7 @@
             </a>              
         </div>       
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">         
             <ul class="nav navbar-nav navbar-right">
                 <li class="hidden">
                     <a href="#page-top"></a>
@@ -54,4 +53,3 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
-{%endraw%}

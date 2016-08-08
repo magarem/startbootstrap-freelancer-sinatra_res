@@ -455,14 +455,12 @@ mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$ht
             data: {item: $scope.item, file: file},
        }).then(function (resp) {
             console.log('---Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+            $rootScope.$emit("ImgChange",file.name, index, siteNome);
         }, function (resp) {
             console.log('---Error status: ' + resp.status);
         }, function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             console.log('---progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-            if (progressPercentage == 100) {
-              $rootScope.$emit("ImgChange",file.name, index, siteNome);      
-            }
         });
         
         

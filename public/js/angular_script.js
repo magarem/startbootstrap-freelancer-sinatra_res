@@ -131,7 +131,7 @@ mod.factory('SiteData', ['$http', '$location', function($http, $location){
 
     var _portAdd = function(){    
       // console.log(obj);
-      return $http.post("/"+siteNome+"/portfolio/add");
+      return $http.post("/portfolio/add", {siteNome: siteNome});
     }
 
     return {
@@ -191,8 +191,6 @@ mod.controller('headerCtrl',['$scope', 'SiteData', function ($scope, SiteData) {
        // console.log(response.data);
     })    
   }
-
-
 }])
 
 mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'SiteData', function ($scope, $rootScope, $uibModal, $log, SiteData) {
@@ -307,12 +305,11 @@ mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'Site
   //    $scope.images = Service.images;
   // });
 
-  $scope.img_add = function () {
-    id_last = $scope.imgs.length;
-    console.log("id_last:",id_last)
-    img_new =  {  "id"     : id_last,
+  $scope.portfolio_add = function () {
+    console.log("+")
+    img_new =  {  "id"     : 0,
                   "titulo" : "Novo",
-                  "img"    : "/img/noimage.png?"+id_last,
+                  "img"    : "/img/noimage.png",
                   "txt"    : "Txt novo",
                   "nome"   : "",
                   "site"   : "",
@@ -320,13 +317,11 @@ mod.controller('imgGridCtrl',['$scope', '$rootScope', '$uibModal', '$log', 'Site
                   "servico": "",
                   "cat"    : ""
                 }
-    $scope.imgs.push(img_new)
-
     //Salva no disco o novo registro
     SiteData.portAdd().then(function(response) {
-       // console.log(response.data);
+       
     })    
-
+    $scope.imgs.push(img_new)
     //Service.images.push(img_new)
     //$scope.open(img_new, id_last)
     // console.log(img_new)
@@ -461,6 +456,7 @@ mod.controller('MyFormCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$ht
         }, function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             console.log('---progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            $rootScope.$emit("ImgChange",file.name, index, siteNome);
         });
         
         

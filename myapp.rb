@@ -443,34 +443,26 @@ post "/:site_nome/portfolio/save/:index" do
   #end
 end
 
-post "/:site_nome/portfolio/add" do 
+post "/portfolio/add" do 
   
-  @site_nome = params[:site_nome]
-
-  # @post_data = JSON.parse(request.body.read)
-  # @obj = @post_data["obj"]
-  
+  @post_data = JSON.parse(request.body.read)  
+  @site_nome = @post_data["siteNome"]
   data = YAML.load_file @site_nome+".yml"
+  novo = { "id"      => "0",
+           "titulo"  => "Novo",
+           "img"     => "/img/noimage.png",
+           "txt"     => "",
+           "cliente" => "",
+           "site"    => "",
+           "data"    => "",
+           "servico" => "",
+           "cat"     => ""
+         }
+  data["pages"]["portfolio"]["items"] << novo
+  f = File.open( @site_nome+".yml", 'w' )
+  YAML.dump( data, f )
+  f.close
   
-  # for t in data["pages"]["portfolio"]["items"]
-  #    id_last = t["id"]
-  # end
 
-  d = { "id" => "0",
-        "titulo" => "Novo",
-        "img" => "/img/noimage.png",
-        "txt" => "",
-        "cliente" => "",
-        "site" => "",
-        "data" => "",
-        "servico" => "",
-        "cat"    => ""
-      }
-  
-  data["pages"]["portfolio"]["items"] << d
-  
-  File.open(@site_nome+".yml", 'w') { |f| YAML.dump(data, f) }
-
-  # redirect '/'+params[:site_nome]
 end
 
